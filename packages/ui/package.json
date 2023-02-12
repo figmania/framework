@@ -1,6 +1,6 @@
 {
   "name": "@figmania/ui",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "UI Library for Figmania plugins",
   "main": "build/index.umd.js",
   "module": "build/index.mjs",
@@ -26,7 +26,6 @@
     "lint": "eslint 'src/**/*.ts' 'src/**/*.tsx'"
   },
   "dependencies": {
-    "@figmania/common": "^1.2.0",
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -35,6 +34,7 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.58.0",
+    "@figmania/common": "^2.0.2",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
     "@types/react-outside-click-handler": "^1.3.1",
@@ -43,6 +43,9 @@
     "typescript": "^4.9.3",
     "vite": "^4.1.1",
     "vite-plugin-dts": "^1.7.2"
+  },
+  "peerDependencies": {
+    "@figmania/common": "*"
   },
   "resolutions": {
     "@types/react": "18.0.28",
