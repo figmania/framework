@@ -1,0 +1,5 @@
+src/
+index.html
+tsconfig.json
+vite.config.ts
+build/vite-env.d.ts

@@ -1,0 +1,3 @@
+# Figmania
+
+> Figma Plugins Repository

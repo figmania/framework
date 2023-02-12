@@ -1,0 +1,29 @@
+{
+  "name": "@figmania/common",
+  "version": "2.0.0",
+  "description": "Code shared between other figmania packages",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "license": "MIT",
+  "author": "Tobias Strebitzer <tobias.strebitzer@magloft.com>",
+  "scripts": {
+    "clean": "rimraf build",
+    "build": "yarn tsc -b",
+    "watch": "yarn tsc -b --watch",
+    "prepack": "yarn clean && yarn build",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "html": "^1.0.0",
+    "md5": "^2.3.0"
+  },
+  "devDependencies": {
+    "@figma/plugin-typings": "^1.57.1",
+    "@types/html": "^1.0.0",
+    "@types/md5": "^2.3.0",
+    "typescript": "^4.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

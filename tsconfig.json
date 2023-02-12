@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@figmania/common": ["./packages/common"],
+      "@figmania/ui": ["./packages/ui"]
+    }
+  },
+  "references": [
+    { "path": "packages/common" },
+    { "path": "packages/ui" }
+  ]
+}

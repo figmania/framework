@@ -1,0 +1,46 @@
+body {
+  font-feature-settings: "liga" on, "calt" on;
+  font: normal 400 11px/16px Inter, sans-serif;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+
+  &.figmania-dark {
+    background-color: #2e3440;
+  }
+
+  &.figmania-light {
+    background-color: #F5F5F5;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0px 0px 16px;
+  padding: 12px 0px;
+}
+
+header {
+  display: block;
+  margin: 0 0 4px;
+  padding: 8px 0px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 11px;
+  line-height: 15px;
+  letter-spacing: 1px;
+}
+
+.panel {
+  margin: 16px 0px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+}
