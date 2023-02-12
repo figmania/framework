@@ -12,7 +12,7 @@
     "build": "lerna run build",
     "prepack": "lerna run prepack",
     "lint": "lerna run lint",
-    "packages:publish": "yarn prepack; lerna publish --concurrency 1 --force-publish"
+    "packages:publish": "yarn prepack && lerna publish --concurrency 1 --force-publish"
   },
   "devDependencies": {
     "@magloft/devkit-core": "^1.1.4",
