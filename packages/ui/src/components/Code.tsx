@@ -1,39 +1,40 @@
 import clsx from 'clsx'
-import { FunctionComponent, HTMLAttributes, useEffect, useState } from 'react'
-import { getHighlighter, Highlighter, renderToHtml } from 'shiki-es'
+import { FunctionComponent, HTMLAttributes, useEffect, useMemo, useRef, useState } from 'react'
 import styles from './Code.module.scss'
-
-const highlighter$ = getHighlighter({ theme: 'nord', langs: ['xml', 'css', 'html'] })
+import { WorkerMessage } from './Code.types'
 
 export interface CodeProps extends HTMLAttributes<HTMLElement> {
   source: string
   lang: 'xml' | 'css' | 'html'
 }
 
+type OnWorkerMessage = (event: MessageEvent<WorkerMessage>) => void
+
 export const Code: FunctionComponent<CodeProps> = ({ source, lang, className, ...props }) => {
-  const [highlighter, setHighlighter] = useState<Highlighter>()
+  const worker = useMemo(() => new Worker(new URL('./Code.worker.ts', import.meta.url), { type: 'module' }), [])
+  const jobId = useRef(0)
   const [code, setCode] = useState<string>()
 
+  const onMessage: OnWorkerMessage = ({ data }) => {
+    if (data.id !== jobId.current) { return }
+    setCode(data.code)
+  }
+
   useEffect(() => {
-    highlighter$.then((result) => {
-      setHighlighter(result)
-    })
+    worker.addEventListener('message', onMessage)
+    return () => {
+      worker.removeEventListener('message', onMessage)
+      worker.terminate()
+    }
   }, [])
 
   useEffect(() => {
-    if (!highlighter) { return }
-    const tokens = highlighter.codeToThemedTokens(source, lang)
-    const html = renderToHtml(tokens, {
-      elements: {
-        pre: ({ children }) => children,
-        code: ({ children }) => children,
-        line: ({ children }) => children
-      }
-    })
-    setCode(html)
-  }, [highlighter, source, lang])
+    setCode('<span style="color: #81A1C1">Loading ...</span>')
+    jobId.current++
+    worker.postMessage({ id: jobId.current, lang, code: source } as WorkerMessage)
+  }, [source, lang])
 
-  if (!highlighter || !code) { return <></> }
+  if (!code) { return <></> }
 
   return (
     <pre dangerouslySetInnerHTML={{ __html: code }} className={clsx(styles['code'], className)} {...props}></pre>
