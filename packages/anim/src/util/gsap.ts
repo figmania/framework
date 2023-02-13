@@ -1,6 +1,8 @@
 import camelcase from 'camelcase'
 import decamelize from 'decamelize'
 
+export type Timeline = gsap.core.Timeline
+
 export type TweenValue = string | number
 
 export interface TweenProps {
