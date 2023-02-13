@@ -3,12 +3,14 @@
     "strict": true,
     "paths": {
       "@figmania/common": ["./packages/common"],
+      "@figmania/anim": ["./packages/anim"],
       "@figmania/ui": ["./packages/ui"],
       "@figmania/webcomponent": ["./packages/webcomponent"],
     }
   },
   "references": [
     { "path": "packages/common" },
+    { "path": "packages/anim" },
     { "path": "packages/ui" },
     { "path": "packages/webcomponent" }
   ]

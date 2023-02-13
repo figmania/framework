@@ -1,5 +1,5 @@
+import { anim, Timeline } from '@figmania/anim'
 import { CustomElement } from '../decorators/CustomElement'
-import { buildTimeline } from '../util/gsap'
 import { intersectionObserver } from '../util/intersection'
 import { loadResource } from '../util/xhr'
 
@@ -11,7 +11,7 @@ export type SvgAnimateEase = 'none' | 'power1.out' | 'power1.in' | 'power1.inOut
 export class SvgAnimate extends HTMLElement {
   static get observedAttributes() { return ['src', 'trigger'] }
 
-  private timeline?: gsap.core.Timeline
+  private timeline?: Timeline
   private svg?: SVGSVGElement
 
   connectedCallback() {
@@ -57,7 +57,7 @@ export class SvgAnimate extends HTMLElement {
     this.svg.removeAttribute('height')
     this.svg.style.display = 'block'
     this.appendChild(this.svg)
-    this.timeline = buildTimeline(this.svg, { paused: this.trigger !== 'on' })
+    this.timeline = anim(this.svg, { paused: this.trigger !== 'on' })
   }
 
   play() {

@@ -1,6 +1,5 @@
 import camelcase from 'camelcase'
 import decamelize from 'decamelize'
-import { gsap } from 'gsap'
 
 export type TweenValue = string | number
 
@@ -79,14 +78,4 @@ export function setTweenProps(element: Element, props: TweenProps): void {
   }
   element.setAttribute('anim:delay', String(props.delay ?? 0))
   element.setAttribute('anim:duration', String(props.duration ?? 0))
-}
-
-export function buildTimeline(svg: SVGSVGElement, options: gsap.TimelineVars = {}): gsap.core.Timeline {
-  const defaultProps = getDefaultProps(svg)
-  const timeline = gsap.timeline({ defaults: { ...defaultProps }, ...options })
-  for (const element of Array.from(svg.querySelectorAll('[anim]'))) {
-    const { from, to, delay, duration } = getTweenProps(element)
-    timeline.fromTo(element, from, { ...to, ...(duration ? { duration } : {}) }, delay)
-  }
-  return timeline
 }
