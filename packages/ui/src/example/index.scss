@@ -27,8 +27,7 @@ h1 {
 
 header {
   display: block;
-  margin: 0 0 4px;
-  padding: 8px 0px;
+  margin: 8px 0px 0px;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 11px;
@@ -38,9 +37,8 @@ header {
 
 .panel {
   margin: 16px 0px;
-  display: flex;
-  flex-direction: column;
+  padding: 8px;
   position: relative;
-  border-radius: 2px;
-  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
 }

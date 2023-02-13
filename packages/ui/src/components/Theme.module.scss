@@ -27,4 +27,8 @@
 .theme {
   background-color: var(--background);
   color: var(--text-primary);
+  
+  * {
+    box-sizing: border-box;
+  }
 }

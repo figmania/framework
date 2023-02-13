@@ -1,0 +1,24 @@
+.scrubber {
+  position: relative;
+  background-color: var(--panel-color);
+  height: 16px;
+  padding: 4px 4px;
+  border-radius: 8px;
+  opacity: 0.5;
+  transition: opacity 250ms;
+
+  .label {
+    opacity: 0;
+    transition: opacity 250ms;
+    position: absolute;
+    height: 28px;
+    line-height: 20px;
+    top: -32px;
+    padding: 4px 8px;
+    background-color: var(--panel-color);
+    color: var(--text-secondary);
+    transform: translateX(-50%);
+  }
+
+  &.active, &.active .label, &:hover, &:hover .label { opacity: 1; }
+}
