@@ -1,5 +1,6 @@
 /// <reference lib="webworker" />
 
+import { svgPrettify } from '@figmania/common'
 import { getHighlighter, renderToHtml } from 'shiki-es'
 import { WorkerMessage } from './Code.types'
 
@@ -10,7 +11,7 @@ self.onmessage = async ({ data: { id, lang, code } }: MessageEvent<WorkerMessage
   self.postMessage({
     id,
     lang,
-    code: renderToHtml(highlighter.codeToThemedTokens(code, lang), {
+    code: renderToHtml(highlighter.codeToThemedTokens(svgPrettify(code), lang), {
       elements: {
         pre: ({ children }) => children,
         code: ({ children }) => children,
