@@ -1,6 +1,6 @@
 {
   "name": "@figmania/webcomponent",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Webcomponent for SVG Animations",
   "main": "build/index.umd.js",
   "module": "build/index.mjs",
