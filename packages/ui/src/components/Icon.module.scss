@@ -9,6 +9,12 @@
   user-select: none;
   background-color: var(--icon-color);
 
+  &.sm {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+  }
+
   &.disabled {
     opacity: 0.35;
     pointer-events: none;
@@ -47,4 +53,8 @@
   &.icon-ui-plus { -webkit-mask: url(../icons/ui-plus.svg) no-repeat center center; }
   &.icon-ui-minus { -webkit-mask: url(../icons/ui-minus.svg) no-repeat center center; }
   &.icon-ui-info { -webkit-mask: url(../icons/ui-info.svg) no-repeat center center; }
+  &.icon-control-loop { -webkit-mask: url(../icons/control-loop.svg) no-repeat center center; }
+  &.icon-control-pause { -webkit-mask: url(../icons/control-pause.svg) no-repeat center center; }
+  &.icon-control-play { -webkit-mask: url(../icons/control-play.svg) no-repeat center center; }
+  &.icon-control-reset { -webkit-mask: url(../icons/control-reset.svg) no-repeat center center; }
 }

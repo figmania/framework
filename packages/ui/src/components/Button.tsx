@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { ButtonHTMLAttributes, FunctionComponent, MouseEvent, ReactNode } from 'react'
 import styles from './Button.module.scss'
 import { Icon, Icons } from './Icon'
+import { ThemeSize } from './Theme'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: Icons
@@ -9,13 +10,20 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isSelected?: boolean
   isDisabled?: boolean
   title?: string
+  size?: ThemeSize
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
-export const Button: FunctionComponent<ButtonProps> = ({ className, icon, color, title, isSelected, isDisabled, onClick, ...props }) => {
+export const Button: FunctionComponent<ButtonProps> = ({ className, icon, color, title, size, isSelected, isDisabled, onClick, ...props }) => {
   return (
-    <button disabled={isDisabled} onClick={onClick} className={clsx(styles['button'], isSelected && styles['selected'], icon ? styles['with-icon'] : styles['without-icon'], className)} {...props}>
-      {icon && (<Icon icon={icon} color={color} isDisabled={isDisabled} mute></Icon>)}
+    <button disabled={isDisabled} onClick={onClick} className={clsx(
+      styles['button'],
+      isSelected && styles['selected'],
+      icon ? styles['with-icon'] : styles['without-icon'],
+      styles[size ?? 'md'],
+      className
+    )} {...props}>
+      {icon && (<Icon icon={icon} color={color} size={size} isDisabled={isDisabled} mute></Icon>)}
       {title && (<div className={styles['button-title']}>{title}</div>)}
     </button>
   )

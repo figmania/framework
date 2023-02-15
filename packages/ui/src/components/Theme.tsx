@@ -4,6 +4,8 @@ import styles from './Theme.module.scss'
 
 export type ThemeType = 'dark' | 'light'
 
+export type ThemeSize = 'sm' | 'md'
+
 export interface ThemeProps extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {
   theme: ThemeType
 }

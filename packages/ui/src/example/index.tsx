@@ -46,6 +46,13 @@ export class Example extends Component<{}, ExampleState> {
   render() {
     return (
       <Theme className='container' theme={this.state.theme}>
+        <header>Small Button with icon</header>
+        <div className="panel">
+          <Button size='sm' icon='control-loop'></Button>
+          <Button size='sm' icon='control-pause'></Button>
+          <Button size='sm' icon='control-play'></Button>
+          <Button size='sm' icon='control-reset'></Button>
+        </div>
         <header>Scrubber</header>
         <div className="panel">
           <Scrubber value={this.state.time} duration={10} fraction={10} suffix='s' onChange={(value) => { this.setState({ time: value }) }} />
