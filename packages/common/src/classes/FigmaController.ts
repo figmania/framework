@@ -1,6 +1,6 @@
-import { createControllerDelegate, Messenger } from './Messenger'
+import { createControllerDelegate, Messenger, SchemaConfig, SchemaMethod } from './Messenger'
 
-export class FigmaController extends Messenger {
+export class FigmaController<S extends SchemaConfig<SchemaMethod> = {}> extends Messenger<S> {
   constructor(uiOptions: Partial<ShowUIOptions> = {}) {
     super(createControllerDelegate())
     figma.on('selectionchange', () => { this.onSelectionChange(figma.currentPage.selection) })

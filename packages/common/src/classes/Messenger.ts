@@ -16,22 +16,28 @@ export interface FigmaMessageEvent extends MessageEvent {
   }
 }
 
-export class Messenger {
+export type SchemaMethod = { name: string, request: unknown, response: unknown }
+
+export type SchemaConfig<Schema extends SchemaMethod> = {
+  [S in Schema as S['name']]: { request: S['request'], response: S['response'] }
+}
+
+export class Messenger<S extends SchemaConfig<SchemaMethod> = {}> {
   private jobId = 0
   private jobs = new Map<number, (data: any) => void>()
-  private handlers = new Map<string, MessageHandler>()
+  private handlers = new Map<keyof S, MessageHandler>()
 
   constructor(private delegate: MessengerDelegate) {
     this.delegate.listen((message) => { this.onMessage(message) })
   }
 
-  addRequestHandler<I = void, O = void>(name: string, handler: MessageHandler<I, O>) {
+  addRequestHandler<K extends keyof S, M extends S[K]>(name: K, handler: MessageHandler<M['request'], M['response']>) {
     this.handlers.set(name, handler)
   }
 
-  request<I, O>(name: string, request: I): Promise<O> {
+  request<K extends keyof S, M extends S[K]>(name: K, request: M['request']): Promise<M['response']> {
     const id = (this.jobId += 1)
-    const promise = new Promise<O>((resolve) => { this.jobs.set(id, resolve) })
+    const promise = new Promise<M['response']>((resolve) => { this.jobs.set(id, resolve) })
     this.delegate.send({ id, type: 'request', name, request })
     return promise
   }
