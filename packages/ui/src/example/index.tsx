@@ -75,7 +75,7 @@ export class Example extends Component<{}, ExampleState> {
         </div>
         <header>Code</header>
         <div className="panel">
-          <Code source={svg} language='html' />
+          <Code source={svg} language='html' indent />
         </div>
         <header>Accordion</header>
         <div className="panel">

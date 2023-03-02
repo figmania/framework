@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import hljs from 'highlight.js'
+import format from 'html-format'
 import { FunctionComponent, useEffect, useState } from 'react'
 import styles from './Code.module.scss'
 import './Code.theme.scss'
@@ -7,17 +8,18 @@ import './Code.theme.scss'
 export interface CodeProps {
   source: string
   language: string
+  indent?: boolean
   className?: string
 }
 
 const LOADING_HTML = '<span class="hljs-tag"><span class="hljs-name">Loading ...</span></span>'
 
-export const Code: FunctionComponent<CodeProps> = ({ source, language, className }) => {
+export const Code: FunctionComponent<CodeProps> = ({ source, language, indent, className }) => {
   const [code, setCode] = useState<string>()
 
   useEffect(() => {
-    const result = hljs.highlight(source, { language: 'html' })
-    setCode(result.value)
+    const { value } = hljs.highlight(indent ? format(source) : source, { language: 'html' })
+    setCode(value)
   }, [source, language])
 
   return (
