@@ -1,43 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export type MessageHandler<I = any, O = any> = (request: I) => Promise<O>
-export type PluginMessageRequest<I = any> = { name: string, id: number, type: 'request', request: I }
-export type PluginMessageResponse<O = any> = { name: string, id: number, type: 'response', response: O }
+import { EventHandler, FigmaMessageEvent, MessengerDelegate, PluginMessageEvent, PluginMessageRequest, PluginMessageResponse, RequestHandler, SchemaConfig } from './BaseMessenger'
 
-export interface MessengerDelegate {
-  name?: string
-  send: (message: any) => void
-  listen: (callback: (message: any) => void) => void
-}
-
-export interface FigmaMessageEvent extends MessageEvent {
-  data: {
-    pluginId: string
-    pluginMessage: PluginMessageRequest | PluginMessageResponse
-  }
-}
-
-export type SchemaMethod = { name: string, request: unknown, response: unknown }
-
-export type SchemaConfig<Schema extends SchemaMethod> = {
-  [S in Schema as S['name']]: { request: S['request'], response: S['response'] }
-}
-
-export class Messenger<S extends SchemaConfig<SchemaMethod> = {}> {
+export class Messenger<S extends SchemaConfig> {
   private jobId = 0
   private jobs = new Map<number, (data: any) => void>()
-  private handlers = new Map<keyof S, MessageHandler>()
+  private eventHandlers = new Map<keyof S['events'], EventHandler[]>()
+  private requestHandlers = new Map<keyof S['request'], RequestHandler>()
 
   constructor(private delegate: MessengerDelegate) {
     this.delegate.listen((message) => { this.onMessage(message) })
   }
 
-  addRequestHandler<K extends keyof S, M extends S[K]>(name: K, handler: MessageHandler<M['request'], M['response']>) {
-    this.handlers.set(name, handler)
+  addRequestHandler<K extends keyof S['request'], M extends S['request'][K]>(name: K, handler: RequestHandler<M[0], M[1]>) {
+    this.requestHandlers.set(name, handler)
   }
 
-  request<K extends keyof S, M extends S[K]>(name: K, request: M['request']): Promise<M['response']> {
+  removeRequestHandler<K extends keyof S>(name: K) {
+    this.requestHandlers.delete(name)
+  }
+
+  emit<K extends keyof S['events'], M extends S['events'][K]>(name: K, request: M): void {
+    this.delegate.send({ type: 'event', name, request })
+  }
+
+  on<K extends keyof S['events'], M extends S['events'][K]>(name: K, handler: EventHandler<M>) {
+    const handlers = this.eventHandlers.get(name) ?? []
+    this.eventHandlers.set(name, [...handlers, handler])
+    return () => { this.off(name, handler) }
+  }
+
+  off<K extends keyof S['events'], M extends S['events'][K]>(name: K, handler: EventHandler<M>) {
+    const handlers = this.eventHandlers.get(name) ?? []
+    const index = handlers.indexOf(handler)
+    if (index === -1) { return }
+    this.eventHandlers.set(name, [...handlers.splice(index, 1)])
+  }
+
+  request<K extends keyof S['request'], M extends S['request'][K]>(name: K, request: M[0]): Promise<M[1]> {
     const id = (this.jobId += 1)
-    const promise = new Promise<M['response']>((resolve) => { this.jobs.set(id, resolve) })
+    const promise = new Promise<M[1]>((resolve) => { this.jobs.set(id, resolve) })
     this.delegate.send({ id, type: 'request', name, request })
     return promise
   }
@@ -46,13 +47,17 @@ export class Messenger<S extends SchemaConfig<SchemaMethod> = {}> {
     this.delegate.send({ id, type: 'response', name, response })
   }
 
-  private onMessage(message: PluginMessageRequest | PluginMessageResponse) {
+  private onMessage(message: PluginMessageRequest | PluginMessageResponse | PluginMessageEvent) {
     if (message.type === 'request') {
-      const handler = this.handlers.get(message.name)!
-      handler(message.request).then((response) => { this.respond(message.id, message.name, response) })
+      const handler = this.requestHandlers.get(message.name)
+      if (!handler) { throw new Error(`No request handler registered for ${message.name}`) }
+      Promise.resolve(handler(message.request)).then((response) => { this.respond(message.id, message.name, response) })
     } else if (message.type === 'response') {
       const resolve = this.jobs.get(message.id)!
       resolve(message.response)
+    } else if (message.type === 'event') {
+      const handlers = this.eventHandlers.get(message.name) ?? []
+      for (const handler of handlers) { handler(message.request) }
     }
   }
 }

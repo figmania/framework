@@ -1,6 +1,7 @@
-import { createControllerDelegate, Messenger, SchemaConfig, SchemaMethod } from './Messenger'
+import { SchemaConfig } from './BaseMessenger'
+import { createControllerDelegate, Messenger } from './Messenger'
 
-export class FigmaController<S extends SchemaConfig<SchemaMethod> = {}> extends Messenger<S> {
+export abstract class FigmaController<S extends SchemaConfig> extends Messenger<S> {
   constructor(uiOptions: Partial<ShowUIOptions> = {}) {
     super(createControllerDelegate())
     figma.on('selectionchange', () => { this.onSelectionChange(figma.currentPage.selection) })
@@ -16,6 +17,6 @@ export class FigmaController<S extends SchemaConfig<SchemaMethod> = {}> extends 
     }
   }
 
-  select(selection: ReadonlyArray<SceneNode>) { }
-  deselect() { }
+  abstract select(selection: ReadonlyArray<SceneNode>): void
+  abstract deselect(): void
 }

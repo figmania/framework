@@ -1,3 +1,4 @@
+export * from './classes/BaseMessenger'
 export * from './classes/FigmaController'
 export * from './classes/Messenger'
 export * from './utils/buffer'
