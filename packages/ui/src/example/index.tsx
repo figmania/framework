@@ -55,7 +55,7 @@ export class Example extends Component<{}, ExampleState> {
         </div>
         <header>Scrubber</header>
         <div className="panel">
-          <Scrubber value={this.state.time} duration={10} fraction={10} suffix='s' onChange={(value) => { this.setState({ time: value }) }} />
+          <Scrubber value={this.state.time} duration={10} onChange={(value) => { this.setState({ time: value }) }} />
         </div>
         <header>Navbar with buttons</header>
         <div className="panel">
@@ -75,7 +75,7 @@ export class Example extends Component<{}, ExampleState> {
         </div>
         <header>Code</header>
         <div className="panel">
-          <Code source={svg} lang='xml' />
+          <Code source={svg} language='html' />
         </div>
         <header>Accordion</header>
         <div className="panel">
