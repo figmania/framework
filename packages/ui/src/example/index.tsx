@@ -72,7 +72,7 @@ export class Example extends Component<{}, ExampleState> {
         </div>
         <header>Code</header>
         <div className="panel">
-          <Code source={code} language='html' indent />
+          <Code source={code} indent />
         </div>
         <header>Accordion</header>
         <div className="panel">
