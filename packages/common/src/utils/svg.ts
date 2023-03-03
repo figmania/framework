@@ -1,5 +1,4 @@
-import { default as md5 } from 'md5'
-import { TreeNode } from './node'
+import { hashList, TreeNode } from './node'
 
 export interface SvgTransformOptions {
   replaceIds: boolean
@@ -11,9 +10,13 @@ export function svgTransform(contents: string, node: TreeNode, options: Partial<
   const opts: SvgTransformOptions = { replaceIds: true, ...options }
   const svg = svgElement(contents)
   if (opts.replaceIds) {
-    svgReplaceIds(svg, 'linearGradient', 'fill', (child) => md5(`${node.id}:linearGradient:${child.id}`))
-    svgReplaceIds(svg, 'mask', 'mask', (child) => md5(`${node.id}:mask:${child.id}`))
-    svgReplaceIds(svg, 'filter', 'filter', (child) => md5(`${node.id}:filter:${child.id}`))
+    hashList((hash) => {
+      svgReplaceIds(svg, 'linearGradient', 'fill', (child) => hash(`${node.id}:linearGradient:${child.id}`))
+      svgReplaceIds(svg, 'linearGradient', 'fill', (child) => hash(`${node.id}:linearGradient:${child.id}`))
+      svgReplaceIds(svg, 'mask', 'mask', (child) => hash(`${node.id}:mask:${child.id}`))
+      svgReplaceIds(svg, 'filter', 'filter', (child) => hash(`${node.id}:filter:${child.id}`))
+      svgReplaceIds(svg, 'clipPath', 'clip-path', (child) => hash(`${node.id}:clipPath:${child.id}`))
+    })
   }
   const result = callback ? callback(svg) : svg
   return result.outerHTML

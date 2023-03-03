@@ -1,4 +1,3 @@
-import md5 from 'md5'
 import { FigmaNode } from './figma'
 
 export interface TreeNode<T = {}> {
@@ -13,8 +12,17 @@ export interface NodeDataModel<T = {}> {
   defaults: T
 }
 
-export function nodeIdHash(id: string) {
-  return md5(id)
+export type HashListFn = (hash: (id: string) => string) => void
+
+export function hashList(fn: HashListFn, prefix = 'x') {
+  let i = 0
+  const map = new Map<string, string>()
+  fn((id) => {
+    if (map.has(id)) { return map.get(id)! }
+    const hash = `${prefix}${i++}`
+    map.set(id, hash)
+    return hash
+  })
 }
 
 export function nodeData<T = {}>(figmaNode: FigmaNode, model: NodeDataModel<T>): T {
