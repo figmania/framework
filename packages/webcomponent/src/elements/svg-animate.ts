@@ -3,7 +3,7 @@ import { CustomElement } from '../decorators/CustomElement'
 import { intersectionObserver } from '../util/intersection'
 import { loadResource } from '../util/xhr'
 
-export type SvgAnimateTrigger = 'hover' | 'visible' | 'on' | 'off'
+export type SvgAnimateTrigger = 'hover' | 'loop' | 'visible' | 'on' | 'off'
 
 export type SvgAnimateEase = 'none' | 'power1.out' | 'power1.in' | 'power1.inOut'
 
@@ -35,12 +35,18 @@ export class SvgAnimate extends HTMLElement {
       this.reset()
     } else if (previousTrigger === 'visible') {
       intersectionObserver.unobserve(this)
+    } else if (previousTrigger === 'loop') {
+      this.loop(false)
     }
 
     if (currentTrigger === 'hover') {
       this.reset()
       this.addEventListener('mouseover', this.onMouseOver)
       this.addEventListener('mouseout', this.onMouseOut)
+    } else if (currentTrigger === 'loop') {
+      this.reset()
+      this.loop(true)
+      this.play()
     } else if (currentTrigger === 'visible') {
       intersectionObserver.observe(this)
     } else if (currentTrigger === 'on') {
@@ -57,11 +63,18 @@ export class SvgAnimate extends HTMLElement {
     this.svg.removeAttribute('height')
     this.svg.style.display = 'block'
     this.appendChild(this.svg)
-    this.timeline = anim(this.svg, { paused: this.trigger !== 'on' })
+    this.timeline = anim(this.svg, {
+      repeat: this.trigger === 'loop' ? -1 : 0,
+      paused: !['on', 'loop'].includes(this.trigger)
+    })
   }
 
   play() {
     this.timeline?.play()
+  }
+
+  loop(enable = true) {
+    this.timeline?.repeat(enable ? -1 : 0)
   }
 
   reverse() {
@@ -69,6 +82,7 @@ export class SvgAnimate extends HTMLElement {
   }
 
   reset() {
+    this.timeline?.repeat(0)
     this.timeline?.seek(0)
     this.timeline?.pause()
   }
