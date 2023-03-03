@@ -1,23 +1,14 @@
-import { hashList, TreeNode } from './node'
-
-export interface SvgTransformOptions {
-  replaceIds: boolean
-}
+import { TreeNode, uid } from './node'
 
 export type SvgTransformCallback = (svg: SVGSVGElement) => Element
 
-export function svgTransform(contents: string, node: TreeNode, options: Partial<SvgTransformOptions> = {}, callback?: SvgTransformCallback): string {
-  const opts: SvgTransformOptions = { replaceIds: true, ...options }
+export function svgTransform(contents: string, node: TreeNode, callback?: SvgTransformCallback): string {
   const svg = svgElement(contents)
-  if (opts.replaceIds) {
-    hashList((hash) => {
-      svgReplaceIds(svg, 'linearGradient', 'fill', (child) => hash(`${node.id}:linearGradient:${child.id}`))
-      svgReplaceIds(svg, 'linearGradient', 'fill', (child) => hash(`${node.id}:linearGradient:${child.id}`))
-      svgReplaceIds(svg, 'mask', 'mask', (child) => hash(`${node.id}:mask:${child.id}`))
-      svgReplaceIds(svg, 'filter', 'filter', (child) => hash(`${node.id}:filter:${child.id}`))
-      svgReplaceIds(svg, 'clipPath', 'clip-path', (child) => hash(`${node.id}:clipPath:${child.id}`))
-    })
-  }
+  svgReplaceIds(svg, 'linearGradient', 'fill', (child) => uid(`${node.id}:linearGradient:${child.id}`))
+  svgReplaceIds(svg, 'linearGradient', 'fill', (child) => uid(`${node.id}:linearGradient:${child.id}`))
+  svgReplaceIds(svg, 'mask', 'mask', (child) => uid(`${node.id}:mask:${child.id}`))
+  svgReplaceIds(svg, 'filter', 'filter', (child) => uid(`${node.id}:filter:${child.id}`))
+  svgReplaceIds(svg, 'clipPath', 'clip-path', (child) => uid(`${node.id}:clipPath:${child.id}`))
   const result = callback ? callback(svg) : svg
   return result.outerHTML
 }
