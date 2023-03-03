@@ -1,4 +1,3 @@
-import { prettyPrint } from 'html'
 import { default as md5 } from 'md5'
 import { TreeNode } from './node'
 
@@ -18,16 +17,6 @@ export function svgTransform(contents: string, node: TreeNode, options: Partial<
   }
   const result = callback ? callback(svg) : svg
   return result.outerHTML
-}
-
-export interface SvgPrettifyOptions {
-  indentSize: number
-  maxChar: number
-}
-
-export function svgPrettify(contents: string, options: Partial<SvgPrettifyOptions> = {}): string {
-  const opts: SvgPrettifyOptions = { indentSize: 2, maxChar: 0, ...options }
-  return prettyPrint(contents, { indent_size: opts.indentSize, max_char: opts.maxChar })
 }
 
 export interface SvgEncodeOptions {

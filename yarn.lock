@@ -3656,11 +3656,6 @@ hosted-git-info@^5.0.0:
   dependencies:
     lru-cache "^7.5.1"
 
-html-format@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/html-format/-/html-format-1.0.2.tgz#a9723472fd3daf360457358ed635568360d030be"
-  integrity sha512-J8OFF3Q9jPcrxKxziJR0aLy5tCr4GDIrI3XblOXdMz9dFQ6DOad06wdFsBItH1Y9tLy9Im+W4Wcoe6H5QffpbA==
-
 html@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/html/-/html-1.0.0.tgz#a544fa9ea5492bfb3a2cca8210a10be7b5af1f61"

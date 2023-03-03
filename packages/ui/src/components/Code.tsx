@@ -1,6 +1,6 @@
+import { format } from '@figmania/common'
 import clsx from 'clsx'
 import hljs from 'highlight.js'
-import format from 'html-format'
 import { FunctionComponent, useEffect, useState } from 'react'
 import styles from './Code.module.scss'
 import './Code.theme.scss'
