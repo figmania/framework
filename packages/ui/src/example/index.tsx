@@ -45,6 +45,7 @@ export class Example extends Component<{}, ExampleState> {
       <Theme className='container' theme={this.state.theme}>
         <header>Small Button with icon</header>
         <div className="panel">
+          <Button size='sm' icon='ui-info'></Button>
           <Button size='sm' icon='control-loop'></Button>
           <Button size='sm' icon='control-pause'></Button>
           <Button size='sm' icon='control-play'></Button>
