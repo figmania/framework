@@ -24,11 +24,22 @@
   --disabled-color: #434f57;
 }
 
-.theme {
+.plugin-ui {
   background-color: var(--background);
   color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   
   * {
     box-sizing: border-box;
   }
+}
+
+.handle {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 1000;
+  cursor: se-resize;
 }

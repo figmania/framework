@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { FunctionComponent, HTMLAttributes } from 'react'
 import styles from './Icon.module.scss'
-import { ThemeSize } from './Theme'
+import { ThemeSize } from './PluginUI'
 
 export type Icons = (
   'animation-opacity' | 'animation-rotate' | 'animation-scale' | 'animation-translate-x' | 'animation-translate-y' |
