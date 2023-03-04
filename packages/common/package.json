@@ -1,6 +1,6 @@
 {
   "name": "@figmania/common",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Code shared between other figmania packages",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -14,12 +14,10 @@
     "lint": "eslint 'src/**/*.ts'"
   },
   "dependencies": {
-    "html": "^1.0.0",
     "md5": "^2.3.0"
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.57.1",
-    "@types/html": "^1.0.0",
     "@types/md5": "^2.3.0",
     "typescript": "^4.9.3"
   },
