@@ -1,6 +1,6 @@
 {
   "name": "@figmania/common",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "Code shared between other figmania packages",
   "main": "build/index.js",
   "types": "build/index.d.ts",
