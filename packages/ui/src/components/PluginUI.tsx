@@ -39,8 +39,8 @@ export const PluginUI: FunctionComponent<PluginUIProps> = ({ theme, children, cl
         }}
         onPointerMove={(event: PointerEvent) => {
           if (!resizing) { return }
-          let width = event.clientX
-          let height = event.clientY
+          let width = event.clientX + 16
+          let height = event.clientY + 16
           if (minSize) { width = Math.max(minSize.width, width); height = Math.max(minSize.height, height) }
           if (maxSize) { width = Math.min(maxSize.width, width); height = Math.min(maxSize.height, height) }
           controller.emit('window:resize', { width: Math.floor(width), height: Math.floor(height) })
