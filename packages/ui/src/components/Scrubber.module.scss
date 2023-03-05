@@ -18,6 +18,7 @@
     background-color: var(--panel-color);
     color: var(--text-secondary);
     transform: translateX(-50%);
+    z-index: 1;
   }
 
   &.active, &.active .label, &:hover, &:hover .label { opacity: 1; }

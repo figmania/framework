@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { ChangeEvent, createRef, FunctionComponent, InputHTMLAttributes, LabelHTMLAttributes, useRef, useState } from 'react'
-import { Icon, Icons } from './Icon'
+import { Icon, ICON } from './Icon'
 import styles from './Input.module.scss'
 
 export interface InputProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onChange'> {
@@ -14,9 +14,9 @@ export interface InputProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 
   fraction?: number
   inputOpts?: InputHTMLAttributes<HTMLInputElement>
   id?: string
-  icon?: Icons
+  icon?: ICON
   defaultValue?: string | number
-  isDisabled?: boolean
+  disabled?: boolean
 }
 
 export interface InputState {
@@ -28,7 +28,7 @@ function precisionRound(number: number, precision: number) {
   return Math.round(number * factor) / factor
 }
 
-export const Input: FunctionComponent<InputProps> = ({ id, className, placeholder, type, name, icon, isDisabled, inputOpts, fraction, value, prefix, suffix, onChange, defaultValue, ...props }) => {
+export const Input: FunctionComponent<InputProps> = ({ id, className, placeholder, type, name, icon, disabled, inputOpts, fraction, value, prefix, suffix, onChange, defaultValue, ...props }) => {
   const [editing, setEditing] = useState(false)
   const uniqueId = useRef(Math.random().toString(36).substring(4))
   const input = createRef<HTMLInputElement>()
@@ -41,10 +41,15 @@ export const Input: FunctionComponent<InputProps> = ({ id, className, placeholde
 
   const inputId = id ?? `${name}-${uniqueId.current}`
   return (
-    <label htmlFor={inputId} className={clsx(styles['input'], isDisabled && styles['disabled'], icon && styles['with-icon'], className)} {...props}>
+    <label htmlFor={inputId} className={clsx(
+      styles['input'],
+      disabled && styles['disabled'],
+      icon && styles['with-icon'],
+      className
+    )} {...props}>
       {icon && <Icon icon={icon} mute></Icon>}
       {editing ? (
-        <input ref={input} {...inputOpts} id={inputId} name={name} type={type} placeholder={placeholder} value={editableValue} disabled={isDisabled} onChange={(event) => {
+        <input ref={input} {...inputOpts} id={inputId} name={name} type={type} placeholder={placeholder} value={editableValue} disabled={disabled} onChange={(event) => {
           if (!onChange) { return }
           let val: string | number = event.target.value
           if (event.target.value === '' && defaultValue) {
@@ -58,7 +63,7 @@ export const Input: FunctionComponent<InputProps> = ({ id, className, placeholde
           setEditing(false)
         }} />
       ) : (
-        <input id={inputId} name={name} type="text" className={className} placeholder={placeholder} value={formattedValue} disabled={isDisabled} onFocus={() => {
+        <input id={inputId} name={name} type="text" className={className} placeholder={placeholder} value={formattedValue} disabled={disabled} onFocus={() => {
           setEditing(true)
           input.current?.select()
         }} readOnly />

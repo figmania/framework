@@ -9,20 +9,20 @@ import './Code.theme.scss'
 hljs.registerLanguage('xml', xml)
 
 export interface CodeProps {
-  source: string
+  value: string
   indent?: boolean
   className?: string
 }
 
 const LOADING_HTML = '<span class="hljs-tag"><span class="hljs-name">Loading ...</span></span>'
 
-export const Code: FunctionComponent<CodeProps> = ({ source, indent, className }) => {
+export const Code: FunctionComponent<CodeProps> = ({ value, indent, className }) => {
   const [code, setCode] = useState<string>()
 
   useEffect(() => {
-    const { value } = hljs.highlight(indent ? prettyPrint(source) : source, { language: 'xml' })
-    setCode(value)
-  }, [source])
+    const result = hljs.highlight(indent ? prettyPrint(value) : value, { language: 'xml' })
+    setCode(result.value)
+  }, [code])
 
   return (
     <code className={clsx(styles['code'], 'code', className)} dangerouslySetInnerHTML={{ __html: code ?? LOADING_HTML }} />

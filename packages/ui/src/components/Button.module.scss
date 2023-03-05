@@ -13,6 +13,7 @@
 
   &.sm {
     min-height: 16px;
+    & > .button-title { line-height: 16px; }
   }
 
   &:hover {
@@ -49,7 +50,6 @@
     margin-right: 6px;
     margin-left: 4px;
     z-index: 1;
-
   }
 
   &.without-icon > .button-title {
@@ -74,6 +74,10 @@
     padding: 1px;
     min-height: 28px;
     border: 1px solid transparent;
+
+    &.sm {
+      min-height: 16px;
+    }
 
     &:hover {
       box-shadow: none;

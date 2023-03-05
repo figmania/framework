@@ -1,20 +1,20 @@
 import clsx from 'clsx'
 import { FunctionComponent, HTMLAttributes, useEffect, useState } from 'react'
 import OutsideClickHandler from 'react-outside-click-handler'
-import { Icon, Icons } from './Icon'
+import { Icon, ICON } from './Icon'
 import styles from './Select.module.scss'
 
 export interface SelectOption {
   value: string
   title: string
-  icon?: Icons
+  icon?: ICON
 }
 
 export interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
-  icon?: Icons
+  icon?: ICON
   options: SelectOption[]
   placeholder: string
-  isDisabled?: boolean
+  disabled?: boolean
   value?: string | number | boolean
   onToggleMenu?: (showMenu: boolean) => void
   onChange?: (option: SelectOption) => void
@@ -25,7 +25,7 @@ export interface SelectState {
   selectedOption?: SelectOption
 }
 
-export const Select: FunctionComponent<SelectProps> = ({ value, className, options, placeholder, isDisabled, icon, onToggleMenu, onChange, ...props }) => {
+export const Select: FunctionComponent<SelectProps> = ({ value, className, options, placeholder, disabled, icon, onToggleMenu, onChange, ...props }) => {
   const [showMenu, setShowMenu] = useState(false)
   const [selectedOption, setSelectedOption] = useState(options.find((option) => option.value === value))
 
@@ -46,14 +46,14 @@ export const Select: FunctionComponent<SelectProps> = ({ value, className, optio
     <OutsideClickHandler onOutsideClick={() => { toggleMenu(false) }} disabled={!showMenu}>
       <div className={clsx(styles['select'], className)} {...props}>
         <button type="button" className={clsx(styles['select-button'], selectedIcon ? styles['with-icon'] : styles['without-icon'])} onClick={() => {
-          if (isDisabled) { return }
+          if (disabled) { return }
           toggleMenu(!showMenu)
         }} onFocus={() => {
-          if (isDisabled) { return }
+          if (disabled) { return }
           toggleMenu(true)
         }} onBlur={() => {
           toggleMenu(false)
-        }} disabled={isDisabled} title={selectedTitle}>
+        }} disabled={disabled} title={selectedTitle}>
           {(selectedIcon) && (<Icon icon={selectedIcon} mute></Icon>)}
           <div className={styles['select-label']}>{selectedOption?.title ?? placeholder}</div>
           <div className={styles['select-caret']}></div>

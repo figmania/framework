@@ -5,48 +5,7 @@ body {
   padding: 0;
   margin: 0;
 
-  &.figmania-dark {
-    background-color: #2e3440;
-  }
+  &.figmania-dark { background-color: #2e3440; }
 
-  &.figmania-light {
-    background-color: #F5F5F5;
-  }
+  &.figmania-light { background-color: #F5F5F5; }
 }
-
-h1 {
-  margin: 0px 0px 16px;
-  padding: 12px 0px;
-}
-
-.container {
-  position: relative;
-  flex: 1;
-  overflow-y: auto;
-  padding: 8px;
-}
-
-
-header {
-  display: block;
-  padding: 8px;
-  margin-bottom: 8px;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 11px;
-  line-height: 15px;
-  letter-spacing: 1px;
-}
-
-.panel {
-  padding: 8px;
-  margin-bottom: 8px;
-  position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 3px;
-
-  &:last-child {
-    margin-bottom: 0px;
-  }
-}
-
