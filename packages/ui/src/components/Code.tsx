@@ -22,7 +22,7 @@ export const Code: FunctionComponent<CodeProps> = ({ value, indent, className })
   useEffect(() => {
     const result = hljs.highlight(indent ? prettyPrint(value) : value, { language: 'xml' })
     setCode(result.value)
-  }, [code])
+  }, [value])
 
   return (
     <code className={clsx(styles['code'], 'code', className)} dangerouslySetInnerHTML={{ __html: code ?? LOADING_HTML }} />
