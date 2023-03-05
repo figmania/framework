@@ -14,7 +14,7 @@ export const ClipboardProvider: FunctionComponent<PropsWithChildren> = (props) =
   return (
     <ClipboardContext.Provider value={clipboard}>
       {props.children}
-      <textarea ref={textareaRef} wrap="soft" readOnly={true} style={{ opacity: 0, pointerEvents: 'none', width: 0, height: 0 }} />
+      <textarea ref={textareaRef} wrap="soft" readOnly={true} style={{ opacity: 0, pointerEvents: 'none', width: 0, height: 0, position: 'absolute' }} />
     </ClipboardContext.Provider>
   )
 }
