@@ -1,6 +1,6 @@
 import { debounce } from 'debounce'
-import { Controller } from '../messenger/Controller'
-import { CreateSchema } from '../messenger/Schema'
+import { Controller } from '../Controller'
+import { CreateSchema } from '../Schema'
 import { WindowSize } from '../utils/figma'
 
 export type ResizeSchema = CreateSchema<{ events: { name: 'window:resize', data: WindowSize } }>

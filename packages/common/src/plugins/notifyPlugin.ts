@@ -1,5 +1,5 @@
-import { Controller } from '../messenger/Controller'
-import { CreateSchema } from '../messenger/Schema'
+import { Controller } from '../Controller'
+import { CreateSchema } from '../Schema'
 
 export type NotifySchema = CreateSchema<{ events: { name: 'notify', data: string } }>
 

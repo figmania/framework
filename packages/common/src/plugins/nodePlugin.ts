@@ -1,5 +1,5 @@
-import { Controller } from '../messenger/Controller'
-import { CreateSchema } from '../messenger/Schema'
+import { Controller } from '../Controller'
+import { CreateSchema } from '../Schema'
 
 export type NodeSchema = CreateSchema<{ events: { name: 'node:select', data: unknown } }>
 
