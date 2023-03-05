@@ -1577,6 +1577,11 @@
   dependencies:
     camelcase "*"
 
+"@types/debounce@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@types/debounce/-/debounce-1.2.1.tgz#79b65710bc8b6d44094d286aecf38e44f9627852"
+  integrity sha512-epMsEE85fi4lfmJUH/89/iV/LI+F5CvNIvmgs5g5jYFPfhO2S/ae8WSsLOKWdwtoaZw9Q2IhJ4tQ5tFCcS/4HA==
+
 "@types/decamelize@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/decamelize/-/decamelize-3.0.3.tgz#1731fead0b603b73ca9ba6e2d576387bc46e1b99"
@@ -1772,7 +1777,7 @@
     "@typescript-eslint/types" "5.51.0"
     eslint-visitor-keys "^3.3.0"
 
-"@vitejs/plugin-react@^3.0.0":
+"@vitejs/plugin-react@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-3.1.0.tgz#d1091f535eab8b83d6e74034d01e27d73c773240"
   integrity sha512-AfgcRL8ZBhAlc3BFdigClmTUMISmmzHn7sB2h9U1odvc5U/MjWXsAaz18b/WoppUTDBzxOJwo2VdClfUcItu9g==
@@ -2588,6 +2593,11 @@ dateformat@^3.0.0:
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
+debounce@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.2.1.tgz#38881d8f4166a5c5848020c11827b834bcb3e0a5"
+  integrity sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==
+
 debug@4, debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
@@ -2971,6 +2981,11 @@ eslint-plugin-import@~2.26.0:
     object.values "^1.1.5"
     resolve "^1.22.0"
     tsconfig-paths "^3.14.1"
+
+eslint-plugin-react-refresh@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-refresh/-/eslint-plugin-react-refresh-0.3.4.tgz#586eeac5f4a95d2520824dba68511540e62c8491"
+  integrity sha512-E0ViBglxSQAERBp6eTj5fPgtCRtDonnbCFiVQBhf4Dto2blJRxg1dFUMdMh7N6ljTI4UwPhHwYDQ3Dyo4m6bwA==
 
 eslint-scope@^5.1.1:
   version "5.1.1"
@@ -6324,6 +6339,18 @@ vite@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/vite/-/vite-4.1.1.tgz#3b18b81a4e85ce3df5cbdbf4c687d93ebf402e6b"
   integrity sha512-LM9WWea8vsxhr782r9ntg+bhSFS06FJgCvvB0+8hf8UWtvaiDagKYWXndjfX6kGl74keHJUcpzrQliDXZlF5yg==
+  dependencies:
+    esbuild "^0.16.14"
+    postcss "^8.4.21"
+    resolve "^1.22.1"
+    rollup "^3.10.0"
+  optionalDependencies:
+    fsevents "~2.3.2"
+
+vite@^4.1.4:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-4.1.4.tgz#170d93bcff97e0ebc09764c053eebe130bfe6ca0"
+  integrity sha512-3knk/HsbSTKEin43zHu7jTwYWv81f8kgAL99G5NWBcA1LKvtvcVAC4JjBH1arBunO9kQka+1oGbrMKOjk4ZrBg==
   dependencies:
     esbuild "^0.16.14"
     postcss "^8.4.21"

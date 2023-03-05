@@ -1,5 +1,7 @@
 import { nodeList, nodeTree, TreeNode, uid } from './node'
 
+export interface WindowSize { width: number, height: number }
+
 export type FigmaNode = SceneNode & { readonly children?: ReadonlyArray<SceneNode>, exportSettings?: ReadonlyArray<ExportSettings> }
 
 export function figmaNodeById(id: string): FigmaNode {

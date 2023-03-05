@@ -1,24 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-export type EventHandler<I = any> = (request: I) => void
-export type RequestHandler<I = any, O = any> = (request: I) => O | PromiseLike<O>
 export type PluginMessageRequest<I = any> = { name: string, id: number, type: 'request', request: I }
 export type PluginMessageResponse<O = any> = { name: string, id: number, type: 'response', response: O }
 export type PluginMessageEvent<I = any> = { name: string, type: 'event', request: I }
-
-export type SchemaDef = {
-  events: { name: string, data: unknown }
-  requests: { name: string, data: [unknown, unknown] }
-}
-
-export type SchemaConfig<Schema extends SchemaDef = any> = {
-  events: {
-    [S in Schema['events']as S['name']]: S['data']
-  }
-  request: {
-    [S in Schema['requests']as S['name']]: S['data']
-  }
-}
+export type PluginMessage = PluginMessageRequest | PluginMessageResponse | PluginMessageEvent
 
 export interface FigmaMessageEvent extends MessageEvent {
   data: {
@@ -31,4 +15,20 @@ export interface MessengerDelegate {
   name?: string
   send: (message: any) => void
   listen: (callback: (message: any) => void) => void
+}
+
+export function createFigmaDelegate(): MessengerDelegate {
+  return {
+    name: 'figma',
+    send: (message) => { figma.ui.postMessage(message) },
+    listen: (callback) => { figma.ui.onmessage = callback }
+  }
+}
+
+export function createUIDelegate(): MessengerDelegate {
+  return {
+    name: 'ui',
+    send: (message) => { window.parent.postMessage({ pluginMessage: message }, '*') },
+    listen: (callback) => { window.onmessage = (message: FigmaMessageEvent) => { callback(message.data.pluginMessage) } }
+  }
 }
