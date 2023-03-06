@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { FunctionComponent, useState } from 'react'
-import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Input, Navbar, PluginUI, Scrubber, Select, SelectOption, ThemeSize, ThemeType, useClipboard } from '..'
+import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, PluginUI, Scrubber, Select, SelectOption, TextInput, ThemeSize, ThemeType, useClipboard } from '..'
+import { NumberInput } from '../components/NumberInput'
 import styles from './App.module.scss'
 
 export const App: FunctionComponent = () => {
@@ -34,6 +35,14 @@ export const App: FunctionComponent = () => {
         <Button icon={ICON.ANIMATION_OPACITY} title={`Size: ${size.toUpperCase()}`} onClick={() => { setSize(size === 'md' ? 'sm' : 'md') }} />
       </Navbar>
       <div className={styles['container']}>
+        <header>Input</header>
+        <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
+          <NumberInput name="duration" icon={ICON.TRANSITION_DURATION} suffix="ms" min={0} max={10} step={0.1} precision={3} value={duration} defaultValue={0.5} onChange={setDuration} />
+          <NumberInput name="delay" icon={ICON.TRANSITION_DELAY} suffix="ms" min={0} max={10} step={0.1} precision={3} value={delay} defaultValue={0} onChange={setDelay} />
+          <NumberInput name="rotation" icon={ICON.ANIMATION_ROTATE} suffix="°" min={-360} max={360} step={10} precision={0} value={rotation} defaultValue={0} onChange={setRotation} />
+          <NumberInput name="opacity" icon={ICON.ANIMATION_OPACITY} suffix="%" min={0} max={1} step={0.1} precision={2} value={opacity} defaultValue={1} onChange={setOpacity} />
+          <TextInput name="text" type='text' placeholder="Your Text" value={text} onChange={setText} />
+        </div>
         <header>Icons</header>
         <div className={clsx(styles['panel'], styles['row'], styles['padding'])}>
           {icons.map((icon) => <Icon key={icon} size={size} icon={icon} />)}
@@ -44,7 +53,7 @@ export const App: FunctionComponent = () => {
         </div>
         <header>Scrubber</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
-          <Input name="time" icon={ICON.TRANSITION_DURATION} type="number" placeholder="0s" suffix="s" inputOpts={{ min: 0, max: 10, step: 1 }} fraction={1} value={time} onChange={(value) => { setTime(+value) }} />
+          <NumberInput name="time" icon={ICON.TRANSITION_DURATION} suffix="s" min={0} max={10} step={1} precision={1} value={time} defaultValue={0} onChange={setTime} />
           <Scrubber value={time} duration={10} onChange={(value) => { setTime(value) }} />
         </div>
         <header>Navbar</header>
@@ -79,17 +88,6 @@ export const App: FunctionComponent = () => {
         <header>Checkbox</header>
         <div className={clsx(styles['panel'], styles['padding'])}>
           <Checkbox name="check" title="Checked" value={checked} onChange={(value) => { setChecked(value) }} />
-        </div>
-        <header>Input</header>
-        <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
-          <Input name="duration" icon={ICON.TRANSITION_DURATION} type="number" placeholder="500ms" suffix="ms" inputOpts={{ min: 0, max: 10000, step: 100 }} fraction={0.001} value={duration} defaultValue={0.5} onChange={(value) => {
-            console.info({ value })
-            setDuration(+value)
-          }} />
-          <Input name="delay" icon={ICON.TRANSITION_DELAY} type="number" placeholder="500ms" suffix="ms" inputOpts={{ min: 0, max: 10000, step: 100 }} fraction={0.001} value={delay} onChange={(value) => { setDelay(+value) }} />
-          <Input name="rotation" icon={ICON.ANIMATION_ROTATE} type="number" placeholder="0°" suffix="°" inputOpts={{ min: -360, max: 360, step: 10 }} value={rotation} onChange={(value) => { setRotation(+value) }} />
-          <Input name="opacity" icon={ICON.ANIMATION_OPACITY} type="number" placeholder="100%" suffix="%" inputOpts={{ min: 0, max: 100, step: 10 }} fraction={0.01} value={opacity} onChange={(value) => { setOpacity(+value) }} />
-          <Input name="text" type='text' placeholder="Your Text" value={text} onChange={(value) => { setText(value as string) }} />
         </div>
         <header>Button</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['row'])}>
