@@ -14,6 +14,7 @@ export function configPlugin<C extends object, S extends ConfigSchema<C> = Confi
   controller.addEventHandler('config:save', (value) => {
     Object.assign(config, value)
     figma.clientStorage.setAsync('config', config)
+    controller.emit('config:changed', config)
   })
 
   figma.clientStorage.getAsync('config').then((value: C = defaultConfig) => {

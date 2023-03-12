@@ -37,7 +37,7 @@ export const App: FunctionComponent = () => {
       <div className={styles['container']}>
         <header>Input</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
-          <NumberInput name="duration" icon={ICON.TRANSITION_DURATION} suffix="ms" min={0} max={10} step={0.1} precision={3} value={duration} defaultValue={0.5} onChange={setDuration} />
+          <NumberInput fadeDefault name="duration" icon={ICON.TRANSITION_DURATION} suffix="ms" min={0} max={10} step={0.1} precision={3} value={duration} defaultValue={0.5} onChange={setDuration} />
           <NumberInput name="delay" icon={ICON.TRANSITION_DELAY} suffix="ms" min={0} max={10} step={0.1} precision={3} value={delay} defaultValue={0} onChange={setDelay} />
           <NumberInput name="rotation" icon={ICON.ANIMATION_ROTATE} suffix="°" min={-360} max={360} step={10} precision={0} value={rotation} defaultValue={0} onChange={setRotation} />
           <NumberInput name="opacity" icon={ICON.ANIMATION_OPACITY} suffix="%" min={0} max={1} step={0.1} precision={2} value={opacity} defaultValue={1} onChange={setOpacity} />

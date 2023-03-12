@@ -9,6 +9,7 @@ export interface NumberInputProps extends Omit<LabelHTMLAttributes<HTMLLabelElem
   precision: number
   onChange: (value: number, event: ChangeEvent<HTMLInputElement>) => void
   defaultValue: number
+  fadeDefault?: boolean
   min?: number
   max?: number
   step?: number
@@ -20,7 +21,7 @@ export interface NumberInputProps extends Omit<LabelHTMLAttributes<HTMLLabelElem
   disabled?: boolean
 }
 
-export const NumberInput: FunctionComponent<NumberInputProps> = ({ id, className, name, icon, disabled, inputOpts, precision, value, defaultValue, min, max, step, prefix, suffix, onChange, ...props }) => {
+export const NumberInput: FunctionComponent<NumberInputProps> = ({ id, className, name, icon, disabled, inputOpts, precision, value, defaultValue, min, max, step, prefix, suffix, fadeDefault, onChange, ...props }) => {
   const [error, setError] = useState(false)
   const [editing, setEditing] = useState(false)
   const [editValue, setEditValue] = useState<string>('')
@@ -39,7 +40,8 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({ id, className
     return +val / factor
   }
 
-  const fractionValue = Math.round((value ?? defaultValue) * factor * factor) / factor
+
+  const fractionValue = Math.round((fadeDefault ? value : (value ?? defaultValue)) * factor * factor) / factor
   const formattedValue = `${prefix ? prefix : ''}${fractionValue}${suffix ? suffix : ''}`
 
   useEffect(() => {
@@ -72,11 +74,13 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({ id, className
             setEditing(false)
           }} />
       ) : (
-        <input id={inputId} name={name} type="text" className={clsx(styles['input'], className)} value={formattedValue} disabled={disabled} onFocus={() => {
-          setEditValue(valueToEditValue(value))
-          setError(false)
-          setEditing(true)
-        }} readOnly />
+        <input id={inputId} name={name} type="text" className={clsx(styles['input'], className)} disabled={disabled}
+          value={(fadeDefault && value === defaultValue) ? '' : formattedValue} placeholder={fadeDefault ? formattedValue : undefined}
+          onFocus={() => {
+            setEditValue(valueToEditValue(value))
+            setError(false)
+            setEditing(true)
+          }} readOnly />
       )}
     </label>
   )
