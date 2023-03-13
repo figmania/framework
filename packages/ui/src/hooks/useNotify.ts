@@ -1,5 +1,5 @@
 import { NotifySchema } from '@figmania/common'
-import { useController } from './useController'
+import { useController } from './useFigma'
 
 export function useNotify(): (message: string) => void {
   const controller = useController<NotifySchema>()

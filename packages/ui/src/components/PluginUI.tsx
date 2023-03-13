@@ -1,7 +1,7 @@
 import { ResizeSchema } from '@figmania/common'
 import clsx from 'clsx'
 import { createRef, FunctionComponent, HTMLAttributes, PointerEvent, PropsWithChildren, useEffect, useState } from 'react'
-import { useController } from '../hooks/useController'
+import { useController } from '../hooks/useFigma'
 import styles from './PluginUI.module.scss'
 
 export type ThemeType = 'dark' | 'light'
