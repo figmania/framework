@@ -6,8 +6,11 @@ export type EventHandler<I = any> = (request: I) => void
 export type RequestHandler<I = any, O = any> = (request: I) => O | PromiseLike<O>
 
 export interface Controller<S extends CreateSchema> {
+  onRequest?(name: string, request: any): void,
+  onResponse?(name: string, response: any): void,
   addRequestHandler<K extends keyof S['request'], M extends S['request'][K]>(name: K, handler: RequestHandler<M[0], M[1]>): void
   removeRequestHandler<K extends keyof S>(name: K): void
+  onEvent?(name: string, message: any): void,
   addEventHandler<K extends keyof S['events'], M extends S['events'][K]>(name: K, handler: EventHandler<M>): () => void
   removeEventHandler<K extends keyof S['events'], M extends S['events'][K]>(name: K, handler: EventHandler<M>): void
   emit<K extends keyof S['events'], M extends S['events'][K]>(name: K, request: M): void
@@ -58,7 +61,9 @@ export function createController<S extends CreateSchema>(delegate: MessengerDele
     if (message.type === 'request') {
       const handler = requestHandlers.get(message.name)
       if (!handler) { throw new Error(`No request handler registered for ${message.name}`) }
+      if (controller.onRequest) { controller.onRequest(message.name, message.request) }
       Promise.resolve(handler(message.request)).then((response) => {
+        if (controller.onResponse) { controller.onResponse(message.name, response) }
         delegate.send({ id: message.id, type: 'response', name: message.name, response })
       })
     } else if (message.type === 'response') {
@@ -66,7 +71,10 @@ export function createController<S extends CreateSchema>(delegate: MessengerDele
       resolve(message.response)
     } else if (message.type === 'event') {
       const handlers = eventHandlers.get(message.name) ?? []
-      for (const handler of handlers) { handler(message.request) }
+      if (controller.onEvent) { controller.onEvent(message.name, message.request) }
+      for (const handler of handlers) {
+        handler(message.request)
+      }
     }
   })
 
