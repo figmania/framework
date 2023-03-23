@@ -1,4 +1,4 @@
-import { Controller, CreateSchema } from '@figmania/common'
+import { Controller, CreateSchema, FigmaLogger } from '@figmania/common'
 import { useContext } from 'react'
 import { FigmaContext } from '../context/FigmaContext'
 
@@ -13,4 +13,8 @@ export function useController<S extends CreateSchema>(): Controller<S> {
 export function useConfig<C>(): [C, (value: Partial<C>) => void] {
   const { config, saveConfig } = useFigma()
   return [config, saveConfig]
+}
+
+export function useLogger(): FigmaLogger {
+  return useFigma().logger
 }

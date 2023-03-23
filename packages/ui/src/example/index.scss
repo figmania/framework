@@ -9,3 +9,12 @@ body {
 
   &.figmania-light { background-color: #F5F5F5; }
 }
+
+.plugin-ui-handle {
+  position: absolute;
+}
+
+.plugin-ui {
+  width: 640px;
+  height: 480px
+}

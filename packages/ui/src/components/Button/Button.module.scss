@@ -8,12 +8,13 @@
   color: var(--text-secondary);
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 4px;
   font: inherit;
   cursor: pointer;
 
   &.sm {
     min-height: 16px;
-    & > .button-title { line-height: 16px; }
   }
 
   &:hover {
@@ -46,14 +47,13 @@
   }
 
   & > .button-title {
-    line-height: 24px;
-    margin-right: 6px;
-    margin-left: 4px;
     z-index: 1;
+    line-height: normal;
+    margin-right: 8px;
   }
 
   &.without-icon > .button-title {
-    margin-left: 9px;
+    margin-left: 8px;
   }
 
   &[disabled] {
@@ -75,9 +75,7 @@
     min-height: 28px;
     border: 1px solid transparent;
 
-    &.sm {
-      min-height: 16px;
-    }
+    &.sm { min-height: 16px; }
 
     &:hover {
       box-shadow: none;

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { ChangeEvent, createRef, FunctionComponent, InputHTMLAttributes, LabelHTMLAttributes, useEffect, useRef, useState } from 'react'
-import { Icon, ICON } from './Icon'
+import { Icon, ICON } from '../Icon/Icon'
 import styles from './Input.module.scss'
 
 export interface NumberInputProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onChange'> {
@@ -58,7 +58,7 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({ id, className
       error && styles['error'],
       className
     )} {...props}>
-      {icon && <Icon icon={icon} mute></Icon>}
+      {icon && <Icon icon={icon}></Icon>}
       {editing ? (
         <input ref={input} id={inputId} name={name} type='number' value={editValue} className={styles['input']} disabled={disabled} {...inputOpts}
           min={min != null ? min * factor : undefined} max={max != null ? max * factor : undefined} step={step != null ? step * factor : undefined}

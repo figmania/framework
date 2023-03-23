@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { ChangeEvent, FunctionComponent, InputHTMLAttributes, LabelHTMLAttributes, useRef } from 'react'
-import { Icon, ICON } from './Icon'
+import { Icon, ICON } from '../Icon/Icon'
 import styles from './Input.module.scss'
 
 export interface TextInputProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onChange'> {
@@ -25,7 +25,7 @@ export const TextInput: FunctionComponent<TextInputProps> = ({ id, className, pl
       icon && styles['with-icon'],
       className
     )} {...props}>
-      {icon && <Icon icon={icon} mute></Icon>}
+      {icon && <Icon icon={icon}></Icon>}
       <input className={styles['input']} {...inputOpts} id={inputId} name={name} type={type} placeholder={placeholder} value={value} disabled={disabled}
         onChange={(event) => { onChange(event.target.value, event) }}
         onFocus={(event) => { event.target.select() }} />

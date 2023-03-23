@@ -42,7 +42,7 @@
 
 	& > input[type=checkbox]:checked + label:before {
 		background-color: var(--focus-color);
-		background-image: url(../icons/check.svg);
+		background-image: url(../../icons/check.svg);
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 12px;

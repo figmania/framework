@@ -1,11 +1,11 @@
 import { ResizeSchema } from '@figmania/common'
 import clsx from 'clsx'
 import { createRef, FunctionComponent, HTMLAttributes, PointerEvent, PropsWithChildren, useEffect, useState } from 'react'
-import { useController } from '../hooks/useFigma'
+import { useController } from '../../hooks/useFigma'
 import styles from './PluginUI.module.scss'
 
 export type ThemeType = 'dark' | 'light'
-export type ThemeSize = 'sm' | 'md'
+export type ThemeSize = 'xl' | 'sm' | 'md' | 'lg' | 'xl'
 
 export interface WindowSize {
   width: number
@@ -29,9 +29,9 @@ export const PluginUI: FunctionComponent<PluginUIProps> = ({ theme, children, cl
   }, [theme])
 
   return (
-    <div className={clsx(styles['plugin-ui'], styles[`theme-${theme}`], className)} {...props}>
+    <div className={clsx('plugin-ui', styles['plugin-ui'], styles[`theme-${theme}`], className)} {...props}>
       {children}
-      <div ref={handleRef} className={styles['handle']}
+      <div ref={handleRef} className={clsx(styles['handle'], 'plugin-ui-handle')}
         onPointerDown={(event: PointerEvent<HTMLDivElement>) => {
           if (!handleRef.current) { return }
           setResizing(true)

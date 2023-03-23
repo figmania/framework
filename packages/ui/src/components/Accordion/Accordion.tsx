@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { FunctionComponent, ReactNode, useState } from 'react'
+import { Button } from '../Button/Button'
+import { ICON, Icon } from '../Icon/Icon'
 import styles from './Accordion.module.scss'
-import { Button } from './Button'
-import { ICON, Icon } from './Icon'
 
 export interface AccordionProps {
   title: string
@@ -24,11 +24,11 @@ export const Accordion: FunctionComponent<AccordionProps> = ({ title, active, ch
   return (
     <div className={clsx(styles['accordion'], active ? styles['active'] : styles['inactive'], disabled ? styles['disabled'] : styles['enabled'])}>
       <div className={styles['header']} onClick={() => { if (!active && activate) { activate() } }}>
-        <Icon className={styles['icon']} icon={ICON.UI_FORWARD} mute></Icon>
+        <Icon className={styles['icon']} icon={ICON.UI_FORWARD}></Icon>
         <div className={styles['title']}><span>{title}</span></div>
         {renderHeader?.()}
         {renderSettings && (
-          <Button icon={ICON.UI_SETTINGS} onClick={() => { if (active) { setShowSettings(!showSettings) } }} selected={active && showSettings}></Button>
+          <Button icon={ICON.APP_SETTINGS} onClick={() => { if (active) { setShowSettings(!showSettings) } }} selected={active && showSettings}></Button>
         )}
       </div>
       {(renderSettings && showSettings && active) && (

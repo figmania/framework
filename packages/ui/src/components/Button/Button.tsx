@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { ButtonHTMLAttributes, FunctionComponent, MouseEvent, ReactNode } from 'react'
+import { ICON, Icon } from '../Icon/Icon'
+import { ThemeSize } from '../PluginUI/PluginUI'
 import styles from './Button.module.scss'
-import { ICON, Icon } from './Icon'
-import { ThemeSize } from './PluginUI'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ICON
@@ -23,7 +23,7 @@ export const Button: FunctionComponent<ButtonProps> = ({ className, icon, color,
       styles[size ?? 'md'],
       className
     )} {...props}>
-      {icon && (<Icon icon={icon} color={color} size={size} disabled={disabled} mute></Icon>)}
+      {icon && (<Icon icon={icon} color={color} size={size} disabled={disabled}></Icon>)}
       {title && (<div className={styles['button-title']}>{title}</div>)}
     </button>
   )

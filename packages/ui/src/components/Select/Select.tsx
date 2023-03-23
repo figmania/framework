@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { FunctionComponent, HTMLAttributes, useEffect, useState } from 'react'
 import OutsideClickHandler from 'react-outside-click-handler'
-import { Icon, ICON } from './Icon'
+import { Icon, ICON } from '../Icon/Icon'
 import styles from './Select.module.scss'
 
 export interface SelectOption {
@@ -54,7 +54,7 @@ export const Select: FunctionComponent<SelectProps> = ({ value, className, optio
         }} onBlur={() => {
           toggleMenu(false)
         }} disabled={disabled} title={selectedTitle}>
-          {(selectedIcon) && (<Icon icon={selectedIcon} mute></Icon>)}
+          {(selectedIcon) && (<Icon icon={selectedIcon}></Icon>)}
           <div className={styles['select-label']}>{selectedOption?.title ?? placeholder}</div>
           <div className={styles['select-caret']}></div>
         </button>

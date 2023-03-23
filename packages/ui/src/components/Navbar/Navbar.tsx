@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { FunctionComponent, HTMLAttributes, PropsWithChildren } from 'react'
-import { Icon, ICON } from './Icon'
+import { Icon, ICON } from '../Icon/Icon'
 import styles from './Navbar.module.scss'
 
 export interface NavbarProps extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {
