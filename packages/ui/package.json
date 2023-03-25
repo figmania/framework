@@ -1,6 +1,6 @@
 {
   "name": "@figmania/ui",
-  "version": "2.3.8",
+  "version": "2.3.9",
   "description": "UI Library for Figmania plugins",
   "main": "build/index.umd.js",
   "module": "build/index.mjs",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.58.0",
-    "@figmania/common": "^2.3.8",
+    "@figmania/common": "^2.3.9",
     "@types/highlight.js": "^10.1.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
