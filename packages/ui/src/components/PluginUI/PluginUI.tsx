@@ -1,6 +1,8 @@
 import { ResizeSchema } from '@figmania/common'
 import clsx from 'clsx'
 import { createRef, FunctionComponent, HTMLAttributes, PointerEvent, PropsWithChildren, useEffect, useState } from 'react'
+import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
 import { useController } from '../../hooks/useFigma'
 import styles from './PluginUI.module.scss'
 
@@ -64,6 +66,7 @@ export const PluginUI: FunctionComponent<PluginUIProps> = ({ theme, children, cl
           </g>
         </svg>
       </div>
+      <Tooltip id="tooltip" />
     </div>
   )
 }

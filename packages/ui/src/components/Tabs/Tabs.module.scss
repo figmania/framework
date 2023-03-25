@@ -12,6 +12,20 @@
 }
 
 .tab {
+
+
+  &.active {
+    .label { color: var(--text-color-primary); font-weight: 600; }
+    .icon { background-color: var(--text-color-primary); }
+  }
+
+  &:hover {
+    .label { color: var(--text-color-primary); }
+    .icon { background-color: var(--text-color-primary); }
+  }
+}
+
+.tab-inner {
   display: flex;
   flex-direction: row;
   gap: 4px;
@@ -20,27 +34,13 @@
   padding: 6px 0px;
   line-height: 1;
   cursor: pointer;
-
-  &.with-icon {
-    padding-left: 0px;
-  }
-
-  &.active {
-    .title { color: var(--text-color-primary); font-weight: 600; }
-    .icon { background-color: var(--text-color-primary); }
-  }
-
-  &:hover {
-    .title { color: var(--text-color-primary); }
-    .icon { background-color: var(--text-color-primary); }
-  }
 }
 
 .icon {
   background-color: var(--text-color-secondary);
 }
 
-.title {
+.label {
   min-width: 0;
   flex: 1;
   color: var(--text-color-secondary);
@@ -49,4 +49,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 500;
+}
+
+.addon {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 }

@@ -1,9 +1,9 @@
 import clsx from 'clsx'
-import { ChangeEvent, createRef, FunctionComponent, InputHTMLAttributes, LabelHTMLAttributes, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, createRef, FunctionComponent, HTMLAttributes, InputHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { Icon, ICON } from '../Icon/Icon'
 import styles from './Input.module.scss'
 
-export interface NumberInputProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onChange'> {
+export interface NumberInputProps extends Omit<HTMLAttributes<HTMLLabelElement>, 'onChange'> {
   name: string
   value: number
   precision: number

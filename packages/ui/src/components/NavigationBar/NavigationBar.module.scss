@@ -20,12 +20,12 @@
 
   &.active {
     background-color: var(--panel-color);
-    .title { color: var(--text-color-primary); font-weight: 600; }
+    .label { color: var(--text-color-primary); font-weight: 600; }
     .icon { background-color: var(--text-color-primary); }
   }
 
   &:hover {
-    .title { color: var(--text-color-primary); }
+    .label { color: var(--text-color-primary); }
     .icon { background-color: var(--text-color-primary); }
   }
 }
@@ -34,7 +34,7 @@
   background-color: var(--text-color-secondary);
 }
 
-.title {
+.label {
   min-width: 0;
   flex: 1;
   color: var(--text-color-secondary);

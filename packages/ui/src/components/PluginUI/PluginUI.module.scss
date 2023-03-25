@@ -1,82 +1,4 @@
-@media (prefers-color-scheme: light) {
-  .plugin-ui {
-    --background-color: #FFFFFF;
-    --text-color-primary: #171717;
-    --text-color-secondary: #333333;
-    --text-color-on-dark: #FFFFFF;
-    --border-color: #e4e4e4;
-    --panel-color: #FCFCFC;
-    --panel-inactive-color: #E9E9E9;
-    --icon-color: #171717;
-    --focus-color: #18a0fb;
-    --error-color: #fb1818;
-    --selected-color: #e6e6e6;
-    --disabled-color: #AAAAAA;
-  }
-}
-
-
-.theme-light {
-  --background-color: #FFFFFF;
-  --text-color-primary: #171717;
-  --text-color-secondary: #333333;
-  --text-color-on-dark: #FFFFFF;
-  --border-color: #e4e4e4;
-  --panel-color: #FCFCFC;
-  --panel-inactive-color: #E9E9E9;
-  --icon-color: #171717;
-  --focus-color: #18a0fb;
-  --error-color: #fb1818;
-  --selected-color: #e6e6e6;
-  --disabled-color: #AAAAAA;
-}
-
-@media (prefers-color-scheme: dark) {
-  .plugin-ui {
-    --background-color: #2C2C2C;
-    --text-color-primary: #FFFFFF;
-    --text-color-secondary: rgba(255, 255, 255, 0.7);
-    --text-color-on-dark: #FFFFFF;
-    --border-color: #444444;
-    --panel-color: #2C2C2C;
-    --panel-inactive-color: #262626;
-    --icon-color: #FFFFFF;
-    --focus-color: #18a0fb;
-    --error-color: #fb1818;
-    --selected-color: #444444;
-    --disabled-color: #434f57;
-  }
-}
-
-.theme-dark {
-  --background-color: #2C2C2C;
-  --text-color-primary: #FFFFFF;
-  --text-color-secondary: rgba(255, 255, 255, 0.7);
-  --text-color-on-dark: #FFFFFF;
-  --border-color: #444444;
-  --panel-color: #2C2C2C;
-  --panel-inactive-color: #262626;
-  --icon-color: #FFFFFF;
-  --focus-color: #18a0fb;
-  --error-color: #fb1818;
-  --selected-color: #444444;
-  --disabled-color: #434f57;
-}
-
-.theme-midnight {
-  --background-color: #2E3440;
-  --text-color-primary: #f7f7fa;
-  --text-color-secondary: rgba(247, 247, 250, 0.7);
-  --text-color-on-dark: #FFFFFF;
-  --border-color: #1e222a;
-  --panel-color: #232730;
-  --panel-inactive-color: #292e39;
-  --icon-color: #D7DEE3;
-  --focus-color: #18a0fb;
-  --error-color: #fb1818;
-  --selected-color: #445662;
-  --disabled-color: #434f57;
-}
+@import '../../themes.scss';
 
 .plugin-ui {
   background-color: var(--background-color);
@@ -85,7 +7,14 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  &.theme-light { @include theme-light; }
+  &.theme-dark { @include theme-dark; }
+  &.theme-midnight { @include theme-midnight; }
   
+  @media (prefers-color-scheme: light) { @include theme-light; }
+  @media (prefers-color-scheme: dark) { @include theme-dark; }
+
   * {
     box-sizing: border-box;
     user-select: none;

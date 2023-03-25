@@ -6,11 +6,12 @@
 
 header {
   display: block;
-  padding: 16px 16px 8px;
+  padding: 20px 16px 12px;
   font-weight: 600;
   font-size: 11px;
   line-height: 15px;
   border-top: 1px solid var(--border-color);
+  &:first-child { border-top: none; }
 }
 
 .panel {
@@ -24,6 +25,10 @@ header {
 
   &.padding {
     padding: 8px;
+  }
+
+  &.padding-lg {
+    padding: 12px 36px;
   }
 
   &.row {

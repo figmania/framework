@@ -1,32 +1,26 @@
 import clsx from 'clsx'
-import { FunctionComponent } from 'react'
-import { ICON, Icon } from '../Icon/Icon'
+import { FunctionComponent, PropsWithChildren, ReactNode } from 'react'
 import styles from './Tabs.module.scss'
 
-export interface TabItem {
-  title: string
-  icon?: ICON
-}
-
-export interface TabsProps {
-  items: TabItem[]
+export interface TabsProps extends PropsWithChildren {
+  items: ReactNode[]
   selectedIndex: number
-  onChange: (tab: TabItem, index: number) => void
+  onChange: (index: number) => void
 }
 
-export const Tabs: FunctionComponent<TabsProps> = ({ items, selectedIndex, onChange }) => {
+export const Tabs: FunctionComponent<TabsProps> = ({ items, selectedIndex, onChange, children }) => {
   return (
     <div className={styles['tabs']}>
       {items.map((item, index) => (
-        <div key={index} className={clsx(
-          styles['tab'],
-          item.icon && styles['with-icon'],
-          index === selectedIndex && styles['active']
-        )} onClick={() => { onChange(item, index) }}>
-          {item.icon && <Icon icon={item.icon} className={styles['icon']} />}
-          <div className={styles['title']} >{item.title}</div>
-        </div>
+        <div key={index} className={clsx(styles['tab'], index === selectedIndex && styles['active'])} onClick={() => {
+          onChange(index)
+        }}>{item}</div>
       ))}
+      {children && (
+        <div className={styles['addon']}>
+          {children}
+        </div>
+      )}
     </div>
   )
 }

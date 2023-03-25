@@ -5,23 +5,23 @@ import { ICON, Icon } from '../Icon/Icon'
 import styles from './Accordion.module.scss'
 
 export interface AccordionProps {
-  title: string
-  active: boolean
+  label: string
+  active?: boolean
   disabled?: boolean
   children?: ReactNode
-  activate: () => void
+  activate?: () => void
   renderHeader?: () => ReactNode
   renderSettings?: () => ReactNode
 }
 
-export const Accordion: FunctionComponent<AccordionProps> = ({ title, active, children, disabled, renderHeader, renderSettings, activate }) => {
+export const Accordion: FunctionComponent<AccordionProps> = ({ label, active, children, disabled, renderHeader, renderSettings, activate }) => {
   const [showSettings, setShowSettings] = useState(false)
 
   return (
     <div className={clsx(styles['accordion'], active ? styles['active'] : styles['inactive'], disabled ? styles['disabled'] : styles['enabled'])}>
       <div className={styles['header']} onClick={() => { if (!active && activate) { activate() } }}>
         <Icon className={styles['icon']} icon={ICON.UI_FORWARD}></Icon>
-        <div className={styles['title']}><span>{title}</span></div>
+        <div className={styles['label']}><span>{label}</span></div>
         {renderHeader?.()}
         {renderSettings && (
           <Button icon={ICON.APP_SETTINGS} onClick={() => { if (active) { setShowSettings(!showSettings) } }} selected={active && showSettings}></Button>

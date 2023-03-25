@@ -1,9 +1,9 @@
 import clsx from 'clsx'
-import { ChangeEvent, FunctionComponent, InputHTMLAttributes, LabelHTMLAttributes, useRef } from 'react'
+import { ChangeEvent, FunctionComponent, HTMLAttributes, InputHTMLAttributes, useRef } from 'react'
 import { Icon, ICON } from '../Icon/Icon'
 import styles from './Input.module.scss'
 
-export interface TextInputProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'onChange'> {
+export interface TextInputProps extends Omit<HTMLAttributes<HTMLLabelElement>, 'onChange'> {
   type: 'text' | 'password'
   name: string
   value: string

@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { FunctionComponent, useEffect, useState } from 'react'
-import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, PluginUI, Scrubber, Select, SelectOption, Tabs, TextInput, ThemeSize, ThemeType, useClipboard, useConfig, useController, useLogger } from '..'
+import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, PluginUI, Scrubber, Select, SelectOption, Tabs, TextInput, ThemeSize, ThemeType, tooltip, useClipboard, useConfig, useController, useLogger } from '..'
+import { Tab } from '../components/Tabs/Tab'
 import styles from './App.module.scss'
 import { Config, Schema } from './Schema'
 
@@ -31,24 +32,24 @@ export const App: FunctionComponent = () => {
   const clipboard = useClipboard()
 
   const options: SelectOption[] = [
-    { value: 'first', title: 'First', icon: ICON.UI_CLIPBOARD },
-    { value: 'second', title: 'Second' },
-    { value: 'third', title: 'Third' }
+    { value: 'first', label: 'First', icon: ICON.UI_CLIPBOARD },
+    { value: 'second', label: 'Second' },
+    { value: 'third', label: 'Third' }
   ]
 
   const themeOptions: SelectOption[] = [
-    { value: 'default', title: 'Default' },
-    { value: 'midnight', title: 'Midnight' },
-    { value: 'dark', title: 'Dark' },
-    { value: 'light', title: 'Light' }
+    { value: 'default', label: 'Default' },
+    { value: 'midnight', label: 'Midnight' },
+    { value: 'dark', label: 'Dark' },
+    { value: 'light', label: 'Light' }
   ]
 
   const sizeOptions: SelectOption[] = [
-    { value: 'xs', title: 'XS' },
-    { value: 'sm', title: 'SM' },
-    { value: 'md', title: 'MD' },
-    { value: 'lg', title: 'LG' },
-    { value: 'xl', title: 'XL' }
+    { value: 'xs', label: 'XS' },
+    { value: 'sm', label: 'SM' },
+    { value: 'md', label: 'MD' },
+    { value: 'lg', label: 'LG' },
+    { value: 'xl', label: 'XL' }
   ]
 
   const icons = Object.values(ICON)
@@ -57,28 +58,25 @@ export const App: FunctionComponent = () => {
   return (
     <PluginUI theme={config.theme} minSize={{ width: 274, height: 40 }}>
       <Tabs selectedIndex={selectedTabIndex} items={[
-        { title: 'Effects', icon: ICON.APP_EFFECTS },
-        { title: 'Library', icon: ICON.APP_LIBRARY },
-        { title: 'Share', icon: ICON.APP_SHARE }
-      ]} onChange={(_, index) => {
-        setSelectedTabIndex(index)
-      }} />
-      <Navbar title="Components">
-        <Select value={config.theme} options={themeOptions} style={{ width: 100 }} onChange={({ value }) => {
+        <Tab label='Effects' icon={ICON.APP_EFFECTS} {...tooltip('Explore our Effects')} />,
+        <Tab label='Library' icon={ICON.APP_LIBRARY} {...tooltip('Explore our Library')} />,
+        <Tab label='Share' icon={ICON.APP_SHARE} {...tooltip('Share on Social Media')} />
+      ]} onChange={(index) => { setSelectedTabIndex(index) }}>
+        <Select {...tooltip('Choose your Theme')} value={config.theme} options={themeOptions} style={{ width: 100 }} onChange={({ value }) => {
           saveConfig({ theme: value as ThemeType })
         }} />
-        <Select value={config.size} icon={ICON.STYLE_VERTICAL} options={sizeOptions} style={{ width: 80 }} onChange={({ value }) => {
+        <Select {...tooltip('Choose your Size')} value={config.size} icon={ICON.STYLE_VERTICAL} options={sizeOptions} style={{ width: 80 }} onChange={({ value }) => {
           saveConfig({ size: value as ThemeSize })
         }} />
-      </Navbar>
+      </Tabs>
       <div className={styles['container']}>
         <header>Input</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
-          <NumberInput fadeDefault name="duration" icon={ICON.TRANSITION_DURATION} suffix="ms" min={0} max={10} step={0.1} precision={3} value={duration} defaultValue={0.5} onChange={setDuration} />
-          <NumberInput name="delay" icon={ICON.TRANSITION_DELAY} suffix="ms" min={0} max={10} step={0.1} precision={3} value={delay} defaultValue={0} onChange={setDelay} />
-          <NumberInput name="rotation" icon={ICON.ANIMATE_ROTATION} suffix="°" min={-360} max={360} step={10} precision={0} value={rotation} defaultValue={0} onChange={setRotation} />
-          <NumberInput name="opacity" icon={ICON.ANIMATE_OPACITY} suffix="%" min={0} max={1} step={0.1} precision={2} value={opacity} defaultValue={1} onChange={setOpacity} />
-          <TextInput name="text" type='text' placeholder="Your Text" value={text} onChange={setText} />
+          <NumberInput {...tooltip('Duration of your animation')} fadeDefault name="duration" icon={ICON.TRANSITION_DURATION} suffix="ms" min={0} max={10} step={0.1} precision={3} value={duration} defaultValue={0.5} onChange={setDuration} />
+          <NumberInput {...tooltip('Delay before your animation starts')} name="delay" icon={ICON.TRANSITION_DELAY} suffix="ms" min={0} max={10} step={0.1} precision={3} value={delay} defaultValue={0} onChange={setDelay} />
+          <NumberInput {...tooltip('Amount of degrees the element should rotate')} name="rotation" icon={ICON.ANIMATE_ROTATION} suffix="°" min={-360} max={360} step={10} precision={0} value={rotation} defaultValue={0} onChange={setRotation} />
+          <NumberInput {...tooltip('Opacity of the element in percent')} name="opacity" icon={ICON.ANIMATE_OPACITY} suffix="%" min={0} max={1} step={0.1} precision={2} value={opacity} defaultValue={1} onChange={setOpacity} />
+          <TextInput {...tooltip('Type a wonderful text')} name="text" type='text' placeholder="Your Text" value={text} onChange={setText} />
         </div>
         <header>Icons</header>
         <div className={clsx(styles['panel'], styles['row'], styles['padding'])}>
@@ -90,50 +88,46 @@ export const App: FunctionComponent = () => {
         </div>
         <header>Scrubber</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
-          <NumberInput name="time" icon={ICON.TRANSITION_DURATION} suffix="s" min={0} max={10} step={1} precision={1} value={time} defaultValue={0} onChange={setTime} />
+          <NumberInput {...tooltip('Current time step in your animation. You can edit this field :-)')} name="time" icon={ICON.TRANSITION_DURATION} suffix="s" min={0} max={10} step={1} precision={1} value={time} defaultValue={0} onChange={setTime} />
           <Scrubber value={time} duration={10} onChange={(value) => { setTime(value) }} />
         </div>
         <header>Navbar</header>
         <div className={styles['panel']}>
-          <Navbar icon={ICON.SYMBOL_COMPONENT} title="Navbar with Icon" />
-          <Navbar disabled title="Navbar Disabled" />
+          <Navbar icon={ICON.SYMBOL_COMPONENT} label="Navbar with Icon" />
+          <Navbar disabled label="Navbar Disabled" />
         </div>
         <header>Code</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
           <Code value={html} indent />
-          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="Copy" onClick={() => { clipboard(html) }} />
+          <Button {...tooltip('Click to copy the HTML code to your clipboard')} size={config.size} icon={ICON.UI_CLIPBOARD} label="Copy" onClick={() => { clipboard(html) }} />
         </div>
         <header>Accordion</header>
         <div className="panel">
-          <Accordion title="First Item" active={accordion} activate={() => { setAccordion(!accordion) }}>
-            <div className={clsx(styles['panel'], styles['padding'])}>First Item Active</div>
+          <Accordion label="First Item" active={accordion} activate={() => { setAccordion(!accordion) }}>
+            <div className={clsx(styles['panel'], styles['padding-lg'])}>First Item Active</div>
           </Accordion>
-          <Accordion title="Second Item" active={!accordion} activate={() => { setAccordion(!accordion) }}>
-            <div className={clsx(styles['panel'], styles['padding'])}>First Item Active</div>
+          <Accordion label="Second Item" active={!accordion} activate={() => { setAccordion(!accordion) }}>
+            <div className={clsx(styles['panel'], styles['padding-lg'])}>Second Item Active</div>
           </Accordion>
+          <Accordion label="Disabled Item" disabled />
         </div>
         <header>Select</header>
-        <div className={clsx(styles['panel'], styles['padding'])}>
+        <div className={clsx(styles['panel'], styles['padding'], styles['row'])}>
           <Select value={selected} icon={ICON.ANIMATE_Y} options={options} placeholder="Choose Option" onChange={(option) => { setSelected(option.value) }} />
-        </div>
-        <header>Uncontrolled Select</header>
-        <div className={clsx(styles['panel'], styles['padding'])}>
-          <Select icon={ICON.ANIMATE_Y} options={options} placeholder="Choose Option" onChange={(option) => {
-            console.info('select', option)
-          }} />
+          <Select icon={ICON.ANIMATE_Y} options={options} placeholder="Uncontrolled Select" />
         </div>
         <header>Checkbox</header>
         <div className={clsx(styles['panel'], styles['padding'])}>
-          <Checkbox name="check" title="Checked" value={checked} onChange={(value) => { setChecked(value) }} />
+          <Checkbox name="check" label="Checked" value={checked} onChange={(value) => { setChecked(value) }} />
         </div>
         <header>Button</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['row'])}>
-          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="With Icon" />
-          <Button size={config.size} title="Plain" />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} label="With Icon" />
+          <Button size={config.size} label="Plain" />
           <Button size={config.size} icon={ICON.UI_CLIPBOARD} />
-          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="Selected" selected />
-          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="Focus" focus />
-          <Button size={config.size} disabled icon={ICON.UI_CLIPBOARD} title="Disabled" />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} label="Selected" selected />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} label="Focus" focus />
+          <Button size={config.size} disabled icon={ICON.UI_CLIPBOARD} label="Disabled" />
           <ButtonGroup>
             <Button size={config.size} icon={ICON.ALIGN_HORIZONTAL_LEFT} selected={groupValue === 'first'} onClick={() => { setGroupValue('first') }} />
             <Button size={config.size} icon={ICON.ALIGN_HORIZONTAL_RIGHT} selected={groupValue === 'second'} onClick={() => { setGroupValue('second') }} />
@@ -141,9 +135,9 @@ export const App: FunctionComponent = () => {
         </div>
       </div>
       <NavigationBar selectedIndex={selectedNavIndex} items={[
-        { title: 'Effects', icon: ICON.APP_EFFECTS },
-        { title: 'Library', icon: ICON.APP_LIBRARY },
-        { title: 'Share', icon: ICON.APP_SHARE }
+        { label: 'Effects', icon: ICON.APP_EFFECTS },
+        { label: 'Library', icon: ICON.APP_LIBRARY },
+        { label: 'Share', icon: ICON.APP_SHARE }
       ]} onChange={(_, index) => {
         setSelectedNavIndex(index)
       }} />

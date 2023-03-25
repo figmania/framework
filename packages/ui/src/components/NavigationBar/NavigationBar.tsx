@@ -4,7 +4,7 @@ import { ICON, Icon } from '../Icon/Icon'
 import styles from './NavigationBar.module.scss'
 
 export interface NavigationItem {
-  title: string
+  label: string
   icon?: ICON
 }
 
@@ -23,7 +23,7 @@ export const NavigationBar: FunctionComponent<NavigationBarProps> = ({ items, se
           index === selectedIndex && styles['active']
         )} onClick={() => { onChange(item, index) }}>
           {item.icon && <Icon icon={item.icon} className={styles['icon']} />}
-          <div className={styles['title']} >{item.title}</div>
+          <div className={styles['label']} >{item.label}</div>
         </div>
       ))}
     </div>
