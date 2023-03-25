@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { FunctionComponent, useEffect, useState } from 'react'
-import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, PluginUI, Scrubber, Select, SelectOption, TextInput, ThemeSize, ThemeType, useClipboard, useConfig, useController, useLogger } from '..'
+import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, PluginUI, Scrubber, Select, SelectOption, Tabs, TextInput, ThemeSize, ThemeType, useClipboard, useConfig, useController, useLogger } from '..'
 import styles from './App.module.scss'
 import { Config, Schema } from './Schema'
 
@@ -17,6 +17,7 @@ export const App: FunctionComponent = () => {
   }, [])
 
   const [selectedTabIndex, setSelectedTabIndex] = useState(0)
+  const [selectedNavIndex, setSelectedNavIndex] = useState(0)
   const [time, setTime] = useState<number>(1.2)
   const [duration, setDuration] = useState<number>(0.5)
   const [delay, setDelay] = useState<number>(0.25)
@@ -54,7 +55,14 @@ export const App: FunctionComponent = () => {
 
   return (
     <PluginUI theme={config.theme} minSize={{ width: 274, height: 40 }}>
-      <Navbar icon={ICON.SYMBOL_COMPONENT} title="Components">
+      <Tabs selectedIndex={selectedTabIndex} items={[
+        { title: 'Effects', icon: ICON.APP_EFFECTS },
+        { title: 'Library', icon: ICON.APP_LIBRARY },
+        { title: 'Share', icon: ICON.APP_SHARE }
+      ]} onChange={(_, index) => {
+        setSelectedTabIndex(index)
+      }} />
+      <Navbar title="Components">
         <Select value={config.theme} options={themeOptions} style={{ width: 100 }} onChange={({ value }) => {
           saveConfig({ theme: value as ThemeType })
         }} />
@@ -122,23 +130,21 @@ export const App: FunctionComponent = () => {
           <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="With Icon" />
           <Button size={config.size} title="Plain" />
           <Button size={config.size} icon={ICON.UI_CLIPBOARD} />
-          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="Selected" selected={true} />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="Selected" selected />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="Focus" focus />
           <Button size={config.size} disabled icon={ICON.UI_CLIPBOARD} title="Disabled" />
-        </div>
-        <header>Button group</header>
-        <div className={clsx(styles['panel'], styles['padding'])}>
           <ButtonGroup>
-            <Button size={config.size} icon={ICON.CONTROL_ON} title='First' selected={groupValue === 'first'} onClick={() => { setGroupValue('first') }} />
-            <Button size={config.size} icon={ICON.CONTROL_OFF} title='Second' selected={groupValue === 'second'} onClick={() => { setGroupValue('second') }} />
+            <Button size={config.size} icon={ICON.ALIGN_HORIZONTAL_LEFT} selected={groupValue === 'first'} onClick={() => { setGroupValue('first') }} />
+            <Button size={config.size} icon={ICON.ALIGN_HORIZONTAL_RIGHT} selected={groupValue === 'second'} onClick={() => { setGroupValue('second') }} />
           </ButtonGroup>
         </div>
       </div>
-      <NavigationBar selectedIndex={selectedTabIndex} items={[
+      <NavigationBar selectedIndex={selectedNavIndex} items={[
         { title: 'Effects', icon: ICON.APP_EFFECTS },
         { title: 'Library', icon: ICON.APP_LIBRARY },
         { title: 'Share', icon: ICON.APP_SHARE }
       ]} onChange={(_, index) => {
-        setSelectedTabIndex(index)
+        setSelectedNavIndex(index)
       }} />
     </PluginUI >
   )

@@ -8,23 +8,25 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ICON
   color?: string
   selected?: boolean
+  focus?: boolean
   disabled?: boolean
   title?: string
   size?: ThemeSize
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
-export const Button: FunctionComponent<ButtonProps> = ({ className, icon, color, title, size, selected, disabled, onClick, ...props }) => {
+export const Button: FunctionComponent<ButtonProps> = ({ className, icon, color, title, size, selected, focus, disabled, onClick, ...props }) => {
   return (
     <button disabled={disabled} onClick={onClick} className={clsx(
       styles['button'],
       selected && styles['selected'],
+      focus && styles['focus'],
       icon ? styles['with-icon'] : styles['without-icon'],
       styles[size ?? 'md'],
       className
     )} {...props}>
-      {icon && (<Icon icon={icon} color={color} size={size} disabled={disabled}></Icon>)}
-      {title && (<div className={styles['button-title']}>{title}</div>)}
+      {icon && (<Icon className={styles['icon']} icon={icon} color={color} size={size} disabled={disabled}></Icon>)}
+      {title && (<div className={styles['title']}>{title}</div>)}
     </button>
   )
 }

@@ -11,7 +11,12 @@ export interface NavbarProps extends PropsWithChildren, HTMLAttributes<HTMLDivEl
 
 export const Navbar: FunctionComponent<NavbarProps> = ({ title, icon, disabled, children, className, ...props }) => {
   return (
-    <div className={clsx(styles['navbar'], disabled && styles['disabled'], className)} {...props}>
+    <div className={clsx(
+      styles['navbar'],
+      icon && styles['with-icon'],
+      disabled && styles['disabled'],
+      className
+    )} {...props}>
       {icon && (<Icon icon={icon} disabled={disabled}></Icon>)}
       <div className={styles['navbar-title']}><span>{title}</span></div>
       {children}

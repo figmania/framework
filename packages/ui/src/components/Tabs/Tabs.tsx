@@ -1,25 +1,26 @@
 import clsx from 'clsx'
 import { FunctionComponent } from 'react'
 import { ICON, Icon } from '../Icon/Icon'
-import styles from './NavigationBar.module.scss'
+import styles from './Tabs.module.scss'
 
-export interface NavigationItem {
+export interface TabItem {
   title: string
   icon?: ICON
 }
 
-export interface NavigationBarProps {
-  items: NavigationItem[]
+export interface TabsProps {
+  items: TabItem[]
   selectedIndex: number
-  onChange: (item: NavigationItem, index: number) => void
+  onChange: (tab: TabItem, index: number) => void
 }
 
-export const NavigationBar: FunctionComponent<NavigationBarProps> = ({ items, selectedIndex, onChange }) => {
+export const Tabs: FunctionComponent<TabsProps> = ({ items, selectedIndex, onChange }) => {
   return (
-    <div className={styles['items']}>
+    <div className={styles['tabs']}>
       {items.map((item, index) => (
         <div key={index} className={clsx(
-          styles['item'],
+          styles['tab'],
+          item.icon && styles['with-icon'],
           index === selectedIndex && styles['active']
         )} onClick={() => { onChange(item, index) }}>
           {item.icon && <Icon icon={item.icon} className={styles['icon']} />}

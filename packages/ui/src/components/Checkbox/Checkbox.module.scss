@@ -16,7 +16,7 @@
 
 	& > label {
 		align-items: center;
-		color: var(--text-secondary);
+		color: var(--text-color-secondary);
 		display: flex;
 		margin: 0;
 		padding: 0;
@@ -24,7 +24,7 @@
 		user-select: none;
 
 		&:before {
-			border: 1px solid var(--text-secondary);
+			border: 1px solid var(--text-color-secondary);
 			border-radius: 2px;
 			content: "";
 			display: block;

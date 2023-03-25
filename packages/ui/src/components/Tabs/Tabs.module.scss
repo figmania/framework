@@ -1,25 +1,31 @@
-.items {
+.tabs {
   position: relative;
+  height: 41px;
   display: flex;
   flex-direction: row;
+  gap: 16px;
   align-items: center;
-  justify-content: space-evenly;
-  min-height: 32px;
-  border-top: 1px solid var(--border-color);
-  background-color: var(--panel-inactive-color);
+  justify-content: flex-start;
+  background-color: var(--panel-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0px 4px 0px 16px;
 }
 
-.item {
-  flex: 1;
+.tab {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 4px;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  padding: 6px 0px;
+  line-height: 1;
   cursor: pointer;
 
+  &.with-icon {
+    padding-left: 0px;
+  }
+
   &.active {
-    background-color: var(--panel-color);
     .title { color: var(--text-color-primary); font-weight: 600; }
     .icon { background-color: var(--text-color-primary); }
   }

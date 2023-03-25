@@ -34,7 +34,7 @@
   padding: 4px 4px 4px 8px;
   background-color: var(--panel-color);
   border-bottom: 1px solid var(--border-color);
-  height: 40px;
+  height: 41px;
 }
 
 .title {
@@ -43,16 +43,14 @@
   padding: 10px 0px;
 
   & > span {
-    color: var(--text-secondary);
+    color: var(--text-color-secondary);
     display: block;
     margin-left: 4px;
     margin-right: 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: var(--font-size-xsmall);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--font-line-height);
+    font-weight: 500;
   }  
 }
 
@@ -81,7 +79,7 @@
 }
 
 .disabled .title > span {
-  font-weight: var(--font-weight-normal);
+  font-weight: 400;
   color: var(--color-disabled);
 }
 
