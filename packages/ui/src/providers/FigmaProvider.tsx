@@ -5,17 +5,18 @@ import { FigmaContext } from '../context/FigmaContext'
 
 export interface FigmaProviderProps extends PropsWithChildren {
   controller: Controller<any>
+  defaultConfig?: Record<string, any>
   logOptions?: FigmaLoggerOptions
 }
 
-export const FigmaProvider: FunctionComponent<FigmaProviderProps> = ({ controller, logOptions, children }) => {
-  const [config, setConfig] = useState<Record<string, any>>({})
+export const FigmaProvider: FunctionComponent<FigmaProviderProps> = ({ controller, defaultConfig, logOptions, children }) => {
+  const [config, setConfig] = useState<Record<string, any>>()
 
   const logger = new FigmaLogger({ name: 'UI', minLevel: LogLevel.SILLY, date: false, ...logOptions })
 
   const saveConfig = (value: {}) => {
     controller.emit('config:save', { ...config, ...value })
-    setConfig({ ...config, ...value })
+    setConfig({ ...defaultConfig, ...config, ...value })
   }
 
   const onConfigChanged = (value: {}) => {
@@ -28,5 +29,5 @@ export const FigmaProvider: FunctionComponent<FigmaProviderProps> = ({ controlle
     return () => { controller.removeEventHandler('config:changed', onConfigChanged) }
   }, [controller])
 
-  return <FigmaContext.Provider value={{ controller, config, saveConfig, logger }}>{children}</FigmaContext.Provider>
+  return <FigmaContext.Provider value={{ controller, config, defaultConfig, saveConfig, logger }}>{children}</FigmaContext.Provider>
 }

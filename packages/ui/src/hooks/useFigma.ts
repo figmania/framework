@@ -11,8 +11,8 @@ export function useController<S extends CreateSchema>(): Controller<S> {
 }
 
 export function useConfig<C>(): [C, (value: Partial<C>) => void] {
-  const { config, saveConfig } = useFigma()
-  return [config, saveConfig]
+  const { config, defaultConfig, saveConfig } = useFigma()
+  return [config ?? defaultConfig, saveConfig]
 }
 
 export function useLogger(): FigmaLogger {

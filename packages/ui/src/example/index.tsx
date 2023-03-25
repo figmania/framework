@@ -1,13 +1,15 @@
-import { createController, createFigmaDelegate, createUIDelegate, logPlugin, nodePlugin, notifyPlugin, resizePlugin, TreeNode } from '@figmania/common'
+import { configPlugin, createController, createFigmaDelegate, createUIDelegate, logPlugin, nodePlugin, notifyPlugin, resizePlugin, TreeNode } from '@figmania/common'
 import { createRoot } from 'react-dom/client'
 import { ClipboardProvider, FigmaProvider } from '..'
 import { createFigma } from '../mock/createFigma'
 import { App } from './App'
 import './index.scss'
 import { PluginWindow } from './PluginWindow'
-import { Schema } from './Schema'
+import { Config, Schema } from './Schema'
 
 createFigma(window)
+
+const defaultConfig: Config = JSON.parse(localStorage.getItem('config') ?? '{"size":"md","theme":"dark"}')
 
 createController<Schema>(createFigmaDelegate(), async (controller) => {
   const size = await resizePlugin(controller, { width: 640, height: 480 })
@@ -15,6 +17,7 @@ createController<Schema>(createFigmaDelegate(), async (controller) => {
 
   notifyPlugin(controller)
   nodePlugin(controller, (node) => node as unknown as TreeNode)
+  configPlugin<Config>(controller, defaultConfig)
   const logger = logPlugin(controller)
 
   controller.addRequestHandler('ping', (message) => {
@@ -27,7 +30,7 @@ createController<Schema>(createFigmaDelegate(), async (controller) => {
 const uiController = createController(createUIDelegate())
 const root = createRoot(document.getElementById('root')!)
 root.render(
-  <FigmaProvider controller={uiController}>
+  <FigmaProvider controller={uiController} defaultConfig={defaultConfig}>
     <ClipboardProvider>
       <PluginWindow title="Figmania UI">
         <App />

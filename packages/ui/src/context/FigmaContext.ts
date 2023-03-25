@@ -4,7 +4,8 @@ import { createContext } from 'react'
 
 export interface FigmaContextProps<C, S extends ConfigSchema<C>> {
   controller: Controller<S>
-  config: C
+  config?: C
+  defaultConfig?: C
   saveConfig: (value: Partial<C>) => void
   logger: FigmaLogger
 }

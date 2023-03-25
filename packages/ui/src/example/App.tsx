@@ -1,15 +1,13 @@
 import clsx from 'clsx'
 import { FunctionComponent, useEffect, useState } from 'react'
-import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NumberInput, PluginUI, Scrubber, Select, SelectOption, TextInput, ThemeSize, ThemeType, useClipboard, useController, useLogger, useNode } from '..'
+import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, PluginUI, Scrubber, Select, SelectOption, TextInput, ThemeSize, ThemeType, useClipboard, useConfig, useController, useLogger } from '..'
 import styles from './App.module.scss'
-import { Schema } from './Schema'
+import { Config, Schema } from './Schema'
 
 export const App: FunctionComponent = () => {
-  const node = useNode<Schema>()
   const controller = useController<Schema>()
+  const [config, saveConfig] = useConfig<Config>()
   const logger = useLogger()
-
-  logger.info('node', node)
 
   useEffect(() => {
     controller.emit('test:message', 'hello world')
@@ -18,8 +16,7 @@ export const App: FunctionComponent = () => {
     })
   }, [])
 
-  const [theme, setTheme] = useState<ThemeType>('dark')
-  const [size, setSize] = useState<ThemeSize>('md')
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0)
   const [time, setTime] = useState<number>(1.2)
   const [duration, setDuration] = useState<number>(0.5)
   const [delay, setDelay] = useState<number>(0.25)
@@ -38,14 +35,32 @@ export const App: FunctionComponent = () => {
     { value: 'third', title: 'Third' }
   ]
 
+  const themeOptions: SelectOption[] = [
+    { value: 'midnight', title: 'Midnight' },
+    { value: 'dark', title: 'Dark' },
+    { value: 'light', title: 'Light' }
+  ]
+
+  const sizeOptions: SelectOption[] = [
+    { value: 'xs', title: 'XS' },
+    { value: 'sm', title: 'SM' },
+    { value: 'md', title: 'MD' },
+    { value: 'lg', title: 'LG' },
+    { value: 'xl', title: 'XL' }
+  ]
+
   const icons = Object.values(ICON)
   const html = '<html><head></head><body></html>'
 
   return (
-    <PluginUI theme={theme} minSize={{ width: 274, height: 40 }}>
+    <PluginUI theme={config.theme} minSize={{ width: 274, height: 40 }}>
       <Navbar icon={ICON.SYMBOL_COMPONENT} title="Components">
-        <Button icon={ICON.ANIMATE_OPACITY} title={`Theme: ${theme.toUpperCase()}`} onClick={() => { setTheme(theme === 'dark' ? 'light' : 'dark') }} />
-        <Button icon={ICON.STYLE_VERTICAL} title={`Size: ${size.toUpperCase()}`} onClick={() => { setSize(size === 'lg' ? 'md' : 'lg') }} />
+        <Select value={config.theme} options={themeOptions} style={{ width: 100 }} onChange={({ value }) => {
+          saveConfig({ theme: value as ThemeType })
+        }} />
+        <Select value={config.size} icon={ICON.STYLE_VERTICAL} options={sizeOptions} style={{ width: 80 }} onChange={({ value }) => {
+          saveConfig({ size: value as ThemeSize })
+        }} />
       </Navbar>
       <div className={styles['container']}>
         <header>Input</header>
@@ -58,11 +73,11 @@ export const App: FunctionComponent = () => {
         </div>
         <header>Icons</header>
         <div className={clsx(styles['panel'], styles['row'], styles['padding'])}>
-          {icons.map((icon) => <Icon key={icon} size={size} icon={icon} />)}
+          {icons.map((icon) => <Icon key={icon} size={config.size} icon={icon} />)}
         </div>
         <header>Icon Buttons</header>
         <div className={clsx(styles['panel'], styles['row'], styles['padding'])}>
-          {icons.map((icon) => <Button key={icon} size={size} icon={icon} />)}
+          {icons.map((icon) => <Button key={icon} size={config.size} icon={icon} />)}
         </div>
         <header>Scrubber</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
@@ -77,7 +92,7 @@ export const App: FunctionComponent = () => {
         <header>Code</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['col'])}>
           <Code value={html} indent />
-          <Button size={size} icon={ICON.UI_CLIPBOARD} title="Copy" onClick={() => { clipboard(html) }} />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="Copy" onClick={() => { clipboard(html) }} />
         </div>
         <header>Accordion</header>
         <div className="panel">
@@ -104,20 +119,27 @@ export const App: FunctionComponent = () => {
         </div>
         <header>Button</header>
         <div className={clsx(styles['panel'], styles['padding'], styles['row'])}>
-          <Button size={size} icon={ICON.UI_CLIPBOARD} title="With Icon" />
-          <Button size={size} title="Plain" />
-          <Button size={size} icon={ICON.UI_CLIPBOARD} />
-          <Button size={size} icon={ICON.UI_CLIPBOARD} title="Selected" selected={true} />
-          <Button size={size} disabled icon={ICON.UI_CLIPBOARD} title="Disabled" />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="With Icon" />
+          <Button size={config.size} title="Plain" />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} />
+          <Button size={config.size} icon={ICON.UI_CLIPBOARD} title="Selected" selected={true} />
+          <Button size={config.size} disabled icon={ICON.UI_CLIPBOARD} title="Disabled" />
         </div>
         <header>Button group</header>
         <div className={clsx(styles['panel'], styles['padding'])}>
           <ButtonGroup>
-            <Button size={size} icon={ICON.CONTROL_ON} title='First' selected={groupValue === 'first'} onClick={() => { setGroupValue('first') }} />
-            <Button size={size} icon={ICON.CONTROL_OFF} title='Second' selected={groupValue === 'second'} onClick={() => { setGroupValue('second') }} />
+            <Button size={config.size} icon={ICON.CONTROL_ON} title='First' selected={groupValue === 'first'} onClick={() => { setGroupValue('first') }} />
+            <Button size={config.size} icon={ICON.CONTROL_OFF} title='Second' selected={groupValue === 'second'} onClick={() => { setGroupValue('second') }} />
           </ButtonGroup>
         </div>
       </div>
+      <NavigationBar selectedIndex={selectedTabIndex} items={[
+        { title: 'Effects', icon: ICON.APP_EFFECTS },
+        { title: 'Library', icon: ICON.APP_LIBRARY },
+        { title: 'Share', icon: ICON.APP_SHARE }
+      ]} onChange={(_, index) => {
+        setSelectedTabIndex(index)
+      }} />
     </PluginUI >
   )
 }

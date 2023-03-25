@@ -1,8 +1,9 @@
 import { CreateSchema, TreeNode } from '@figmania/common'
+import { ThemeSize, ThemeType } from '../components/PluginUI/PluginUI'
 
 export interface Config {
-  theme: 'dark' | 'light'
-  size: 'sm' | 'md'
+  theme: ThemeType
+  size: ThemeSize
 }
 
 export type Schema = CreateSchema<{

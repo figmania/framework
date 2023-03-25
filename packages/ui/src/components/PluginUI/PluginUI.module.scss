@@ -12,6 +12,19 @@
 }
 
 .theme-dark {
+  --background: #2C2C2C;
+  --text-primary: #FFFFFF;
+  --text-secondary: #D7DEE3;
+  --border-color: #444444;
+  --panel-color: #2C2C2C;
+  --icon-color: #D7DEE3;
+  --focus-color: #18a0fb;
+  --error-color: #fb1818;
+  --selected-color: #445662;
+  --disabled-color: #434f57;
+}
+
+.theme-midnight {
   --background: #2E3440;
   --text-primary: #F4F4F9;
   --text-secondary: #D7DEE3;
@@ -43,4 +56,16 @@
   right: 0px;
   z-index: 1000;
   cursor: se-resize;
+
+  .handle-bg {
+    fill: var(--border-color);
+  }
+  
+  .handle-bar {
+    fill: var(--background);
+  }
+
+  &:hover .handle-bar {
+    fill: var(--focus-color);
+  }
 }

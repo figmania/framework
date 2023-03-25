@@ -13,7 +13,7 @@ export interface SelectOption {
 export interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   icon?: ICON
   options: SelectOption[]
-  placeholder: string
+  placeholder?: string
   disabled?: boolean
   value?: string | number | boolean
   onToggleMenu?: (showMenu: boolean) => void
@@ -45,7 +45,7 @@ export const Select: FunctionComponent<SelectProps> = ({ value, className, optio
   return (
     <OutsideClickHandler onOutsideClick={() => { toggleMenu(false) }} disabled={!showMenu}>
       <div className={clsx(styles['select'], className)} {...props}>
-        <button type="button" className={clsx(styles['select-button'], selectedIcon ? styles['with-icon'] : styles['without-icon'])} onClick={() => {
+        <button type="button" className={clsx(styles['button'], selectedIcon ? styles['with-icon'] : styles['without-icon'])} onClick={() => {
           if (disabled) { return }
           toggleMenu(!showMenu)
         }} onFocus={() => {
@@ -55,18 +55,18 @@ export const Select: FunctionComponent<SelectProps> = ({ value, className, optio
           toggleMenu(false)
         }} disabled={disabled} title={selectedTitle}>
           {(selectedIcon) && (<Icon icon={selectedIcon}></Icon>)}
-          <div className={styles['select-label']}>{selectedOption?.title ?? placeholder}</div>
-          <div className={styles['select-caret']}></div>
+          <div className={styles['label']}>{selectedOption?.title ?? placeholder}</div>
+          <svg className={styles['caret']} width="8" height="7" viewBox="0 0 8 7"><path d="M3.646 5.354l-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z" fillRule="evenodd" fill="currentColor" /></svg>
         </button>
-        <div className={clsx(styles['select-menu'], showMenu && styles['select-menu-active'])}>
+        <div className={clsx(styles['menu'], showMenu && styles['menu-active'])}>
           {options.map((option, index) => (
-            <div className={clsx(styles['select-item'], selectedOption && selectedOption.value === option.value && styles['select-item-selected'])} onMouseDown={() => {
+            <div className={clsx(styles['menu-item'], selectedOption && selectedOption.value === option.value && styles['menu-item-selected'])} onMouseDown={() => {
               setSelectedOption(option)
               onChange?.(option)
               toggleMenu(false)
-            }} key={`select-option-${index}`} title={option.title}>
-              <div className={styles['select-item-icon']}></div>
-              <div className={styles['select-item-label']}>{option.title}</div>
+            }} key={`option-${index}`} title={option.title}>
+              <div className={styles['menu-item-icon']}></div>
+              <div className={styles['menu-item-label']}>{option.title}</div>
             </div>
           ))}
         </div>

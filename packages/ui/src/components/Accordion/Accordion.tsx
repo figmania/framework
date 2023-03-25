@@ -14,10 +14,6 @@ export interface AccordionProps {
   renderSettings?: () => ReactNode
 }
 
-export interface AccordionState {
-  showSettings: boolean
-}
-
 export const Accordion: FunctionComponent<AccordionProps> = ({ title, active, children, disabled, renderHeader, renderSettings, activate }) => {
   const [showSettings, setShowSettings] = useState(false)
 

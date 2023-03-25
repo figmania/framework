@@ -1,0 +1,44 @@
+.items {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  min-height: 32px;
+  background-color: var(--panel-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  background-size: 20px;
+  background-position: center center;
+}
+
+.title {
+  min-width: 0;
+  flex: 1;
+  color: var(--text-secondary);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--font-size-xsmall);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height);
+}

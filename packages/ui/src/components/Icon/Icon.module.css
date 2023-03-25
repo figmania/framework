@@ -1,4 +1,4 @@
-.icon { width: 24px; min-width: 24px; height: 24px; display: block; background-position: center center; background-repeat: no-repeat; background-size: contain; background-color: var(--icon-color); }
+.icon { width: 24px; min-width: 24px; height: 24px; display: block; background-position: center center; -webkit-mask-repeat: no-repeat; background-size: contain; background-color: var(--icon-color); }
 .xs { width: 12px; min-width: 12px; height: 12px; }
 .sm { width: 16px; min-width: 16px; height: 16px; }
 .md { width: 24px; min-width: 24px; height: 24px; }

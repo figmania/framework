@@ -6,10 +6,14 @@
   user-select: none;
   align-items: center;
   border: 1px solid transparent;
-  padding: 0px 0px 0px 4px;
+  padding: 0px 0px 0px 7px;
   margin: 0px;
   box-sizing: border-box;
   border-radius: 2px;
+
+  &.with-icon {
+    padding-left: 4px;
+  }
 
   &.disabled {
     opacity: 0.3;
