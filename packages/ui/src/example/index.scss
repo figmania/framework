@@ -5,6 +5,9 @@ body {
   padding: 0;
   margin: 0;
 
+  @media (prefers-color-scheme: light) { background-color: #F5F5F5; }
+  @media (prefers-color-scheme: dark) { background-color: #1E1E1E; }
+
   &.figmania-midnight { background-color: #2e3440; }
   &.figmania-dark { background-color: #1E1E1E; }
   &.figmania-light { background-color: #F5F5F5; }

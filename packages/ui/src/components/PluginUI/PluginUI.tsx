@@ -13,7 +13,7 @@ export interface WindowSize {
 }
 
 export interface PluginUIProps extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {
-  theme: ThemeType
+  theme?: ThemeType
   minSize?: WindowSize
   maxSize?: WindowSize
 }
@@ -24,12 +24,17 @@ export const PluginUI: FunctionComponent<PluginUIProps> = ({ theme, children, cl
   const handleRef = createRef<HTMLDivElement>()
 
   useEffect(() => {
-    document.body.classList.remove('figmania-dark', 'figmania-light')
-    document.body.classList.add(`figmania-${theme}`)
+    document.body.classList.remove('figmania-dark', 'figmania-light', 'figmania-midnight')
+    if (theme) { document.body.classList.add(`figmania-${theme}`) }
   }, [theme])
 
   return (
-    <div className={clsx('plugin-ui', styles['plugin-ui'], styles[`theme-${theme}`], className)} {...props}>
+    <div className={clsx(
+      'plugin-ui',
+      styles['plugin-ui'],
+      theme && styles[`theme-${theme}`],
+      className
+    )} {...props}>
       {children}
       <div ref={handleRef} className={clsx(styles['handle'], 'plugin-ui-handle')}
         onPointerDown={(event: PointerEvent<HTMLDivElement>) => {

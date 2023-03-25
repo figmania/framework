@@ -37,6 +37,7 @@ export const App: FunctionComponent = () => {
   ]
 
   const themeOptions: SelectOption[] = [
+    { value: 'default', title: 'Default' },
     { value: 'midnight', title: 'Midnight' },
     { value: 'dark', title: 'Dark' },
     { value: 'light', title: 'Light' }
