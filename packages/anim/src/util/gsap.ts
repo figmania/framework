@@ -1,6 +1,24 @@
 import camelcase from 'camelcase'
 import decamelize from 'decamelize'
 
+export type GsapEase = 'none' | 'power1.in' | 'power1.out' | 'power1.inOut'
+
+export type AnimEase = 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out'
+
+export const EaseAnimToGsap: Record<string, GsapEase> = {
+  'linear': 'none',
+  'ease-in': 'power1.in',
+  'ease-out': 'power1.out',
+  'ease-in-out': 'power1.inOut'
+}
+
+export const EaseGsapToAnim: Record<string, AnimEase> = {
+  'none': 'linear',
+  'power1.in': 'ease-in',
+  'power1.out': 'ease-out',
+  'power1.inOut': 'ease-in-out'
+}
+
 export type Timeline = gsap.core.Timeline
 
 export type TweenValue = string | number
@@ -30,7 +48,7 @@ export function getAnimValue(value: string) {
 
 export function getDefaultProps(element: SVGSVGElement): gsap.TweenVars {
   return getAnimAttributes(element).reduce<gsap.TweenVars>((obj, { propertyName, value }) => {
-    obj[propertyName] = getAnimValue(value)
+    obj[propertyName] = propertyName === 'ease' ? EaseAnimToGsap[getAnimValue(value)] : getAnimValue(value)
     return obj
   }, {})
 }
@@ -49,6 +67,9 @@ export function getTweenProps(element: Element): TweenProps {
       obj.delay = parseFloat(value)
     } else if (propertyName === 'duration') {
       obj.duration = parseFloat(value)
+    } else if (propertyName === 'ease') {
+      obj.from.ease = EaseAnimToGsap[value]
+      obj.to.ease = EaseAnimToGsap[value]
     } else {
       const values = value.split('|').map(getAnimValue)
       if (values.length === 1) {
