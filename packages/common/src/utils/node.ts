@@ -14,7 +14,7 @@ export interface NodeDataModel<T = {}> {
 }
 
 export function uid(id: string) {
-  return md5(id).substring(0, 8)
+  return `id${md5(id).substring(0, 8)}`
 }
 
 export function nodeData<T = {}>(figmaNode: FigmaNode, model: NodeDataModel<T>): T {
