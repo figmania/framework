@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/no-misused-promises */
 import { MockPageNode } from './createNode'
 
 export type MockPluginAPI = Pick<PluginAPI, 'apiVersion' | 'editorType' | 'pluginId' | 'ui' | 'clientStorage' | 'showUI' | 'on' | 'currentPage'>
