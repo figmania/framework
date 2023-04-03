@@ -1,0 +1,42 @@
+{
+  "name": "@figmania/ast",
+  "version": "2.3.10",
+  "description": "Transform SVG using AST",
+  "type": "module",
+  "main": "./build/index.js",
+  "types": "build/index.d.ts",
+  "license": "MIT",
+  "author": "Tobias Strebitzer <tobias.strebitzer@magloft.com>",
+  "scripts": {
+    "clean": "rimraf build",
+    "build": "vite build",
+    "watch": "vite build --watch --mode=development",
+    "serve": "vite",
+    "prepack": "yarn clean && yarn build",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "css-tree": "^2.3.1",
+    "hast": "^1.0.0",
+    "hast-util-select": "^5.0.5",
+    "rehype-parse": "^8.0.4",
+    "rehype-stringify": "^9.0.3",
+    "unified": "^10.1.2",
+    "unist-util-is": "^5.2.1",
+    "unist-util-visit": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/css-tree": "^2.3.1",
+    "@types/hast": "^2.3.4",
+    "@types/node": "^18.15.11",
+    "@types/unist": "^2.0.6",
+    "ts-node": "^10.9.1",
+    "tsx": "^3.12.6",
+    "typescript": "^4.9.3",
+    "vite": "^4.2.1",
+    "vite-plugin-dts": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:anim="http://www.w3.org/2000/anim" anim="" anim:transform-origin="50% 50%" anim:duration="0.5" anim:ease="power1.inOut">
+  <style>
+    #id67fa0e0d {
+      transform-origin: center;
+      animation:spin 3s ease infinite;
+    }
+    @keyframes spin {
+      100% { transform:rotate(-360deg); } 
+    }
+  </style>
+  <g id="id99a7da30">
+    <rect width="512" height="512" fill="#232730"></rect>
+    <rect id="id67fa0e0d" x="51" y="238" width="411" height="37" fill="#18A0FB" anim="" anim:rotation="0|360" anim:delay="0" anim:duration="0.5"></rect>
+  </g>
+</svg>

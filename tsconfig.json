@@ -2,13 +2,15 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
+      "@figmania/ast": ["./packages/ast"],
       "@figmania/common": ["./packages/common"],
       "@figmania/anim": ["./packages/anim"],
       "@figmania/ui": ["./packages/ui"],
-      "@figmania/webcomponent": ["./packages/webcomponent"],
+      "@figmania/webcomponent": ["./packages/webcomponent"]
     }
   },
   "references": [
+    { "path": "packages/ast" },
     { "path": "packages/common" },
     { "path": "packages/anim" },
     { "path": "packages/ui" },
