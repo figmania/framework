@@ -5,8 +5,6 @@ import { loadResource } from '../util/xhr'
 
 export type SvgAnimateTrigger = 'hover' | 'loop' | 'visible' | 'on' | 'off'
 
-export type SvgAnimateEase = 'none' | 'power1.out' | 'power1.in' | 'power1.inOut'
-
 @CustomElement('svg-animate')
 export class SvgAnimate extends HTMLElement {
   static get observedAttributes() { return ['src', 'trigger'] }
