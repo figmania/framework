@@ -17,7 +17,6 @@ export interface AnimProps {
   duration: number
   delay: number
   ease: AnimPropsEase
-  transformOrigin: string
   rotation?: [number, number]
   opacity?: [number, number]
   x?: [number, number]
@@ -34,14 +33,13 @@ export function getAnimProps(properties: Properties = {}, defaults?: AnimProps):
   const props: AnimProps = {
     duration: properties['anim:duration'] ? +properties['anim:duration'] : defaults?.duration ?? 0.5,
     delay: properties['anim:delay'] ? +properties['anim:delay'] : defaults?.delay ?? 0,
-    ease: properties['anim:ease'] ? AnimEaseMap[properties['anim:ease']] : defaults?.ease ?? 'ease-in-out',
-    transformOrigin: properties['anim:transform-origin'] ?? defaults?.transformOrigin ?? '50% 50%'
+    ease: properties['anim:ease'] ? AnimEaseMap[properties['anim:ease']] : defaults?.ease ?? 'ease-in-out'
   }
   if (properties['anim:rotation']) { props.rotation = getAnimNumber(properties['anim:rotation']) }
-  if (properties['anim:opacity']) { props.rotation = getAnimNumber(properties['anim:opacity']) }
-  if (properties['anim:x']) { props.rotation = getAnimNumber(properties['anim:x']) }
-  if (properties['anim:y']) { props.rotation = getAnimNumber(properties['anim:y']) }
-  if (properties['anim:scale']) { props.rotation = getAnimNumber(properties['anim:scale']) }
+  if (properties['anim:opacity']) { props.opacity = getAnimNumber(properties['anim:opacity']) }
+  if (properties['anim:x']) { props.x = getAnimNumber(properties['anim:x']) }
+  if (properties['anim:y']) { props.y = getAnimNumber(properties['anim:y']) }
+  if (properties['anim:scale']) { props.scale = getAnimNumber(properties['anim:scale']) }
   return props
 }
 
