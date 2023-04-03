@@ -2,9 +2,9 @@
   "name": "@figmania/ast",
   "version": "2.3.10",
   "description": "Transform SVG using AST",
-  "type": "module",
-  "main": "./build/index.js",
-  "types": "build/index.d.ts",
+  "main": "build/index.umd.js",
+  "module": "build/index.mjs",
+  "typings": "build/index.d.ts",
   "license": "MIT",
   "author": "Tobias Strebitzer <tobias.strebitzer@magloft.com>",
   "scripts": {

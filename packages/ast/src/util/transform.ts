@@ -1,5 +1,8 @@
 import { AnimEase, Element, Properties, Root } from 'hast'
 import { select } from 'hast-util-select'
+import rehypeParse from 'rehype-parse'
+import rehypeStringify from 'rehype-stringify'
+import { unified } from 'unified'
 import { is } from 'unist-util-is'
 import { visit } from 'unist-util-visit'
 import { buildStylesheet } from './style'
@@ -80,4 +83,11 @@ export function transform(root: Root): Map<string, AnimProps> {
   })
 
   return animMap
+}
+
+export function process(html: string): string {
+  const processor = unified().use(rehypeParse, { fragment: true }).use(rehypeStringify)
+  const root = processor.parse(html)
+  transform(root)
+  return processor.stringify(root)
 }
