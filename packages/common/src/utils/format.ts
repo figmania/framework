@@ -1,4 +1,5 @@
 export const WHITESPACES = '\n\r\t '.split('')
+
 export const SINGLE_TOKENS = 'br,input,link,meta,!doctype,basefont,base,area,hr,wbr,param,img,isindex,?xml,embed,?php,?,?='.split(',')
 
 export interface ParserOptions {
@@ -93,7 +94,7 @@ export class Parser {
   private getContentsTo(name: string) {
     if (this.pos === this.input.length) { return ['', 'TK_EOF'] }
     let content = ''
-    const regMatch = new RegExp('\<\/' + name + '\\s*\>', 'igm')
+    const regMatch = new RegExp('</' + name + '\\s*>', 'igm')
     regMatch.lastIndex = this.pos
     const regArray = regMatch.exec(this.input)
     const endScript = regArray ? regArray.index : this.input.length //absolute end of script
@@ -220,8 +221,7 @@ export class Parser {
           content.push(comment)
         }
         this.tagType = 'START'
-      }
-      else if (tagCheck.indexOf('[endif') !== -1) {//peek for <!--[endif end conditional comment
+      } else if (tagCheck.indexOf('[endif') !== -1) { //peek for <!--[endif end conditional comment
         this.tagType = 'END'
         this.unindent()
       } else if (tagCheck.indexOf('[cdata[') !== -1) { //if it's a <[cdata[ comment...

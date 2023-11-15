@@ -3,14 +3,15 @@ import { MessengerDelegate, PluginMessage } from './Delegate'
 import { CreateSchema } from './Schema'
 
 export type EventHandler<I = any> = (request: I) => void
+
 export type RequestHandler<I = any, O = any> = (request: I) => O | PromiseLike<O>
 
 export interface Controller<S extends CreateSchema> {
-  onRequest?(name: string, request: any): void,
-  onResponse?(name: string, response: any): void,
+  onRequest?(name: string, request: any): void
+  onResponse?(name: string, response: any): void
   addRequestHandler<K extends keyof S['request'], M extends S['request'][K]>(name: K, handler: RequestHandler<M[0], M[1]>): void
   removeRequestHandler<K extends keyof S>(name: K): void
-  onEvent?(name: string, message: any): void,
+  onEvent?(name: string, message: any): void
   addEventHandler<K extends keyof S['events'], M extends S['events'][K]>(name: K, handler: EventHandler<M>): () => void
   removeEventHandler<K extends keyof S['events'], M extends S['events'][K]>(name: K, handler: EventHandler<M>): void
   emit<K extends keyof S['events'], M extends S['events'][K]>(name: K, request: M): void

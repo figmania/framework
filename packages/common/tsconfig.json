@@ -1,10 +1,9 @@
 {
-  "extends": "@magloft/devkit-core/tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "build/",
-    "rootDir": "src/",
-    "types": ["@figma/plugin-typings"]
+    "rootDir": "src/"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "build"]
+  "exclude": ["../../node_modules", "build"]
 }

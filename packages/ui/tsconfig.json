@@ -1,5 +1,5 @@
 {
-  "extends": "@magloft/devkit-core/tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "build/",
     "rootDir": "src/",

@@ -1,19 +1,35 @@
 {
   "compilerOptions": {
     "strict": true,
+    "target": "ES2020",
+    "module": "ES2020",
+    "types": ["@figma/plugin-typings"],
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "paths": {
+      "@figmania/anim": ["./packages/anim"],
       "@figmania/ast": ["./packages/ast"],
       "@figmania/common": ["./packages/common"],
-      "@figmania/anim": ["./packages/anim"],
       "@figmania/ui": ["./packages/ui"],
       "@figmania/webcomponent": ["./packages/webcomponent"]
     }
   },
   "references": [
+    { "path": "packages/anim" },
     { "path": "packages/ast" },
     { "path": "packages/common" },
-    { "path": "packages/anim" },
     { "path": "packages/ui" },
     { "path": "packages/webcomponent" }
-  ]
+  ],
+  "ts-node": {
+    "esm": true,
+    "moduleTypes": { "/**/*": "cjs" }
+  }
 }

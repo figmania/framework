@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export type PluginMessageRequest<I = any> = { name: string, id: number, type: 'request', request: I }
-export type PluginMessageResponse<O = any> = { name: string, id: number, type: 'response', response: O }
-export type PluginMessageEvent<I = any> = { name: string, type: 'event', request: I }
+export type PluginMessageRequest<I = any> = { name: string; id: number; type: 'request'; request: I }
+
+export type PluginMessageResponse<O = any> = { name: string; id: number; type: 'response'; response: O }
+
+export type PluginMessageEvent<I = any> = { name: string; type: 'event'; request: I }
+
 export type PluginMessage = PluginMessageRequest | PluginMessageResponse | PluginMessageEvent
 
 export interface FigmaMessageEvent extends MessageEvent {

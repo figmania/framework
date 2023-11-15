@@ -39,7 +39,6 @@ export function atrule(selector: string, from: DeclarationPlain[], to: Declarati
   }
 }
 
-
 export function buildStylesheet(animMap: Map<string, AnimProps>): string {
   const stylesheet: CssNodePlain = {
     type: 'StyleSheet',

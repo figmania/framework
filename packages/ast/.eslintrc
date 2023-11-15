@@ -1,4 +1,4 @@
 {
-  "extends": "@magloft/eslint-config",
-  "parserOptions": { "project": "./tsconfig.json" }
+  "extends": ["@figmania/eslint-config"],
+  "parserOptions": { "project": "tsconfig.json" }
 }

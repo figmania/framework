@@ -3,7 +3,7 @@ import { Controller } from '../Controller'
 import { CreateSchema } from '../Schema'
 import { WindowSize } from '../utils/figma'
 
-export type ResizeSchema = CreateSchema<{ events: { name: 'window:resize', data: WindowSize } }>
+export type ResizeSchema = CreateSchema<{ events: { name: 'window:resize'; data: WindowSize } }>
 
 export async function resizePlugin<S extends ResizeSchema>(controller: Controller<S>, defaultSize: WindowSize): Promise<WindowSize> {
   const size = { ...defaultSize, ...(await figma.clientStorage.getAsync('size')) }

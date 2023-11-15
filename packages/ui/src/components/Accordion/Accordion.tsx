@@ -16,7 +16,6 @@ export interface AccordionProps {
 
 export const Accordion: FunctionComponent<AccordionProps> = ({ label, active, children, disabled, renderHeader, renderSettings, activate }) => {
   const [showSettings, setShowSettings] = useState(false)
-
   return (
     <div className={clsx(styles['accordion'], active ? styles['active'] : styles['inactive'], disabled ? styles['disabled'] : styles['enabled'])}>
       <div className={styles['header']} onClick={() => { if (!active && activate) { activate() } }}>

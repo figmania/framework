@@ -3,8 +3,8 @@ import { CreateSchema } from '../Schema'
 
 export type ConfigSchema<C> = CreateSchema<{
   events: (
-    { name: 'config:save', data: Partial<C> } |
-    { name: 'config:changed', data: C }
+    { name: 'config:save'; data: Partial<C> } |
+    { name: 'config:changed'; data: C }
   )
 }>
 

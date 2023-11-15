@@ -1,6 +1,4 @@
 {
-  "extends": "@magloft/eslint-config",
-  "parserOptions": { "project": "./tsconfig.json" },
-  "plugins": ["react-refresh"],
-  "rules": { "react-refresh/only-export-components": "warn" }
+  "extends": ["@figmania/eslint-config"],
+  "parserOptions": { "project": "tsconfig.json" }
 }

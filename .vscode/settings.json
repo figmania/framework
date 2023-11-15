@@ -11,6 +11,13 @@
   "scss.format.enable": false,
   "html.format.enable": false,
   "xml.format.enabled": false,
+  "eslint.workingDirectories": [
+    "packages/anim",
+    "packages/ast",
+    "packages/common",
+    "packages/ui",
+    "packages/webcomponent"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.organizeImports": true
@@ -21,5 +28,8 @@
     "**/node_modules": true,
     "**/build": true
   },
-  "[svg]": { "editor.formatOnSave": false }
+  "[svg]": {
+    "editor.formatOnSave": false
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

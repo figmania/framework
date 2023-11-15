@@ -5,9 +5,10 @@
   "description": "Figmania Plugin Framework",
   "author": "Tobias Strebitzer <tobias.strebitzer@magloft.com>",
   "license": "MIT",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
     "clean": "lerna run clean",
     "build": "lerna run build",
     "prepack": "lerna run prepack",
@@ -15,8 +16,11 @@
     "packages:publish": "yarn prepack && lerna publish --concurrency 1 --force-publish"
   },
   "devDependencies": {
-    "@magloft/devkit-core": "^1.1.4",
-    "@magloft/eslint-config": "^1.1.4",
-    "lerna": "^6.4.1"
+    "@figma/plugin-typings": "^1.81.0",
+    "@figmania/eslint-config": "^1.0.0",
+    "@vitejs/plugin-react": "^4.1.1",
+    "lerna": "^7.4.2",
+    "vite": "^4.5.0",
+    "vite-plugin-dts": "^2.1.0"
   }
 }

@@ -1,4 +1,4 @@
-import { prettyPrint } from '@figmania/common'
+// import { prettyPrint } from '@figmania/common'
 import clsx from 'clsx'
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'
@@ -20,7 +20,8 @@ export const Code: FunctionComponent<CodeProps> = ({ value, indent, className })
   const [code, setCode] = useState<string>()
 
   useEffect(() => {
-    const result = hljs.highlight(indent ? prettyPrint(value) : value, { language: 'xml' })
+    // const result = hljs.highlight(indent ? prettyPrint(value) : value, { language: 'xml' })
+    const result = hljs.highlight(value, { language: 'xml' })
     setCode(result.value)
   }, [value])
 

@@ -7,6 +7,7 @@ import { useController } from '../../hooks/useFigma'
 import styles from './PluginUI.module.scss'
 
 export type ThemeType = 'dark' | 'light' | 'midnight'
+
 export type ThemeSize = 'xl' | 'sm' | 'md' | 'lg' | 'xl'
 
 export interface WindowSize {

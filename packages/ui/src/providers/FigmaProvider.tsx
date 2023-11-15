@@ -14,12 +14,12 @@ export const FigmaProvider: FunctionComponent<FigmaProviderProps> = ({ controlle
 
   const logger = new FigmaLogger({ name: 'UI', minLevel: LogLevel.SILLY, date: false, ...logOptions })
 
-  const saveConfig = (value: {}) => {
+  const saveConfig = (value: object) => {
     controller.emit('config:save', { ...config, ...value })
     setConfig({ ...defaultConfig, ...config, ...value })
   }
 
-  const onConfigChanged = (value: {}) => {
+  const onConfigChanged = (value: object) => {
     setConfig(value)
   }
 

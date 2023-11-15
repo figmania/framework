@@ -40,7 +40,6 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({ id, className
     return +val / factor
   }
 
-
   const fractionValue = Math.round((fadeDefault ? value : (value ?? defaultValue)) * factor * factor) / factor
   const formattedValue = `${prefix ? prefix : ''}${fractionValue}${suffix ? suffix : ''}`
 
