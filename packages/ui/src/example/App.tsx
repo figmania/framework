@@ -1,21 +1,21 @@
 import clsx from 'clsx'
-import { FunctionComponent, useEffect, useState } from 'react'
-import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, PluginUI, Scrubber, Select, SelectOption, Tabs, TextInput, ThemeSize, ThemeType, tooltip, useClipboard, useConfig, useController, useLogger } from '..'
+import { FunctionComponent, useState } from 'react'
+import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, Scrubber, Select, SelectOption, Tabs, TextInput, tooltip, useClipboard } from '..'
 import { Tab } from '../components/Tabs/Tab'
 import styles from './App.module.scss'
-import { Config, Schema } from './Schema'
+import { Config } from './Schema'
 
 export const App: FunctionComponent = () => {
-  const controller = useController<Schema>()
-  const [config, saveConfig] = useConfig<Config>()
-  const logger = useLogger()
+  // const controller = useController<Schema>()
+  const config: Config = { size: 'md', theme: 'dark' }
 
-  useEffect(() => {
-    controller.emit('test:message', 'hello world')
-    controller.request('ping', 'World').then((response) => {
-      logger.info('pong', response)
-    })
-  }, [])
+  // useEffect(() => {
+  //   if (!controller) { return }
+  //   controller.emit('test:message', 'hello world')
+  //   controller.request('ping', 'World').then((response) => {
+  //     logger.info('pong', response)
+  //   })
+  // }, [])
 
   const [selectedTabIndex, setSelectedTabIndex] = useState(0)
   const [selectedNavIndex, setSelectedNavIndex] = useState(0)
@@ -37,37 +37,16 @@ export const App: FunctionComponent = () => {
     { value: 'third', label: 'Third' }
   ]
 
-  const themeOptions: SelectOption[] = [
-    { value: 'default', label: 'Default' },
-    { value: 'midnight', label: 'Midnight' },
-    { value: 'dark', label: 'Dark' },
-    { value: 'light', label: 'Light' }
-  ]
-
-  const sizeOptions: SelectOption[] = [
-    { value: 'xs', label: 'XS' },
-    { value: 'sm', label: 'SM' },
-    { value: 'md', label: 'MD' },
-    { value: 'lg', label: 'LG' },
-    { value: 'xl', label: 'XL' }
-  ]
-
   const icons = Object.values(ICON)
   const html = '<html><head></head><body></html>'
 
   return (
-    <PluginUI theme={config.theme} minSize={{ width: 274, height: 40 }}>
+    <div>
       <Tabs selectedIndex={selectedTabIndex} items={[
         <Tab label='Effects' icon={ICON.APP_EFFECTS} {...tooltip('Explore our Effects')} />,
         <Tab label='Library' icon={ICON.APP_LIBRARY} {...tooltip('Explore our Library')} />,
         <Tab label='Share' icon={ICON.APP_SHARE} {...tooltip('Share on Social Media')} />
       ]} onChange={(index) => { setSelectedTabIndex(index) }}>
-        <Select {...tooltip('Choose your Theme')} value={config.theme} options={themeOptions} style={{ width: 100 }} onChange={({ value }) => {
-          saveConfig({ theme: value as ThemeType })
-        }} />
-        <Select {...tooltip('Choose your Size')} value={config.size} icon={ICON.STYLE_VERTICAL} options={sizeOptions} style={{ width: 80 }} onChange={({ value }) => {
-          saveConfig({ size: value as ThemeSize })
-        }} />
       </Tabs>
       <div className={styles['container']}>
         <header>Input</header>
@@ -141,6 +120,6 @@ export const App: FunctionComponent = () => {
       ]} onChange={(_, index) => {
         setSelectedNavIndex(index)
       }} />
-    </PluginUI >
+    </div>
   )
 }
