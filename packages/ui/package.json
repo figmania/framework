@@ -23,7 +23,9 @@
     "watch": "vite build --watch --mode=development",
     "serve": "vite",
     "prepack": "yarn build",
-    "lint": "eslint src --ext .ts,.tsx -c .eslintrc"
+    "lint": "eslint src --ext .ts,.tsx -c .eslintrc",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "add": "^2.0.6",
@@ -39,11 +41,21 @@
   },
   "devDependencies": {
     "@figmania/common": "^2.4.0",
+    "@storybook/addon-essentials": "^7.5.3",
+    "@storybook/addon-interactions": "^7.5.3",
+    "@storybook/addon-links": "^7.5.3",
+    "@storybook/blocks": "^7.5.3",
+    "@storybook/react": "^7.5.3",
+    "@storybook/react-vite": "^7.5.3",
+    "@storybook/testing-library": "^0.2.2",
     "@types/highlight.js": "^10.1.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
     "@types/react-highlight": "^0.12.5",
-    "sass": "^1.58.0"
+    "prop-types": "^15.8.1",
+    "sass": "^1.58.0",
+    "storybook": "^7.5.3",
+    "storybook-css-modules": "^1.0.8"
   },
   "peerDependencies": {
     "@figmania/common": "*"
