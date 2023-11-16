@@ -37,6 +37,7 @@ export function createFigma(target: Window): void {
     ui: {
       show() { },
       hide() { },
+      reposition(x, y) { },
       resize(width, height) {
         const element = document.querySelector<HTMLDivElement>('.plugin-ui')
         if (!element) { return }
