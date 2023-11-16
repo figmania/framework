@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type MockNodeOptions = Pick<BaseNodeMixin, 'id' | 'name'>
 
 export class MockNode implements BaseNodeMixin, ChildrenMixin, ExportMixin {
@@ -29,12 +30,27 @@ export class MockNode implements BaseNodeMixin, ChildrenMixin, ExportMixin {
   findChild(callback: (node: SceneNode) => boolean): SceneNode | null { throw new Error('Method not implemented.') }
   findAll(callback?: ((node: SceneNode) => boolean) | undefined): SceneNode[] { throw new Error('Method not implemented.') }
   findOne(callback: (node: SceneNode) => boolean): SceneNode | null { throw new Error('Method not implemented.') }
-  findAllWithCriteria<T extends ('PAGE' | 'DOCUMENT' | 'SLICE' | 'FRAME' | 'GROUP' | 'COMPONENT_SET' | 'COMPONENT' | 'INSTANCE' | 'BOOLEAN_OPERATION' | 'VECTOR' | 'STAR' | 'LINE' | 'ELLIPSE' | 'POLYGON' | 'RECTANGLE' | 'TEXT' | 'STICKY' | 'CONNECTOR' | 'SHAPE_WITH_TEXT' | 'CODE_BLOCK' | 'STAMP' | 'WIDGET' | 'EMBED' | 'LINK_UNFURL' | 'MEDIA' | 'SECTION' | 'HIGHLIGHT' | 'WASHI_TAPE')[]>(criteria: { types: T }): ({ type: T[number] } & SceneNode)[] { throw new Error('Method not implemented.') }
+  findAllWithCriteria<T extends NodeType[]>(
+    criteria: FindAllCriteria<T>,
+  ): Array<
+    {
+      type: T[number]
+    } & SceneNode
+  > { throw new Error('Method not implemented.') }
   findWidgetNodesByWidgetId(widgetId: string): WidgetNode[] { throw new Error('Method not implemented.') }
 
   // ExportMixin
   exportSettings = []
-  exportAsync(settings?: ExportSettings | undefined): Promise<Uint8Array> { throw new Error('Method not implemented.') }
+  exportAsync = (settings: any) => { throw new Error('Method not implemented.') }
+
+  // New Methods
+  isAsset = false
+  getCSSAsync(): Promise<Record<string, string>> { throw new Error('Method not implemented.') }
+  getDevResourcesAsync(options?: { includeChildren?: boolean }): Promise<DevResourceWithNodeId[]> { throw new Error('Method not implemented.') }
+  addDevResourceAsync(url: string, name?: string): Promise<void> { throw new Error('Method not implemented.') }
+  editDevResourceAsync(currentUrl: string, newValue: { name?: string; url?: string }): Promise<void> { throw new Error('Method not implemented.') }
+  deleteDevResourceAsync(url: string): Promise<void> { throw new Error('Method not implemented.') }
+  setDevResourcePreviewAsync(url: string, preview: PlainTextElement): Promise<void> { throw new Error('Method not implemented.') }
 }
 
 export class MockPageNode extends MockNode implements PageNode {
