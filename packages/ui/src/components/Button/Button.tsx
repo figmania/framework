@@ -26,7 +26,7 @@ export const Button: FunctionComponent<ButtonProps> = ({ className, icon, color,
       className
     )} {...props}>
       {icon && (<Icon className={styles['icon']} icon={icon} color={color} size={size} disabled={disabled}></Icon>)}
-      {label && (<div className={styles['label']}>{label}</div>)}
+      {label && (<div className={styles['label']} style={{ color }}>{label}</div>)}
     </button>
   )
 }

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { FunctionComponent, HTMLAttributes, useEffect, useState } from 'react'
-import { useOutsideClick } from '../../hooks/useOutsideClick'
-import { ICON, Icon } from '../Icon/Icon'
+import { useOutsideClick } from '../../../hooks/useOutsideClick'
+import { ICON, Icon } from '../../Icon/Icon'
 import styles from './Select.module.scss'
 
 export interface SelectOption {

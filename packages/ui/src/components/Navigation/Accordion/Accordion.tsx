@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { FunctionComponent, ReactNode, useState } from 'react'
-import { Button } from '../Button/Button'
-import { ICON, Icon } from '../Icon/Icon'
+import { Button } from '../../Button/Button'
+import { ICON, Icon } from '../../Icon/Icon'
 import styles from './Accordion.module.scss'
 
 export interface AccordionProps {

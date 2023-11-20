@@ -1,9 +1,8 @@
 import clsx from 'clsx'
 import { FunctionComponent, useState } from 'react'
-import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, Scrubber, Select, SelectOption, Tabs, TextInput, tooltip, useClipboard } from '..'
-import { Tab } from '../components/Tabs/Tab'
+import { Accordion, Button, ButtonGroup, Checkbox, Code, ICON, Icon, Navbar, NavigationBar, NumberInput, Scrubber, Select, SelectOption, Tab, Tabs, TextInput, tooltip, useClipboard } from '..'
 import styles from './App.module.scss'
-import { Config } from './Schema'
+import { Config } from './App.schema'
 
 export const App: FunctionComponent = () => {
   // const controller = useController<Schema>()

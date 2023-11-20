@@ -1,4 +1,5 @@
 import { Preview } from '@storybook/react'
+import { PluginWindow } from './components/PluginWindow'
 import './preview.scss'
 
 interface BackgroundTheme {
@@ -24,14 +25,14 @@ const preview: Preview = {
       }
     }
   },
-  decorators: [(Story, { globals, parameters }) => {
+  decorators: [(Story, { globals, parameters, title }) => {
     const backgroundColor: string = globals.backgrounds?.value ?? '#1e1e1e'
     const backgroundThemes: BackgroundTheme[] = parameters.backgrounds.values
     const backgroundTheme = backgroundThemes.find(({ value }) => value === backgroundColor)
     return (
-      <div className={`ui-theme-${backgroundTheme?.name ?? 'light'}`}>
+      <PluginWindow title={title} theme={backgroundTheme?.name} padding={parameters.padding}>
         <Story />
-      </div>
+      </PluginWindow>
     )
   }]
 }

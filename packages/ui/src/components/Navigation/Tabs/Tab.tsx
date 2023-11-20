@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { FunctionComponent, HTMLAttributes } from 'react'
-import { Icon, ICON } from '../Icon/Icon'
+import { ICON, Icon } from '../../Icon/Icon'
 import styles from './Tabs.module.scss'
 
 export interface TabProps extends HTMLAttributes<HTMLDivElement> {

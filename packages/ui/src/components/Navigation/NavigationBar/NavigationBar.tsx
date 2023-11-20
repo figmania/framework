@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { FunctionComponent } from 'react'
-import { ICON, Icon } from '../Icon/Icon'
+import { ICON, Icon } from '../../Icon/Icon'
 import styles from './NavigationBar.module.scss'
 
 export interface NavigationItem {

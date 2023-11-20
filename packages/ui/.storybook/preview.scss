@@ -1,24 +1,21 @@
 @import '../src/themes.scss';
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-feature-settings: "liga" on, "calt" on;
   font: normal 400 11px/16px Inter, sans-serif;
   font-weight: 400;
   padding: 0;
   margin: 0;
+  display: flex !important;
+  flex-direction: column;
 }
 
-.ui-theme-dark { @include theme-dark; }
-.ui-theme-light { @include theme-light; }
-.ui-theme-midnight { @include theme-midnight; }
-
-.plugin-ui-handle {
-  position: absolute;
-}
-
-.plugin-ui {
-  width: 640px;
-  height: 480px
+#storybook-root {
+  flex: 1;
 }
 
 @font-face {
