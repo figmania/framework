@@ -1,0 +1,63 @@
+.slot {
+  position: relative;
+  height: 16px;
+  min-width: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .key {
+    display: block;
+    width: 10px;
+    height: 10px;
+    transform: rotateZ(45deg);
+  }
+
+  &:not(.transition) {
+    .key { background-color: var(--tick-slot); }
+    &.default:hover .key {
+      background-color: var(--tick-hover);
+    }
+  }
+
+  &.transition {
+    .key { background-color: transparent; }
+
+    &.start, &.end {
+      .key { background-color: var(--tick-primary); }
+    }
+
+    &.default:hover {
+      &.start .key, &.end .key {
+        background-color: var(--tick-transition-hover);
+      }
+    }
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 5px;
+      transform: translateY(-50%);
+      background-color: var(--tick-primary);
+    }
+    &.start:before { left: 50%; }
+    &.end:before { right: 50%; }
+  }
+
+  &.active .key {
+    background-color: var(--tick-selected) !important;
+    width: 12px;
+    height: 12px;
+  }
+
+  &.selected.transition {
+    &.start .key, &.end .key { background-color: var(--tick-selected) !important; }
+    &:before { background-color: var(--tick-selected) !important; }
+  }
+}

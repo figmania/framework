@@ -73,7 +73,7 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({ id, className
             setEditing(false)
           }} />
       ) : (
-        <input id={inputId} name={name} type="text" className={clsx(styles['input'], className)} disabled={disabled}
+        <input id={inputId} name={name} type="text" className={styles['input']} disabled={disabled}
           value={(fadeDefault && value === defaultValue) ? '' : formattedValue} placeholder={fadeDefault ? formattedValue : undefined}
           onFocus={() => {
             setEditValue(valueToEditValue(value))

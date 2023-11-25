@@ -1,7 +1,7 @@
 @mixin theme-midnight {
   --background-color: #2E3440;
   --text-color-primary: #f7f7fa;
-  --text-color-secondary: rgba(247, 247, 250, 0.7);
+  --text-color-secondary: rgba(255, 255, 255, 0.66);
   --text-color-on-dark: #FFFFFF;
   --border-color: #1e222a;
   --panel-color: #232730;
@@ -11,6 +11,12 @@
   --error-color: #fb1818;
   --selected-color: #445662;
   --disabled-color: #434f57;
+  --tick-primary: #7E97D4;
+  --tick-slot: #232730;
+  --tick-disabled: #151d30;
+  --tick-hover: #555c6f;
+  --tick-transition-hover: #cedcff;
+  --tick-selected: #FFFFFF;
 }
 
 @mixin theme-dark {
@@ -26,6 +32,12 @@
   --error-color: #fb1818;
   --selected-color: #444444;
   --disabled-color: #434f57;
+  --tick-primary: #7E97D4;
+  --tick-slot: #444444;
+  --tick-disabled: #292f3d;
+  --tick-hover: #555c6f;
+  --tick-transition-hover: #cedcff;
+  --tick-selected: #FFFFFF;
 }
 
 @mixin theme-light {
@@ -41,4 +53,10 @@
   --error-color: #fb1818;
   --selected-color: #e6e6e6;
   --disabled-color: #AAAAAA;
+  --tick-primary: #7E97D4;
+  --tick-slot: #e4e4e4;
+  --tick-disabled: #151d30;
+  --tick-hover: #555c6f;
+  --tick-transition-hover: rgb(74, 95, 148);
+  --tick-selected: #FFFFFF;
 }

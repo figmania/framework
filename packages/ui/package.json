@@ -21,10 +21,9 @@
     "clean": "rimraf build",
     "build": "vite build",
     "watch": "vite build --watch --mode=development",
-    "serve": "vite",
+    "serve": "storybook dev -p 6006",
     "prepack": "yarn build",
     "lint": "eslint src --ext .ts,.tsx -c .eslintrc",
-    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {

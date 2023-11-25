@@ -19,7 +19,6 @@
     color: var(--text-color-secondary);
     transform: translateX(-50%);
     z-index: 1;
-    box-sizing: border-box;
   }
 
   &.active, &.active .label, &:hover, &:hover .label { opacity: 1; }

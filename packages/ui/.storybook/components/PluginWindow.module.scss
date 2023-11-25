@@ -6,7 +6,6 @@
   background-color: #2c2c2c;
   border-radius: 2px;
   box-shadow: 0px 10px 24px rgba(0, 0, 0, .45), 0px 3px 5px rgba(0, 0, 0, .35), inset 0px 1px 0px rgba(255, 255, 255, .08), inset 0px 0px 1px rgba(255, 255, 255, .35);
-  height: 100%;
 
   &.theme-dark { @include theme-dark; }
   &.theme-midnight { @include theme-midnight; }
@@ -30,13 +29,17 @@
       }
     }
   }
+
+  * {
+    box-sizing: border-box;
+    user-select: none;
+  }
 }
 
 .header {
   border-top-left-radius: 1px !important;
   border-top-right-radius: 1px !important;
   font-weight: 600;
-  box-sizing: border-box;
   min-height: 41px;
   display: flex;
   justify-content: space-between;
@@ -93,5 +96,5 @@
   flex: 1;
   overflow-y: auto;
 
-  &.padding { padding: 8px; }
+  &.padding { padding: 8px; }  
 }

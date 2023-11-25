@@ -8,7 +8,6 @@
   border: 1px solid transparent;
   padding: 0px 0px 0px 7px;
   margin: 0px;
-  box-sizing: border-box;
   border-radius: 2px;
 
   &.with-icon {
@@ -49,7 +48,6 @@
   font-family: inherit;
   border-radius: 2px;
   cursor: default;
-  box-sizing: border-box;
   background-clip: padding-box;
   background-color: transparent;
   width: 100%;
@@ -65,7 +63,7 @@
 
   &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxMCAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZyBpZD0iYTE4MWNiZTUiPgogICAgPHBhdGggaWQ9ImNmOTQ5NDM4IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQuOTk5NjMgMC45MzMxNzlMMS41MjgyNSA0TDEgMy41MzM0MUw0Ljk5OTYzIDBMOSAzLjUzMzQxTDguNDcxNzUgNEw0Ljk5OTYzIDAuOTMzMTc5WiIgZmlsbD0iIzRCOUVGNCI+PC9wYXRoPgogICAgPHBhdGggaWQ9IjkxMzNjNGY2IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQuOTk5NjMgMTUuMDY2OEwxLjUyODI1IDEyTDEgMTIuNDY2Nkw0Ljk5OTYzIDE2TDkgMTIuNDY2Nkw4LjQ3MTc1IDEyTDQuOTk5NjMgMTUuMDY2OFoiIGZpbGw9IiM0QjlFRjQiPjwvcGF0aD4KICAgIDxwYXRoIGlkPSI1MTZlMTQ5MSIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMCA4LjVIMFY3LjVIMTBWOC41WiIgZmlsbD0iYmxhY2siIGZpbGwtb3BhY2l0eT0iMC4yNSI+PC9wYXRoPgogIDwvZz4KPC9zdmc+);
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDEwIDE0IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQuOTk5NjMgMC45MzMxNzlMMS41MjgyNSA0TDEgMy41MzM0MUw0Ljk5OTYzIDBMOSAzLjUzMzQxTDguNDcxNzUgNEw0Ljk5OTYzIDAuOTMzMTc5WiIgZmlsbD0iIzRCOUVGNCIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNC45OTk2MyAxMy4wNjY4TDEuNTI4MjUgMTBMMSAxMC40NjY2TDQuOTk5NjMgMTRMOSAxMC40NjY2TDguNDcxNzUgMTBMNC45OTk2MyAxMy4wNjY4WiIgZmlsbD0iIzRCOUVGNCIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTAgNy41SDBWNi41SDEwVjcuNVoiIGZpbGw9ImJsYWNrIiBmaWxsLW9wYWNpdHk9IjAuMjUiLz48L3N2Zz4=);
     background-repeat: no-repeat;
     background-position: center center;
     position: absolute;

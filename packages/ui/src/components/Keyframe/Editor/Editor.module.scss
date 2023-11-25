@@ -1,0 +1,94 @@
+.editor {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--background-color);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  &:last-child { border-right: none; }
+}
+
+.col-labels {
+  width: 94px;
+}
+
+.col-timelines {
+  flex: 1;
+  position: relative;
+  overflow-x: auto;
+
+  .header {
+    align-items: flex-end;
+    padding: 0px 10px;
+  }
+}
+
+.label {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  padding: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--panel-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.container {
+  width: fit-content;
+  min-width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  text-align: center;
+  background-color: var(--panel-color);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--tick-primary);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 13px;
+}
+
+.cell-tick {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1;
+  min-width: 26px;
+  position: relative;
+
+  &:last-child {
+    overflow: hidden;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 8px;
+    background-color: var(--tick-hover);
+  }
+
+  div {
+    position: absolute;
+    text-align: left;
+    color: var(--tick-hover);
+    padding-left: 4px;
+    bottom: 0px;
+    left: 50%;
+    width: 100%;
+  }
+
+  &.tick-5:after { height: 12px; }
+  &.tick-0 div { color: var(--tick-primary); }
+  &.tick-0:after { height: 16px; background-color: var(--tick-primary); }
+}
