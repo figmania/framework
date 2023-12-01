@@ -15,6 +15,7 @@
     "packages/anim",
     "packages/ast",
     "packages/common",
+    "packages/gsap",
     "packages/ui",
     "packages/webcomponent"
   ],
