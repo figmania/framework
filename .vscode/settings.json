@@ -16,6 +16,7 @@
     "packages/ast",
     "packages/common",
     "packages/gsap",
+    "packages/loader",
     "packages/ui",
     "packages/webcomponent"
   ],

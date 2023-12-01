@@ -1,0 +1,38 @@
+{
+  "name": "@figmania/loader",
+  "version": "3.0.1",
+  "description": "Webcomponent Loader for SVG Animations",
+  "main": "build/index.umd.js",
+  "module": "build/index.mjs",
+  "typings": "build/index.d.ts",
+  "license": "MIT",
+  "author": "Tobias Strebitzer <tobias.strebitzer@magloft.com>",
+  "exports": {
+    ".": {
+      "import": "./build/index.mjs",
+      "require": "./build/index.umd.js"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf build",
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "serve": "vite",
+    "prepack": "yarn build",
+    "lint": "eslint 'src/**/*.ts'"
+  },
+  "dependencies": {
+    "@figmania/anim": "^3.0.1",
+    "camelcase": "^6.2.0",
+    "decamelize": "^4.0.0",
+    "gsap": "^3.6.1"
+  },
+  "devDependencies": {
+    "@types/camelcase": "^5.2.0",
+    "@types/decamelize": "^3.0.3",
+    "@types/gsap": "^3.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

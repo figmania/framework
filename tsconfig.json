@@ -18,6 +18,7 @@
       "@figmania/ast": ["./packages/ast"],
       "@figmania/common": ["./packages/common"],
       "@figmania/gsap": ["./packages/gsap"],
+      "@figmania/loader": ["./packages/loader"],
       "@figmania/ui": ["./packages/ui"],
       "@figmania/webcomponent": ["./packages/webcomponent"]
     }
@@ -27,6 +28,7 @@
     { "path": "packages/ast" },
     { "path": "packages/common" },
     { "path": "packages/gsap" },
+    { "path": "packages/loader" },
     { "path": "packages/ui" },
     { "path": "packages/webcomponent" }
   ],
