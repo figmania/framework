@@ -1,0 +1,84 @@
+.label {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  user-select: none;
+  align-items: center;
+  border: 1px solid transparent;
+  padding: 0px 0px 0px 7px;
+  margin: 0px;
+  border-radius: 2px;
+
+  &.with-icon {
+    padding-left: 4px;
+  }
+
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  &:hover {
+    border: 1px solid var(--border-color);
+  }
+
+  & > .icon {
+    margin-right: 3px;
+  }
+
+  &:focus-within {
+    border-radius: 2px;
+    border: 1px solid var(--focus-color);
+    outline: 1px solid var(--focus-color);
+    outline-offset: -2px;
+  }
+
+  &.error:focus-within {
+    border-color: var(--error-color);
+    outline-color: var(--error-color);
+  }
+}
+
+.input {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--text-color-primary);
+  font-family: inherit;
+  border-radius: 2px;
+  cursor: default;
+  background-clip: padding-box;
+  background-color: transparent;
+  width: 100%;
+  padding: 0px;
+  height: 32px;
+  border: 1px solid transparent;
+  min-width: 0;
+
+  &::placeholder {
+    color: var(--text-color-secondary);
+    opacity: 0.66;
+  }
+
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDEwIDE0IiBmaWxsPSJub25lIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTQuOTk5NjMgMC45MzMxNzlMMS41MjgyNSA0TDEgMy41MzM0MUw0Ljk5OTYzIDBMOSAzLjUzMzQxTDguNDcxNzUgNEw0Ljk5OTYzIDAuOTMzMTc5WiIgZmlsbD0iIzRCOUVGNCIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNC45OTk2MyAxMy4wNjY4TDEuNTI4MjUgMTBMMSAxMC40NjY2TDQuOTk5NjMgMTRMOSAxMC40NjY2TDguNDcxNzUgMTBMNC45OTk2MyAxMy4wNjY4WiIgZmlsbD0iIzRCOUVGNCIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTAgNy41SDBWNi41SDEwVjcuNVoiIGZpbGw9ImJsYWNrIiBmaWxsLW9wYWNpdHk9IjAuMjUiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 24px;
+    opacity: 1;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,98 @@
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 0px 10px;
+  width: fit-content;
+  container-type: size;
+  min-height: 42px;
+
+  & > * { user-select: none; }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-width: 26px;
+  position: relative;
+}
+
+.cell-input {
+  height: 18px;
+  min-height: 18px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.control {
+  height: 20px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-top: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+
+  // Narrow
+  z-index: 1;
+  min-width: 38px;
+  padding-left: 0;
+
+  &:focus-within {
+    min-width: 48px;
+    padding-left: 7px;
+  }
+
+  &:hover, &:focus-within {
+    z-index: 2;
+    background-color: var(--panel-color);
+  }
+
+  &:hover:not(:focus-within) {
+    border-top-color: transparent;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  input {
+    text-align: center;
+    height: 20px;
+    &:focus { text-align: left; }
+  }
+  
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    width: 16px;
+  }
+}
+
+.cell-tick {
+  height: 18px;
+  min-height: 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  &:after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 8px;
+    background-color: var(--border-color);
+  }
+  &.tick-500:after { height: 12px; }
+  &.tick-0:after { height: 16px; }
+}
+
+@container (max-height: 58px) {
+  .cell-tick {
+    display: none;
+  }
+}
+

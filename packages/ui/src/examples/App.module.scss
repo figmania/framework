@@ -1,0 +1,53 @@
+.container {
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--background-color);
+}
+
+header {
+  display: block;
+  padding: 20px 16px 12px;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 15px;
+  color: var(--text-color-secondary);
+  border-top: 1px solid var(--border-color);
+  &:first-child { border-top: none; }
+}
+
+.panel {
+  position: relative;
+  
+  &.inset {
+    padding: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+  }
+
+  &.padding {
+    padding: 8px;
+  }
+
+  &.padding-lg {
+    padding: 12px 36px;
+  }
+
+  &.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &.col {
+    & > * {
+      margin-bottom: 8px;
+      &:last-child { margin-bottom: 0; }
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
