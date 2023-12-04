@@ -10,14 +10,17 @@ export const EaseAnimToGsap: Record<AnimEase, gsap.EaseString> = {
 }
 
 export const GsapRenderer: Renderer<gsap.core.Timeline> = (_svg, defaults) => {
-  const gsapTimeline = gsap.timeline({ defaults })
+  const tl = gsap.timeline({ defaults })
   return {
     timeline(element, { property, initialValue, transitions }) {
-      gsapTimeline.set(element, { [property]: initialValue }, 0)
-      for (const { from, to, value, ease } of transitions) {
-        gsapTimeline.to(element, { [property]: value, duration: to - from, ease: EaseAnimToGsap[ease] }, from)
-      }
+      transitions.forEach(({ from, to, value, ease }, index) => {
+        if (index === 0) {
+          tl.fromTo(element, { [property]: initialValue }, { [property]: value, duration: to - from, ease: EaseAnimToGsap[ease] }, from)
+        } else {
+          tl.to(element, { [property]: value, duration: to - from, ease: EaseAnimToGsap[ease] }, from)
+        }
+      })
     },
-    finalize() { return gsapTimeline }
+    finalize() { return tl }
   }
 }

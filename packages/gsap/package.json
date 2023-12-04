@@ -17,7 +17,7 @@
     "clean": "rimraf build",
     "build": "vite build",
     "watch": "vite build --watch",
-    "serve": "vite",
+    "serve": "vite --port=8085",
     "prepack": "yarn build",
     "lint": "eslint 'src/**/*.ts'"
   },
