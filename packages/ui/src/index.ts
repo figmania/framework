@@ -1,6 +1,7 @@
 export * from './components/Button/Button'
 export * from './components/Code/Code'
 export * from './components/Form/Checkbox/Checkbox'
+export * from './components/Form/CycleButton/CycleButton'
 export * from './components/Form/NumberInput/NumberInput'
 export * from './components/Form/Select/Select'
 export * from './components/Form/TextInput/TextInput'
@@ -24,3 +25,4 @@ export * from './providers/FigmaProvider'
 export * from './util/dom'
 export * from './util/tooltip'
 export * from './util/transition'
+

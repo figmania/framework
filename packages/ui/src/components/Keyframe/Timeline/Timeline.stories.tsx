@@ -6,6 +6,9 @@ import { Timeline } from './Timeline'
 const meta = {
   parameters: { padding: false },
   component: Timeline,
+  argTypes: {
+    timeline: { type: { name: 'object', value: {} }, control: { type: 'object' } }
+  },
   args: {
     bar: { duration: 2, tick: 0.1 },
     config: { icon: ICON.ANIMATE_OPACITY, label: 'Opacity', from: 0, to: 1, min: 0, max: 1, step: 0.1, precision: 2, suffix: '%' },

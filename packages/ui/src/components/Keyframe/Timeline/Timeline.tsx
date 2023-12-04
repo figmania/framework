@@ -1,9 +1,10 @@
-import { AnimTimeline, AnimTransition } from '@figmania/common'
+import { AnimEase, AnimTimeline, AnimTransition } from '@figmania/common'
 import clsx from 'clsx'
 import { FunctionComponent, HTMLAttributes, useMemo, useState } from 'react'
 import { DragEvent, useDragSlots } from '../../../hooks/useDragSlots'
 import { round } from '../../../util/math'
 import { nextTransition, prevTransition, queryTransitions, transitionForTime, transitionSortFn } from '../../../util/transition'
+import { CycleButton } from '../../Form/CycleButton/CycleButton'
 import { NumberInput } from '../../Form/NumberInput/NumberInput'
 import { ICON } from '../../Icon/Icon'
 import { Slot, SlotUiState } from '../Slot/Slot'
@@ -183,9 +184,10 @@ export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, ti
         const isTransition = query.length > 0
         const isDualTransition = query.length > 1
         const isStart = transitions.some(({ from }) => time === from)
-        const startData = query.prev?.value ?? timeline.initialValue
+        const startValue = query.prev?.value ?? timeline.initialValue
         const isEnd = transitions.some(({ to }) => time === to)
-        const endData = transitions.find(({ to }) => to === time)?.value
+        const endValue = query.first?.value
+        const endEase = query.first?.ease
         let uiState = SlotUiState.DEFAULT
         if (state?.operation === 'move' && time >= state.from && time <= state.to) {
           uiState = SlotUiState.SELECTED
@@ -195,9 +197,9 @@ export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, ti
         return (
           <div key={index} className={clsx(styles['col'], 'col')}>
             <div className={clsx(styles['cell'], styles['cell-input'])}>
-              {!isDualTransition && isStart && startData != null && !isNaN(startData) && (
+              {!isDualTransition && isStart && startValue != null && !isNaN(startValue) && (
                 <NumberInput className={styles['control']} name='start'
-                  value={startData} defaultValue={startData}
+                  value={startValue} defaultValue={startValue}
                   min={config.min} max={config.max} step={config.step}
                   precision={config.precision} suffix={config.suffix}
                   onChange={(value) => {
@@ -216,9 +218,9 @@ export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, ti
                     }
                   }} />
               )}
-              {isEnd && endData != null && !isNaN(endData) && (
+              {isEnd && endValue != null && !isNaN(endValue) && (
                 <NumberInput className={styles['control']} name='end'
-                  value={endData} defaultValue={endData}
+                  value={endValue} defaultValue={endValue}
                   min={config.min} max={config.max} step={config.step}
                   precision={config.precision} suffix={config.suffix}
                   onChange={(value) => {
@@ -259,7 +261,20 @@ export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, ti
                   onChange({ ...timeline, transitions: newTransitions })
                 }
               }} />
-            <div className={clsx(styles['cell'], styles['cell-tick'], styles[`tick-${modulo}`])}></div>
+            <div className={clsx(styles['cell'], styles['cell-tick'], styles[`tick-${modulo}`])}>
+              {isEnd && endEase && (
+                <CycleButton size='sm' className={styles['button']} tabIndex={-1} value={endEase} options={[
+                  { icon: ICON.EASE_LINEAR, value: 'linear' },
+                  { icon: ICON.EASE_IN, value: 'ease-in' },
+                  { icon: ICON.EASE_OUT, value: 'ease-out' },
+                  { icon: ICON.EASE_IN_OUT, value: 'ease-in-out' }
+                ]} onChange={(option) => {
+                  if (!query.first) { return }
+                  const newTransitions = [...timeline.transitions].map((item) => item === query.first ? { ...item, ease: option.value as AnimEase } : item)
+                  onChange({ ...timeline, transitions: newTransitions })
+                }} />
+              )}
+            </div>
           </div>
         )
       })}

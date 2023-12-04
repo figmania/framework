@@ -7,10 +7,7 @@ const meta = {
   parameters: { padding: false },
   component: Editor,
   args: {
-    bar: {
-      duration: 2,
-      tick: 0.1
-    },
+    bar: { duration: 2, tick: 0.1 },
     config: {
       opacity: { icon: ICON.ANIMATE_OPACITY, label: 'Opacity', from: 0, to: 1, min: 0, max: 1, step: 0.1, precision: 2, suffix: '%' },
       x: { icon: ICON.ANIMATE_X, label: 'Move X', from: 0, to: 100, min: -1000, max: 1000, step: 10, precision: 0, suffix: 'px' },
@@ -38,7 +35,7 @@ export const Default = {
   render(args) {
     const [{ timelines }, updateArgs] = useArgs<typeof args>()
     return (
-      <div style={{ height: 320, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ height: 200, display: 'flex', flexDirection: 'column' }}>
         <Editor {...args} timelines={timelines} onChange={(value) => { updateArgs({ timelines: value }) }} />
       </div>
     )

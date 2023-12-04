@@ -15,17 +15,13 @@ export interface SelectProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   options: SelectOption[]
   placeholder?: string
   disabled?: boolean
+  hideLabel?: boolean
   value?: string | number | boolean
   onToggleMenu?: (showMenu: boolean) => void
   onChange?: (option: SelectOption) => void
 }
 
-export interface SelectState {
-  showMenu: boolean
-  selectedOption?: SelectOption
-}
-
-export const Select: FunctionComponent<SelectProps> = ({ value, className, options, placeholder, disabled, icon, onToggleMenu, onChange, ...props }) => {
+export const Select: FunctionComponent<SelectProps> = ({ value, className, options, placeholder, disabled, hideLabel, icon, onToggleMenu, onChange, ...props }) => {
   const [showMenu, setShowMenu] = useState(false)
   const [selectedOption, setSelectedOption] = useState(options.find((option) => option.value === value))
 
@@ -60,7 +56,7 @@ export const Select: FunctionComponent<SelectProps> = ({ value, className, optio
         toggleMenu(false)
       }} disabled={disabled}>
         {(selectedIcon) && (<Icon icon={selectedIcon}></Icon>)}
-        <div className={styles['label']}>{selectedLabel}</div>
+        {!hideLabel && <div className={styles['label']}>{selectedLabel}</div>}
         <svg className={styles['caret']} width="8" height="7" viewBox="0 0 8 7"><path d="M3.646 5.354l-3-3 .708-.708L4 4.293l2.646-2.647.708.708-3 3L4 5.707l-.354-.353z" fillRule="evenodd" fill="currentColor" /></svg>
       </button>
       <div className={clsx(styles['menu'], showMenu && styles['menu-active'])}>

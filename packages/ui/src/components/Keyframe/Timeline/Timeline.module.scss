@@ -6,7 +6,7 @@
   padding: 0px 10px;
   width: fit-content;
   container-type: size;
-  min-height: 42px;
+  min-height: 60px;
 
   & > * { user-select: none; }
 }
@@ -88,11 +88,36 @@
   }
   &.tick-500:after { height: 12px; }
   &.tick-0:after { height: 16px; }
-}
 
-@container (max-height: 58px) {
-  .cell-tick {
-    display: none;
+  .button {
+    position: absolute;
+    height: 20px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    z-index: 1;
+
+    &:hover {
+      z-index: 2;
+      background-color: var(--panel-color);
+      border-top: 1px solid var(--border-color);
+      border-left: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid transparent;
+      box-shadow: none;
+    }
+
+    &:focus {
+      border-top: 1px solid var(--focus-color);
+      border-left: 1px solid var(--focus-color);
+      border-right: 1px solid var(--focus-color);
+      border-bottom: 1px solid transparent;
+      outline: none;
+    }
   }
 }
-
