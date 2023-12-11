@@ -6,6 +6,7 @@ import styles from './NavigationBar.module.scss'
 export interface NavigationItem {
   label: string
   icon?: ICON
+  disabled?: boolean
 }
 
 export interface NavigationBarProps {
@@ -20,6 +21,7 @@ export const NavigationBar: FunctionComponent<NavigationBarProps> = ({ items, se
       {items.map((item, index) => (
         <div key={index} className={clsx(
           styles['item'],
+          item.disabled && styles['disabled'],
           index === selectedIndex && styles['active']
         )} onClick={() => { onChange(item, index) }}>
           {item.icon && <Icon icon={item.icon} className={styles['icon']} />}

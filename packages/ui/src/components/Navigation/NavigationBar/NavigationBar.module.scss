@@ -28,6 +28,12 @@
     .label { color: var(--text-color-primary); }
     .icon { background-color: var(--text-color-primary); }
   }
+
+  &.disabled {
+    pointer-events: none;
+    .label { color: var(--disabled-color); }
+    .icon { background-color: var(--disabled-color); }
+  }
 }
 
 .icon {

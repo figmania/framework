@@ -10,7 +10,7 @@ const meta = {
     selectedIndex: 0,
     items: [
       { icon: ICON.APP_EFFECTS, label: 'Effects' },
-      { icon: ICON.APP_LIBRARY, label: 'Library' },
+      { icon: ICON.APP_LIBRARY, label: 'Library', disabled: true },
       { icon: ICON.APP_SETTINGS, label: 'Settings' }
     ]
   }
