@@ -13,6 +13,7 @@
     width: 10px;
     height: 10px;
     transform: rotateZ(45deg);
+    z-index: 2;
   }
 
   &:not(.transition) {
@@ -35,19 +36,31 @@
       }
     }
 
-    &:before {
+    &:before, &:after {
       content: "";
-      display: block;
+      display: none;
       position: absolute;
       top: 50%;
-      left: 0;
-      right: 0;
       height: 5px;
       transform: translateY(-50%);
       background-color: var(--tick-primary);
     }
-    &.start:not(.dual):before { left: 50%; }
-    &.end:not(.dual):before { right: 50%; }
+    &:before { left: 0; right: 50%; }
+    &:after { left: 50%; right: 0; }
+    &.start:not(.end):after { display: block; }
+    &.end:not(.start):before { display: block; }
+    &:not(.start):not(.end) { &:before, &:after { display: block; } }
+    &.start.end { &:before, &:after { display: block; } }
+    &.start.end:not(.dual) { &:before, &:after { display: none; } }
+  }
+
+  &.selected.transition {
+    &.start .key, &.end .key { background-color: var(--tick-selected); }
+    &.start:not(.end):after { background-color: var(--tick-selected); }
+    &:not(.start).end:before { background-color: var(--tick-selected); }
+    &:not(.start):not(.end) { &:before, &:after { background-color: var(--tick-selected); } }
+    &.selected-left:before { background-color: var(--tick-selected); }
+    &.selected-right:after { background-color: var(--tick-selected); }
   }
 
   &.active .key {
@@ -55,9 +68,16 @@
     width: 12px;
     height: 12px;
   }
+}
 
-  &.selected.transition {
-    &.start .key, &.end .key { background-color: var(--tick-selected) !important; }
-    &:before { background-color: var(--tick-selected) !important; }
-  }
+.lock {
+  display: block;
+  position: absolute;
+  width: 50%;
+  height: 5px;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--tick-locked);
+  z-index: 1;
 }

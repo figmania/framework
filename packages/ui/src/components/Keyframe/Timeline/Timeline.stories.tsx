@@ -11,6 +11,7 @@ const meta = {
   },
   args: {
     bar: { duration: 2, tick: 0.1 },
+    allowMultiple: true,
     config: { icon: ICON.ANIMATE_OPACITY, label: 'Opacity', from: 0, to: 1, min: 0, max: 1, step: 0.1, precision: 2, suffix: '%' },
     timeline: {
       property: 'opacity',

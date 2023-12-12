@@ -17,6 +17,7 @@
   --tick-hover: #555c6f;
   --tick-transition-hover: #cedcff;
   --tick-selected: #FFFFFF;
+  --tick-locked: rgba(46, 52, 64, 0.5);
 }
 
 @mixin theme-dark {
@@ -38,6 +39,7 @@
   --tick-hover: #555c6f;
   --tick-transition-hover: #cedcff;
   --tick-selected: #FFFFFF;
+  --tick-locked: rgba(44, 44, 44, 0.5);
 }
 
 @mixin theme-light {
@@ -58,5 +60,6 @@
   --tick-disabled: #151d30;
   --tick-hover: #555c6f;
   --tick-transition-hover: rgb(74, 95, 148);
-  --tick-selected: #FFFFFF;
+  --tick-selected: #18a0fb;
+  --tick-locked: rgba(255, 255, 255, 0.5);
 }

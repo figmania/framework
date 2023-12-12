@@ -17,10 +17,11 @@ export interface EditorProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onCha
   bar: TimelineBarConfig
   config: TransitionConfigMap
   timelines: AnimTimeline[]
+  allowMultiple?: boolean
   onChange: (timelines: AnimTimeline[]) => void
 }
 
-export const Editor: FunctionComponent<EditorProps> = ({ bar, config, timelines, onChange, className, ...props }) => {
+export const Editor: FunctionComponent<EditorProps> = ({ bar, config, timelines, allowMultiple, onChange, className, ...props }) => {
   const numSlots = Math.ceil(bar.duration / bar.tick) + 1
   const slots = Array(numSlots).fill(null).map((_, index) => index)
   const properties: AnimProperty[] = Object.keys(config) as AnimProperty[]
@@ -60,6 +61,7 @@ export const Editor: FunctionComponent<EditorProps> = ({ bar, config, timelines,
           {renderTimelines.map((timeline) => (
             <Timeline className={styles['cell']} key={timeline.property} bar={bar}
               timeline={timeline} config={config[timeline.property]}
+              allowMultiple={allowMultiple}
               onChange={(newTimeline) => {
                 const newTimelines = renderTimelines.map((value) => (newTimeline.property === value.property) ? newTimeline : value)
                 onChange(newTimelines)

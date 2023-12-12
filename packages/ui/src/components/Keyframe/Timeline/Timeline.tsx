@@ -40,10 +40,11 @@ export interface TimelineProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onC
   bar: TimelineBarConfig
   config: TransitionConfig
   timeline: AnimTimeline
+  allowMultiple?: boolean
   onChange: (timeline: AnimTimeline) => void
 }
 
-export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, tick }, config, timeline, className, onChange, ...props }) => {
+export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, tick }, config, timeline, className, onChange, allowMultiple, ...props }) => {
   const numSlots = Math.ceil(duration / tick) + 1
   const slots = Array(numSlots).fill(null).map((_, index) => index)
   const [state, setState] = useState<TransitionState>()
@@ -182,7 +183,7 @@ export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, ti
         const modulo = round(time % 1 * 1000)
         const query = queryTransitions(transitions, time)
         const isTransition = query.length > 0
-        const isDualTransition = query.length > 1
+        const isDual = query.length > 1
         const isStart = transitions.some(({ from }) => time === from)
         const startValue = query.prev?.value ?? timeline.initialValue
         const isEnd = transitions.some(({ to }) => time === to)
@@ -194,10 +195,17 @@ export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, ti
         } else if (state?.edge) {
           uiState = state[state.edge] === time ? SlotUiState.ACTIVE : SlotUiState.INACTIVE
         }
+        let selectedSide: string | undefined = undefined
+        if (state && uiState === SlotUiState.SELECTED && isEnd && isStart) {
+          const selectedTransition = transitions[state.index]
+          if (selectedTransition === query.first) { selectedSide = 'selected-left' }
+          if (selectedTransition === query.last) { selectedSide = 'selected-right' }
+        }
+        const isLocked = !allowMultiple && isTransition && (query.prev != null || (isStart && isEnd))
         return (
           <div key={index} className={clsx(styles['col'], 'col')}>
             <div className={clsx(styles['cell'], styles['cell-input'])}>
-              {!isDualTransition && isStart && startValue != null && !isNaN(startValue) && (
+              {!isDual && isStart && startValue != null && !isNaN(startValue) && (
                 <NumberInput className={styles['control']} name='start'
                   value={startValue} defaultValue={startValue}
                   min={config.min} max={config.max} step={config.step}
@@ -241,7 +249,9 @@ export const Timeline: FunctionComponent<TimelineProps> = ({ bar: { duration, ti
             <Slot className={clsx(styles['cell'], styles['cell-slot'])}
               uiState={uiState}
               transitionState={isTransition ? [isStart, isEnd] : undefined}
-              isDual={isDualTransition}
+              isDual={isDual}
+              isLocked={isLocked}
+              selectedSide={selectedSide}
               onDoubleClick={() => {
                 const { all, first, prev, space } = queryTransitions(timeline.transitions, time)
                 if (first) {
