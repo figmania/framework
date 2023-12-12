@@ -1,4 +1,4 @@
-import { hasAttribute, isElement, parse, stringify, transform, Element as UniElement, Node as UniNode } from 'unihtml'
+import { hasAttribute, isElement, parse, Root, stringify, transform, Element as UniElement, Node as UniNode } from 'unihtml'
 import { visit } from 'unist-util-visit'
 import { AnimEase } from '../types/AnimEase'
 import { AnimTimeline } from '../types/AnimTimeline'
@@ -39,7 +39,7 @@ export function uniAssignNodes<T extends SvgNodeData>(tree: UniNode, masterNode:
   })
 }
 
-export function transformSvg<T extends SvgNodeData>(contents: string, masterNode: TreeNode<T>): string {
+export function transformSvg<T extends SvgNodeData>(contents: string, masterNode: TreeNode<T>, fn?: (tree: Root) => Root): string {
   const tree = parse(contents)
   transform(tree, ({ clean }) => { clean() })
   uniAssignNodes<T>(tree, masterNode)
@@ -51,7 +51,8 @@ export function transformSvg<T extends SvgNodeData>(contents: string, masterNode
   svg.properties!['anim:transform-origin'] = '50% 50%'
   svg.properties!['anim:duration'] = String(masterNode.data.duration)
   svg.properties!['anim:ease'] = masterNode.data.defaultEase
-  return stringify(tree)
+  const result = fn ? fn(tree) : tree
+  return stringify(result)
 }
 
 export interface SvgEncodeOptions {
