@@ -1,6 +1,6 @@
 {
   "name": "@figmania/ast",
-  "version": "3.2.6",
+  "version": "3.2.7",
   "description": "Transform SVG using AST",
   "main": "build/index.umd.js",
   "module": "build/index.mjs",
@@ -34,5 +34,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "c5556725d7fd25053fe4a498231f3fbcd99d6ea5"
+  "gitHead": "071e51455b15e8f7a27039ee341cf3d68a6ad968"
 }

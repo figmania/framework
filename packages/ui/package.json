@@ -1,6 +1,6 @@
 {
   "name": "@figmania/ui",
-  "version": "3.2.6",
+  "version": "3.2.7",
   "description": "UI Library for Figmania plugins",
   "main": "build/index.umd.js",
   "module": "build/index.mjs",
@@ -39,7 +39,7 @@
     "yarn": "^1.22.19"
   },
   "devDependencies": {
-    "@figmania/common": "^3.2.6",
+    "@figmania/common": "^3.2.7",
     "@storybook/addon-essentials": "^7.6.3",
     "@storybook/addon-interactions": "^7.6.3",
     "@storybook/addon-links": "^7.6.3",
@@ -66,5 +66,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "c5556725d7fd25053fe4a498231f3fbcd99d6ea5"
+  "gitHead": "071e51455b15e8f7a27039ee341cf3d68a6ad968"
 }
