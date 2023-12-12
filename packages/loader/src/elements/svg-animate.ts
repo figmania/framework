@@ -62,7 +62,7 @@ export class SvgAnimate extends HTMLElement {
     this.svg.removeAttribute('height')
     this.svg.style.display = 'block'
     this.appendChild(this.svg)
-    this.timeline = anim(this.svg, 'gsap') as gsap.core.Timeline
+    this.timeline = anim(this.svg) as gsap.core.Timeline
     this.timeline.repeat(this.trigger === 'loop' ? -1 : 0)
     this.timeline.paused(!['on', 'loop'].includes(this.trigger))
   }
