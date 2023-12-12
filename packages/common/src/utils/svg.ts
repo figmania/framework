@@ -1,16 +1,57 @@
-import { TreeNode, uid } from './node'
+import { hasAttribute, isElement, parse, stringify, transform, Element as UniElement, Node as UniNode } from 'unihtml'
+import { visit } from 'unist-util-visit'
+import { AnimEase } from '../types/AnimEase'
+import { AnimTimeline } from '../types/AnimTimeline'
+import { serializeAnimString } from './anim'
+import { nodeList, TreeNode } from './node'
 
-export type SvgTransformCallback = (svg: SVGSVGElement) => Element
+export interface SvgNodeData {
+  duration: number
+  defaultEase: AnimEase
+  timelines: AnimTimeline[]
+}
 
-export function svgTransform(contents: string, node: TreeNode, callback?: SvgTransformCallback): string {
-  const svg = svgElement(contents)
-  svgReplaceIds(svg, 'linearGradient', 'fill', (child) => uid(`${node.id}:linearGradient:${child.id}`))
-  svgReplaceIds(svg, 'linearGradient', 'fill', (child) => uid(`${node.id}:linearGradient:${child.id}`))
-  svgReplaceIds(svg, 'mask', 'mask', (child) => uid(`${node.id}:mask:${child.id}`))
-  svgReplaceIds(svg, 'filter', 'filter', (child) => uid(`${node.id}:filter:${child.id}`))
-  svgReplaceIds(svg, 'clipPath', 'clip-path', (child) => uid(`${node.id}:clipPath:${child.id}`))
-  const result = callback ? callback(svg) : svg
-  return result.outerHTML
+export function createNodeMap<T>(node: TreeNode<T>): Record<string, TreeNode<T>> {
+  return nodeList(node).reduce<Record<string, TreeNode<T>>>((obj, child) => {
+    let tryName = child.name
+    let counter = 2
+    while (tryName in obj) {
+      tryName = `${child.name}_${counter}`
+      counter += 1
+    }
+    obj[tryName] = child
+    return obj
+  }, {})
+}
+
+export function uniAssignNodes<T extends SvgNodeData>(tree: UniNode, masterNode: TreeNode<T>) {
+  const nameNodeMap = createNodeMap<T>(masterNode)
+  visit(tree, (node) => isElement(node) && hasAttribute(node, 'id'), (node) => {
+    if (!isElement(node) || !node.properties?.id) { return }
+    if (!node.data) { node.data = {} }
+    const figmaNode = nameNodeMap[node.properties.id]
+    if (!figmaNode) { return }
+    node.data.node = figmaNode
+    for (const { property, initialValue, transitions } of figmaNode.data.timelines ?? []) {
+      const value = serializeAnimString(initialValue, transitions)
+      if (value) { node.properties[`anim:${property}`] = value }
+    }
+  })
+}
+
+export function transformSvg<T extends SvgNodeData>(contents: string, masterNode: TreeNode<T>): string {
+  const tree = parse(contents)
+  transform(tree, ({ clean }) => { clean() })
+  uniAssignNodes<T>(tree, masterNode)
+  const svg = tree.children[0] as UniElement
+  delete svg.properties!.width
+  delete svg.properties!.height
+  svg.properties!['xmlns:anim'] = 'http://www.w3.org/2000/anim'
+  svg.properties!['anim'] = ''
+  svg.properties!['anim:transform-origin'] = '50% 50%'
+  svg.properties!['anim:duration'] = String(masterNode.data.duration)
+  svg.properties!['anim:ease'] = masterNode.data.defaultEase
+  return stringify(tree)
 }
 
 export interface SvgEncodeOptions {
@@ -31,18 +72,4 @@ export function svgEncode(contents: string, options: Partial<SvgEncodeOptions> =
   } else {
     return contents
   }
-}
-
-export function svgReplaceIds(svg: SVGSVGElement, tagName: string, attributeName: string, generator: (element: Element) => string) {
-  svg.querySelectorAll(`${tagName}[id]`).forEach((element) => {
-    const id = generator(element)
-    svg.querySelectorAll(`[${attributeName}="url(#${element.id})"]`).forEach((target) => { target.setAttribute(attributeName, `url(#${id})`) })
-    element.id = id
-  })
-}
-
-export function svgElement(contents: string): SVGSVGElement {
-  const element = document.createElement('div')
-  element.innerHTML = contents
-  return element.firstChild as SVGSVGElement
 }

@@ -1,4 +1,4 @@
-import { nodeList, nodeTree, TreeNode, uid } from './node'
+import { TreeNode, uid } from './node'
 
 export interface WindowSize { width: number; height: number }
 
@@ -14,17 +14,17 @@ export function figmaReplaceNodeNames(list: TreeNode[], hash: boolean) {
   }
 }
 
-export async function figmaExportAsync(figmaNode: FigmaNode, options?: Partial<ExportSettingsSVG>): Promise<Uint8Array> {
-  const originalList = nodeList(nodeTree(figmaNode))
-  figmaReplaceNodeNames(originalList, true)
-  const array = await (figmaNode as ExportMixin).exportAsync({
-    format: 'SVG',
+export async function figmaExportAsync(figmaNode: FigmaNode, options?: Partial<ExportSettingsSVGString>): Promise<string> {
+  // const originalList = nodeList(nodeTree(figmaNode))
+  // figmaReplaceNodeNames(originalList, true)
+  const result = await (figmaNode as ExportMixin).exportAsync({
+    format: 'SVG_STRING',
     contentsOnly: true,
     svgOutlineText: true,
     svgIdAttribute: true,
     svgSimplifyStroke: true,
     ...options
   })
-  figmaReplaceNodeNames(originalList, false)
-  return array
+  // figmaReplaceNodeNames(originalList, false)
+  return result
 }

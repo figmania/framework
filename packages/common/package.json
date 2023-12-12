@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "debounce": "^1.2.1",
-    "md5": "^2.3.0"
+    "md5": "^2.3.0",
+    "unihtml": "^2.0.8"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.1",
