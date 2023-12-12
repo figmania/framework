@@ -72,9 +72,6 @@ export function transitionSortFn(a: AnimTransition, b: AnimTransition): number {
 }
 
 export function queryTransitions(initialTransitions: AnimTransition[], time: number): QueryTransitionsScope {
-  if (!initialTransitions) {
-    debugger
-  }
   const transitions = [...initialTransitions].sort(transitionSortFn)
   const all: AnimTransition[] = transitions.filter(({ from, to }) => time >= from && time <= to)
   const edge = all.some((transition) => transition.from === time || transition.to === time)

@@ -15,8 +15,6 @@ export function figmaReplaceNodeNames(list: TreeNode[], hash: boolean) {
 }
 
 export async function figmaExportAsync(figmaNode: FigmaNode, options?: Partial<ExportSettingsSVGString>): Promise<string> {
-  // const originalList = nodeList(nodeTree(figmaNode))
-  // figmaReplaceNodeNames(originalList, true)
   const result = await (figmaNode as ExportMixin).exportAsync({
     format: 'SVG_STRING',
     contentsOnly: true,
@@ -25,6 +23,5 @@ export async function figmaExportAsync(figmaNode: FigmaNode, options?: Partial<E
     svgSimplifyStroke: true,
     ...options
   })
-  // figmaReplaceNodeNames(originalList, false)
   return result
 }
