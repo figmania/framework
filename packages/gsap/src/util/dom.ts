@@ -1,3 +1,4 @@
+/* eslint-disable @stylistic/padding-line-between-statements */
 import { AnimDefaults, AnimEase, AnimProperties, AnimProperty, AnimTimeline, deserializeAnimString } from '@figmania/common'
 
 export function getAnimSvgAttributes(element: SVGSVGElement): AnimDefaults {
@@ -17,9 +18,9 @@ export function getAnimAttributes(element: Element): Record<AnimProperty, string
   }
 }
 
-function getAnimAttribute<T = string>(element: Element, name: string): T | undefined
-function getAnimAttribute<T = string>(element: Element, name: string, defaultValue: T): T
-function getAnimAttribute<T = string>(element: Element, name: string, defaultValue?: T): T | undefined {
+export function getAnimAttribute<T = string>(element: Element, name: string): T | undefined
+export function getAnimAttribute<T = string>(element: Element, name: string, defaultValue: T): T
+export function getAnimAttribute<T = string>(element: Element, name: string, defaultValue?: T): T | undefined {
   const result = element.getAttribute(`anim:${name}`) ?? defaultValue
   if (!result) { return undefined }
   return result as T
