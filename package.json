@@ -16,7 +16,7 @@
     "packages:publish": "yarn prepack && lerna publish --concurrency 1 --force-publish"
   },
   "devDependencies": {
-    "@figma/plugin-typings": "^1.81.0",
+    "@figma/plugin-typings": "^1.82.0",
     "@figmania/eslint-config": "^1.0.0",
     "@vitejs/plugin-react": "^4.1.1",
     "lerna": "^7.4.2",
