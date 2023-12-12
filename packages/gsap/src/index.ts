@@ -11,7 +11,7 @@ const EaseAnimToGsap: Record<AnimEase, gsap.EaseString> = {
 
 const ANIM_SELECTOR = AnimProperties.map((type) => `[anim\\:${type}]`).join(',')
 
-export function anim(svg: SVGSVGElement) {
+export function render(svg: SVGSVGElement) {
   const defaults = getAnimSvgAttributes(svg)
   const timeline = gsap.timeline({ defaults })
   for (const element of Array.from(svg.querySelectorAll(ANIM_SELECTOR))) {

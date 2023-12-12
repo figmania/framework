@@ -1,4 +1,4 @@
-import { anim } from '@figmania/gsap'
+import { render } from '@figmania/gsap'
 import 'gsap'
 import { CustomElement } from '../decorators/CustomElement'
 import { intersectionObserver } from '../util/intersection'
@@ -62,7 +62,7 @@ export class SvgAnimate extends HTMLElement {
     this.svg.removeAttribute('height')
     this.svg.style.display = 'block'
     this.appendChild(this.svg)
-    this.timeline = anim(this.svg) as gsap.core.Timeline
+    this.timeline = render(this.svg) as gsap.core.Timeline
     this.timeline.repeat(this.trigger === 'loop' ? -1 : 0)
     this.timeline.paused(!['on', 'loop'].includes(this.trigger))
   }
