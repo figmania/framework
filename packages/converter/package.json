@@ -1,6 +1,6 @@
 {
   "name": "@figmania/converter",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Video Converter for SVG Animations",
   "main": "build/index.umd.js",
   "module": "build/index.mjs",
@@ -24,7 +24,7 @@
   "dependencies": {
     "@ffmpeg/ffmpeg": "^0.12.7",
     "@ffmpeg/util": "^0.12.1",
-    "@figmania/gsap": "^3.3.1",
+    "@figmania/gsap": "^3.3.2",
     "canvg": "^4.0.1",
     "gsap": "^3.12.3",
     "upng-js": "^2.1.0"
@@ -35,5 +35,5 @@
   "devDependencies": {
     "@types/upng-js": "^2.1.5"
   },
-  "gitHead": "9a5219d648739206447da0b9b03ce2994509ced4"
+  "gitHead": "d86631fc0496b8e0284a064c15f9c940dd5a2739"
 }
