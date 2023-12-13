@@ -1,6 +1,6 @@
 {
   "name": "@figmania/common",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Code shared between other figmania packages",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -28,5 +28,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "071e51455b15e8f7a27039ee341cf3d68a6ad968"
+  "gitHead": "9a5219d648739206447da0b9b03ce2994509ced4"
 }
