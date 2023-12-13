@@ -128,8 +128,8 @@
       </div>
     </div>
     <script type="module">
-       import { anim } from './src/index.ts'
-       const timeline = anim(document.querySelector('svg'))
+       import { render } from './src/index.ts'
+       const timeline = render(document.querySelector('svg'))
        document.querySelector('#seek').addEventListener('change', ({ target }) => { timeline.seek(+target.value) })
        document.querySelector('#play').addEventListener('click',() => { timeline.play() })
        document.querySelector('#pause').addEventListener('click',() => { timeline.pause() })

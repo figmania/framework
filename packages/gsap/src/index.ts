@@ -26,6 +26,6 @@ export function render(svg: SVGSVGElement) {
     }
   }
   const duration = +getAnimAttribute<string>(svg, 'duration', '1')
-  timeline.fromTo(null, {}, { duration }, 0)
+  timeline.fromTo({ transformOrigin: 0 }, {}, { duration }, 0)
   return timeline
 }
