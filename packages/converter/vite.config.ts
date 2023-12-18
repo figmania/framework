@@ -17,5 +17,8 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'],
   },
-  plugins: [react(), dts()]
+  plugins: [react(), dts()],
+  worker: {
+    format: 'es'
+  }
 })

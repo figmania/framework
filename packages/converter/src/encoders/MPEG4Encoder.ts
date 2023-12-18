@@ -7,7 +7,8 @@ async function loadFfmpeg(): Promise<FFmpeg> {
   const ffmpeg = new FFmpeg()
   await ffmpeg.load({
     coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm')
+    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+    workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript')
   })
   await ffmpeg.createDir('images')
   ffmpeg.on('log', ({ type, message }) => {

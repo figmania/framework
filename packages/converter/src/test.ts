@@ -83,5 +83,5 @@ async function convertMp4(options: TestOptions) {
   video.appendChild(source)
 }
 
-convertApng({ width: 640, height: 320, fps: 30, loop: true, lossy: false })
-convertMp4({ width: 640, height: 320, fps: 30, loop: true, lossy: false })
+convertApng({ width: 640, height: 320, fps: 30, loop: true, lossy: true })
+convertMp4({ width: 640, height: 320, fps: 30, loop: true, lossy: true })
