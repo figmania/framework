@@ -14,15 +14,9 @@ export function deserializeAnimString(value: string, defaults: AnimDefaults): [n
   return [initialValue, transitions]
 }
 
-export const SerializerSettings = {
-  getMaxTransitions: () => 1
-}
-
 export function serializeAnimString(initialValue: number, transitions: AnimTransition[]): string | null {
   if (transitions.length === 0) { return null }
   const sortedTransitions = transitions.sort((a, b) => a.from - b.from)
-  const maxTransitions = SerializerSettings.getMaxTransitions()
-  if (maxTransitions > 0) { sortedTransitions.length = Math.min(maxTransitions, sortedTransitions.length) }
   const groups = sortedTransitions.map(({ from, to, value, ease }) => {
     return `${from}:${to}:${value}:${ease}`
   }).map((result) => `[${result}]`).join('')
