@@ -36,7 +36,7 @@ export const Default = {
   render(args) {
     const [{ timelines }, updateArgs] = useArgs<typeof args>()
     return (
-      <div style={{ height: 200, display: 'flex', flexDirection: 'column' }}>
+      <div style={{ height: 340, display: 'flex', flexDirection: 'column' }}>
         <Editor {...args} timelines={timelines} onChange={(value) => { updateArgs({ timelines: value }) }} />
       </div>
     )

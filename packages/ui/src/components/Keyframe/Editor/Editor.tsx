@@ -38,12 +38,20 @@ export const Editor: FunctionComponent<EditorProps> = ({ bar, config, timelines,
     <div className={clsx(styles['editor'], className)} {...props}>
       <div className={clsx(styles['column'], styles['column-left'])}>
         <div className={clsx(styles['cell'], styles['header'])}>PROPERTY</div>
-        {properties.map((property) => (
-          <div key={property} className={clsx(styles['cell'], styles['label'])}>
-            <Icon icon={config[property].icon} />
-            <span>{config[property].label}</span>
-          </div>
-        ))}
+        {properties.map((property) => {
+          const timeline = timelines.find((item) => item.property === property)
+          const isActive = timeline && timeline.transitions.length > 0
+          return (
+            <div key={property} className={clsx(
+              styles['cell'],
+              styles['label'],
+              isActive && styles['active']
+            )}>
+              <Icon icon={config[property].icon} />
+              <span>{config[property].label}</span>
+            </div>
+          )
+        })}
       </div>
       <div className={clsx(styles['column'], styles['column-right'])}>
         <div className={styles['scrollable']}>

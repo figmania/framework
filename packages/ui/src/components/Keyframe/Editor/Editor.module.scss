@@ -44,6 +44,17 @@
   align-items: center;
   justify-content: flex-start;
   min-height: 60px;
+  color: var(--text-color-secondary);
+
+  & > div {
+    background-color: var(--text-color-secondary);
+  }
+
+  &.active {
+    font-weight: 600;
+    color: var(--text-color-primary);
+    & > div { background-color: var(--text-color-primary); }
+  }
 }
 
 .scrollable {
