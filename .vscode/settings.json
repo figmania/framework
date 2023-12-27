@@ -15,7 +15,6 @@
     "packages/anim",
     "packages/ast",
     "packages/common",
-    "packages/converter",
     "packages/gsap",
     "packages/loader",
     "packages/ui",
