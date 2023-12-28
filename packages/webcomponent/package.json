@@ -1,6 +1,6 @@
 {
   "name": "@figmania/webcomponent",
-  "version": "3.3.4",
+  "version": "3.3.5",
   "description": "Webcomponent for SVG Animations",
   "main": "build/index.umd.js",
   "module": "build/index.mjs",
@@ -22,7 +22,7 @@
     "lint": "eslint 'src/**/*.ts'"
   },
   "dependencies": {
-    "@figmania/anim": "^3.3.4",
+    "@figmania/anim": "^3.3.5",
     "camelcase": "^6.2.0",
     "decamelize": "^4.0.0",
     "gsap": "^3.12.3"
