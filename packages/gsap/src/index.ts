@@ -2,6 +2,8 @@ import { AnimEase, AnimProperties } from '@figmania/common'
 import { gsap } from 'gsap'
 import { getAnimAttribute, getAnimSvgAttributes, getAnimTimelines } from './util/dom'
 
+export * from './util/dom'
+
 export const EaseAnimToGsap: Record<AnimEase, gsap.EaseString> = {
   'linear': 'none',
   'ease-in': 'power1.in',
