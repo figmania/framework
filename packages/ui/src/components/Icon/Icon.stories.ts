@@ -5,7 +5,8 @@ const meta = {
   component: Icon,
   args: {
     icon: ICON.SYMBOL_COMPONENT,
-    size: 'md'
+    size: 'md',
+    spin: false
   }
 } satisfies Meta<typeof Icon>
 

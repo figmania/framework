@@ -26,6 +26,7 @@ export enum ICON {
   UI_ELLIPSIS = 'ui-ellipsis',
   UI_CLOSE = 'ui-close',
   UI_HELP = 'ui-help',
+  UI_SPINNER = 'ui-spinner',
   TRANSITION_FROM = 'transition-from',
   TRANSITION_TO = 'transition-to',
   TRANSITION_DELAY = 'transition-delay',
@@ -99,7 +100,7 @@ export enum ICON {
   LAYOUT_ROWS = 'layout-rows',
   LAYOUT_ROWS_LIGHT = 'layout-rows-light',
   LAYOUT_COLUMNS = 'layout-columns',
-  LAYOUR_COLUMNS_LIGHT = 'layour-columns-light',
+  LAYOUT_COLUMNS_LIGHT = 'layout-columns-light',
   LAYOUT_GRID = 'layout-grid',
   LAYOUT_GRID_LIGHT = 'layout-grid-light',
   LAYOUT_LIST = 'layout-list',
@@ -111,9 +112,10 @@ export interface IconProps extends HTMLAttributes<HTMLDivElement> {
   color?: string
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   disabled?: boolean
+  spin?: boolean
 }
 
-export const Icon: FunctionComponent<IconProps> = ({ icon, color, size, disabled, style, className, ...props }) => {
+export const Icon: FunctionComponent<IconProps> = ({ icon, color, size, disabled, spin, style, className, ...props }) => {
   return (
     <div style={{ ...style, backgroundColor: color }} className={clsx(
       'icon',
@@ -121,6 +123,7 @@ export const Icon: FunctionComponent<IconProps> = ({ icon, color, size, disabled
       styles[icon],
       styles[size ?? 'md'],
       disabled && styles['disabled'],
+      spin && styles['spin'],
       className
     )} {...props} />
   )
