@@ -6,7 +6,8 @@ const meta = {
   component: Button,
   args: {
     label: 'Button',
-    size: 'md'
+    size: 'md',
+    loading: false
   }
 } satisfies Meta<typeof Button>
 
