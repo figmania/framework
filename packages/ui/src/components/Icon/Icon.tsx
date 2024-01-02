@@ -27,6 +27,7 @@ export enum ICON {
   UI_CLOSE = 'ui-close',
   UI_HELP = 'ui-help',
   UI_SPINNER = 'ui-spinner',
+  UI_VIDEO = 'ui-video',
   TRANSITION_FROM = 'transition-from',
   TRANSITION_TO = 'transition-to',
   TRANSITION_DELAY = 'transition-delay',
