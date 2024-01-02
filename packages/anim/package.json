@@ -1,6 +1,6 @@
 {
   "name": "@figmania/anim",
-  "version": "3.3.7",
+  "version": "3.3.8",
   "description": "SVG Animation Engine",
   "main": "build/index.umd.js",
   "module": "build/index.mjs",
