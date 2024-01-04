@@ -59,6 +59,7 @@ export function createController<S extends CreateSchema>(delegate: MessengerDele
 
   // Attach Delegate
   delegate.listen((message: PluginMessage) => {
+    if (!message.type) { return }
     if (message.type === 'request') {
       const handler = requestHandlers.get(message.name)
       if (!handler) { throw new Error(`No request handler registered for ${message.name}`) }
